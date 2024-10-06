@@ -30,12 +30,16 @@ int render(sf::RenderWindow &gamewindow, Mapstate &mapstate)
 
 int simulate(Mapstate& mapstate)
 {
-	int ranx = rand() % 3;
-	int rany = rand() % 3;
-	int ranc = rand() % 4;
-	mapstate.settilecolor(ranx, rany, ranc);
-	mapstate.transfermapstatetoVA(800, 600);
+	for (int i = 0; i < rand()%1000+6000; i++)
+	{
 
+		int ranx = rand() % 3;
+		int rany = rand() % 3;
+		int ranc = rand() % 4;
+		mapstate.settilecolor(ranx, rany, ranc);
+		mapstate.transfermapstatetoVA(800, 600);
+
+	}
 	return 1;
 }
 
@@ -44,34 +48,35 @@ int screenloopandinit()
 	Mapstate mapstate(3, 3);
 
 	double t = 0.0;
-	const double dt = 0.00001;
+	const double dt = 0.01;
 	double accumulator = 0.0;
 	sf::Clock clock;
 
-	//int framenum = 0;
-	//int ticknum = 0;
+	int framenum = 0;
+	int ticknum = 0;
 
 	sf::RenderWindow gamewindow(sf::VideoMode(800, 600), "Snake", sf::Style::Close | sf::Style::Titlebar);
-	gamewindow.setVerticalSyncEnabled(true);
+	//gamewindow.setVerticalSyncEnabled(true);
 
 	while (gamewindow.isOpen())
 	{
 		sf::Time frameTime = clock.restart();
 		accumulator = accumulator + frameTime.asSeconds();
 
-		//std::cout << t << " " << framenum << " " << ticknum << " " << framenum / t << " " << ticknum / t << "\n";
+		std::cout << t << " " << framenum << " " << ticknum << " " << framenum / t << " " << ticknum / t << " " << accumulator << "\n";
 
 		handleinput(gamewindow);
 
 		while (accumulator >= dt)
 		{
+			std::cout << "                                                      USED\n";
 			simulate(mapstate);
 
 			accumulator = accumulator - dt;
 			t = t + dt;
-			//ticknum++;
+			ticknum++;
 		}
-		//framenum++;
+		framenum++;
 		render(gamewindow, mapstate);
 	}
 
