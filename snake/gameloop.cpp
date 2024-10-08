@@ -43,8 +43,7 @@ int handleinput(sf::RenderWindow& gamewindow, std::pair<int,int>& snakeheading)
 
 int render(sf::RenderWindow &gamewindow, Mapstate &mapstate, std::pair<int, int>& apple, std::vector<std::pair<int, int>>& snakeparts)
 {
-
-	if (apple.first > 0 && apple.second > 0)
+	if (!(apple.first < 0 || apple.first > mapstate.mapxsize - 1 || apple.second < 0 || apple.second > mapstate.mapysize - 1))
 	{
 		mapstate.settilecolor(apple.first, apple.second, 1);
 	}
@@ -65,23 +64,24 @@ int render(sf::RenderWindow &gamewindow, Mapstate &mapstate, std::pair<int, int>
 
 int simulate(Mapstate& mapstate, int t, double dt, std::pair<int,int> &apple, std::vector<std::pair<int, int>> &snakeparts, std::pair<int, int> snakeheading, double& tillmove, double& movementcap)
 {
-	if (apple.first < 0 || apple.second < 0)
 	{
 		bool found = false;
-		while (!found)
+		while (apple.first < 0 || apple.first > mapstate.mapxsize - 1 || apple.second < 0 || apple.second > mapstate.mapysize - 1 || apple.first == -1 || apple.second == -1 || !found)
 		{
 			apple.first = rand() % mapstate.mapxsize;
-			apple.second = rand() % mapstate.mapxsize;
+			apple.second = rand() % mapstate.mapysize;
+			bool checking = true;
 			for (int i = 0; i < snakeparts.size(); i++)
 			{
 				if (apple.first == snakeparts[i].first && apple.second == snakeparts[i].second)
 				{
+					checking = false;
 					break;
 				}
-				else
-				{
-					found = true;
-				}
+			}
+			if (checking)
+			{
+				found = true;
 			}
 		}
 	}
@@ -89,48 +89,63 @@ int simulate(Mapstate& mapstate, int t, double dt, std::pair<int,int> &apple, st
 	tillmove = tillmove + dt;
 
 	bool ate = false;
+	bool wallcollide = false;
 
 	if (tillmove > movementcap)
 	{
-		std::pair<int, int> oldhead = snakeparts[0];
-		snakeparts[0].first += snakeheading.first;
-		snakeparts[0].second += snakeheading.second;
-		tillmove = 0;
-		if (snakeparts[0].first < 0) return 2;
-		if (snakeparts[0].first > mapstate.mapxsize) return 2;
-		if (snakeparts[0].second < 0) return 2;
-		if (snakeparts[0].second > mapstate.mapysize) return 2;
-
-		if (snakeparts[0].first == apple.first && snakeparts[0].second == apple.second)
 		{
-			ate = true;
+			std::pair<int, int> temphead;
+			temphead.first = snakeparts[0].first + snakeheading.first;
+			temphead.second = snakeparts[0].second + snakeheading.second;
+
+			if(temphead.first < 0) wallcollide = true;
+			if(temphead.second < 0) wallcollide = true;
+			if(temphead.first > mapstate.mapxsize - 1) wallcollide = true;
+			if(temphead.second > mapstate.mapysize - 1) wallcollide = true;
 		}
-
-		if (!ate)
+		if (!wallcollide)
 		{
-			if (snakeparts.size() > 1)
+			std::pair<int, int> oldhead = snakeparts[0];
+			snakeparts[0].first += snakeheading.first;
+			snakeparts[0].second += snakeheading.second;
+			tillmove = 0;
+
+			if (snakeparts[0].first == apple.first && snakeparts[0].second == apple.second)
 			{
-				mapstate.settilecolor(snakeparts[snakeparts.size() - 1].first, snakeparts[snakeparts.size() - 1].second, 0);
+				ate = true;
 			}
-			else
-			{
-				mapstate.settilecolor(oldhead.first, oldhead.second, 0);
-			}
-			
-		}
-		for (int i = 1; i < snakeparts.size(); i++)
-		{
-			std::pair<int, int> temppart = snakeparts[i];
-			snakeparts[i] = oldhead;
-			oldhead = temppart;
-		}
-		if (ate)
-		{
-			apple.first = -1;
-			apple.second = -1;
 
-			snakeparts.push_back(oldhead);
+			if (!ate)
+			{
+				if (snakeparts.size() > 1)
+				{
+					mapstate.settilecolor(snakeparts[snakeparts.size() - 1].first, snakeparts[snakeparts.size() - 1].second, 0);
+				}
+				else
+				{
+					mapstate.settilecolor(oldhead.first, oldhead.second, 0);
+				}
+
+			}
+			for (int i = 1; i < snakeparts.size(); i++)
+			{
+				std::pair<int, int> temppart = snakeparts[i];
+				snakeparts[i] = oldhead;
+				oldhead = temppart;
+			}
+			if (ate)
+			{
+				apple.first = -1;
+				apple.second = -1;
+
+				snakeparts.push_back(oldhead);
+			}
 		}
+	}
+
+	if (wallcollide)
+	{
+		return 2;
 	}
 
 
