@@ -184,10 +184,10 @@ int screenloopandinit()
 	std::pair<int, int> apple = { -1, -1 };
 
 	double t = 0.0;
-	const double dt = 1.0/60.0;
+	const double dt = (1.0/60.0)/2;
 
 	double tillmove = 0;
-	double movementcap = dt*15;
+	double movementcap = dt*30;
 
 	double speed = 1;
 
