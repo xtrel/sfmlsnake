@@ -1,4 +1,4 @@
-V1.0.1.1
+V1.0.1.2
 10.10.2024
 Hubert Gonera
 
@@ -15,8 +15,9 @@ Right arrow to set direction to the right. Left to set to the left, etc.
 
 		Update notes:
 
-* Made VS2022 automatically add neccessesary files to build directory. (Such as .dlls and README)
-* Small formatting changes to README
+* Corrected game window name.
+* Corrected in-game version tag display.
+* Fixed "passing by yourself" bug.
 
 
 
@@ -34,6 +35,12 @@ Each README has its build version in the beginning, and build date in dd/mm/yyyy
 
 
 		Previous update notes:
+
+	V1.0.1.1
+	10.10.2024
+
+* Made VS2022 automatically add neccessesary files to build directory. (Such as .dlls and README)
+* Small formatting changes to README
 
 	V1.0.1.0
 	10.10.2024

@@ -2,9 +2,13 @@
 #include <chrono>
 #include <string>
 
-int handleinput(sf::RenderWindow& gamewindow, std::pair<int,int>& snakeheading)
+int handleinput(sf::RenderWindow& gamewindow, std::pair<int,int>& snakeheading, std::vector<std::pair<int, int>>& snakeparts)
 {
 	sf::Event windowevent;
+
+	int right = 0;
+	int up = 0;
+
 	while (gamewindow.pollEvent(windowevent))
 	{
 		if (windowevent.type == sf::Event::Closed)
@@ -13,32 +17,90 @@ int handleinput(sf::RenderWindow& gamewindow, std::pair<int,int>& snakeheading)
 		}
 		if (windowevent.type == sf::Event::KeyReleased)
 		{
-			if (windowevent.key.code == sf::Keyboard::Key::Up && snakeheading.second != 1)
+			right = 0;
+			up = 0;
+			if (windowevent.key.code == sf::Keyboard::Key::Up)
 			{
-				snakeheading.first = 0;
-				snakeheading.second = -1;
+				up = 1;
 			}
-			if (windowevent.key.code == sf::Keyboard::Key::Down && snakeheading.second != -1)
+			if (windowevent.key.code == sf::Keyboard::Key::Down)
 			{
-				snakeheading.first = 0;
-				snakeheading.second = 1;
+				up = -1;
 			}
-			if (windowevent.key.code == sf::Keyboard::Key::Right && snakeheading.first != -1)
+			if (windowevent.key.code == sf::Keyboard::Key::Right)
 			{
+				right = 1;
+			}
+			if (windowevent.key.code == sf::Keyboard::Key::Left)
+			{
+				right = -1;
+			}
+		}
+	}
+
+	{
+		if (right == 1)
+		{
+			if(snakeparts.size() > 1)
+			{
+				if (snakeparts[0].first >= snakeparts[1].first)
+				{
+					snakeheading.first = 1;
+					snakeheading.second = 0;
+				}
+			}
+			else {
 				snakeheading.first = 1;
 				snakeheading.second = 0;
 			}
-			if (windowevent.key.code == sf::Keyboard::Key::Left && snakeheading.first != 1)
+		}
+		if (right == -1)
+		{
+			if (snakeparts.size() > 1)
 			{
+				if (snakeparts[0].first <= snakeparts[1].first)
+				{
+					snakeheading.first = -1;
+					snakeheading.second = 0;
+				}
+			}
+			else {
 				snakeheading.first = -1;
 				snakeheading.second = 0;
 			}
 		}
-		else
+		if (up == 1)
 		{
-			break;
+			if (snakeparts.size() > 1)
+			{
+				if (snakeparts[0].second <= snakeparts[1].second)
+				{
+					snakeheading.first = 0;
+					snakeheading.second = -1;
+				}
+			}
+			else {
+				snakeheading.first = 0;
+				snakeheading.second = -1;
+			}
+		}
+		if (up == -1)
+		{
+			if (snakeparts.size() > 1)
+			{
+				if (snakeparts[0].second >= snakeparts[1].second)
+				{
+					snakeheading.first = 0;
+					snakeheading.second = 1;
+				}
+			}
+			else {
+				snakeheading.first = 0;
+				snakeheading.second = 1;
+			}
 		}
 	}
+
 	return 1;
 }
 
@@ -197,7 +259,7 @@ int screenloopandinit()
 	//int framenum = 0;
 	//int ticknum = 0;
 
-	sf::RenderWindow gamewindow(sf::VideoMode(800, 600), "Snake V1.0.0", sf::Style::Close | sf::Style::Titlebar);
+	sf::RenderWindow gamewindow(sf::VideoMode(800, 600), "Snake " + versiontag, sf::Style::Close | sf::Style::Titlebar);
 	{
 		sf::Image icon;
 		icon.loadFromFile("rsc/icon.png");
@@ -211,7 +273,7 @@ int screenloopandinit()
 	text.setFont(font);
 	text.setCharacterSize(20);
 	text.setFillColor(sf::Color::White);
-	text.setString("Welcome to snake\nBy HG2024\nV1.0.0");
+	text.setString("Welcome to snake\nBy HG2024\n" + versiontag);
 
 	gamewindow.setVerticalSyncEnabled(true);
 
@@ -223,7 +285,7 @@ int screenloopandinit()
 		//std::cout << t << " " << framenum << " " << ticknum << " " << framenum / t << " " << ticknum / t << " " << accumulator << "\n";
 		//std::cout << tillmove << " " << snakeheading.first << " " << snakeheading.second <<" "<<snakeparts[0].first<<" "<<snakeparts[0].second<< "\n";
 
-		handleinput(gamewindow, snakeheading);
+		handleinput(gamewindow, snakeheading, snakeparts);
 
 		while (accumulator >= dt)
 		{
