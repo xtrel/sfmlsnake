@@ -8,9 +8,11 @@
 #include <iostream>
 #include <vector>
 
-const std::string versiontag = "V1.0.2.0";
+const std::string versiontag = "Vdev";
 
-int screenloopandinit();
+int mainmenu(sf::RenderWindow& gamewindow);
+
+int screenloopandinit(sf::RenderWindow& gamewindow);
 
 class Mapstate : public sf::Drawable
 {
@@ -164,4 +166,96 @@ private:
 	}
 
 	sf::VertexArray vertices;
+};
+
+class Button : public sf::Drawable
+{
+public:
+	
+	Button(sf::Font font, std::string string = "Default", std::pair<int, int> screenpos = { 10,10 }, std::pair<int, int> screensize = { 5,5 }, int borderw = 5, int fontsize = 10)
+	{
+		buttonstring = string;
+		buttonfont = font;
+
+		buttonscreenpos = screenpos;
+		buttonscreensize = screensize;
+
+		buttonfontsize = fontsize;
+
+		borderwidth = borderw;
+
+		vertices.setPrimitiveType(sf::TriangleStrip);
+		vertices.resize(10);
+
+		vertices[0].color = sf::Color::White;
+		vertices[1].color = sf::Color::White;
+		vertices[2].color = sf::Color::White;
+		vertices[3].color = sf::Color::White;
+		vertices[4].color = sf::Color::White;
+		vertices[5].color = sf::Color::White;
+		vertices[6].color = sf::Color::White;
+		vertices[7].color = sf::Color::White;
+		vertices[8].color = sf::Color::White;
+		vertices[9].color = sf::Color::White;
+
+	}
+
+	int buttonedgeupdate()
+	{
+		int w = borderwidth;
+		int xpos = buttonscreenpos.first;
+		int ypos = buttonscreenpos.second;
+		int xsiz = buttonscreensize.first/2;
+		int ysiz = buttonscreensize.second/2;
+
+		vertices[0].position = sf::Vector2f(xpos - xsiz, ypos - ysiz);
+		vertices[1].position = sf::Vector2f(xpos - xsiz + w, ypos - ysiz + w);
+		vertices[2].position = sf::Vector2f(xpos + xsiz, ypos - ysiz);
+		vertices[3].position = sf::Vector2f(xpos + xsiz - w, ypos - ysiz + w);
+		vertices[4].position = sf::Vector2f(xpos + xsiz, ypos + ysiz);
+		vertices[5].position = sf::Vector2f(xpos + xsiz - w, ypos + ysiz - w);
+		vertices[6].position = sf::Vector2f(xpos - xsiz, ypos + ysiz);
+		vertices[7].position = sf::Vector2f(xpos - xsiz + w, ypos + ysiz - w);
+		vertices[8].position = vertices[0].position;
+		vertices[9].position = vertices[1].position;
+
+		return 1;
+	}
+
+	int buttontextupdate()
+	{
+		buttontext.setFont(buttonfont);
+		buttontext.setCharacterSize(buttonfontsize);
+		buttontext.setString(buttonstring);
+
+		sf::FloatRect textrect = buttontext.getLocalBounds();
+		int h = textrect.height;
+		int w = textrect.width;
+
+		buttontext.setPosition(buttonscreenpos.first-w/2, buttonscreenpos.second-h);
+
+		return 1;
+	}
+
+	std::string buttonstring;
+
+	int borderwidth;
+	int buttonfontsize;
+
+	std::pair<int, int> buttonscreenpos;
+	std::pair<int, int> buttonscreensize;
+
+private:
+	
+	sf::Text buttontext;
+	sf::Font buttonfont;
+
+	sf::VertexArray vertices;
+
+	virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const
+	{
+		target.draw(vertices);
+		target.draw(buttontext);
+		//target.draw();
+	}
 };
