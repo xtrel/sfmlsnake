@@ -8,7 +8,8 @@
 #include <iostream>
 #include <vector>
 
-const std::string versiontag = "Vdev";
+const std::string versiontag = "V1.1.0.0";
+const std::string builddate = "14.10.2024";
 
 int mainmenu(sf::RenderWindow& gamewindow);
 
@@ -229,12 +230,38 @@ public:
 		buttontext.setString(buttonstring);
 
 		sf::FloatRect textrect = buttontext.getLocalBounds();
-		int h = textrect.height;
-		int w = textrect.width;
-
-		buttontext.setPosition(buttonscreenpos.first-w/2, buttonscreenpos.second-h);
+		buttontext.setOrigin(textrect.left + textrect.width / 2.0f, textrect.top + textrect.height / 2.0f);
+		buttontext.setPosition(buttonscreenpos.first, buttonscreenpos.second);
 
 		return 1;
+	}
+
+	bool arethosethisbuttoncords(std::pair<int,int> presscords)
+	{
+		int w = borderwidth;
+		int xpos = buttonscreenpos.first;
+		int ypos = buttonscreenpos.second;
+		int xsiz = buttonscreensize.first / 2;
+		int ysiz = buttonscreensize.second / 2;
+
+		if (presscords.first >= xpos + xsiz - w)
+		{
+			return false;
+		}
+		if (presscords.first <= xpos - xsiz + w)
+		{
+			return false;
+		}
+		if (presscords.second <= ypos - ysiz + w)
+		{
+			return false;
+		}
+		if (presscords.second >= ypos + ysiz - w)
+		{
+			return false;
+		}
+
+		return true;
 	}
 
 	std::string buttonstring;

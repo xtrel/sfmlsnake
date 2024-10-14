@@ -2,46 +2,92 @@
 #include <chrono>
 #include <string>
 
-int handleinput(sf::RenderWindow& gamewindow, std::pair<int,int>& snakeheading, std::vector<std::pair<int, int>>& snakeparts)
+int handleinput(sf::RenderWindow& gamewindow)
 {
 	sf::Event windowevent;
-
-	int right = 0;
-	int up = 0;
 
 	while (gamewindow.pollEvent(windowevent))
 	{
 		if (windowevent.type == sf::Event::Closed)
 		{
-			gamewindow.close();
+			return 2;
 		}
-		if (windowevent.type == sf::Event::KeyReleased)
+	}
+
+	return 1;
+}
+
+int render(sf::RenderWindow &gamewindow, Mapstate &mapstate, std::pair<int, int>& apple, std::vector<std::pair<int, int>>& snakeparts, double& speed,sf::Text text, sf::Font font)
+{
+	if (!(apple.first < 0 || apple.first > mapstate.mapxsize - 1 || apple.second < 0 || apple.second > mapstate.mapysize - 1))
+	{
+		mapstate.settilecolor(apple.first, apple.second, 1);
+	}
+
+	for (int i = 0; i < snakeparts.size(); i++)
+	{
+		mapstate.settilecolor(snakeparts[i].first, snakeparts[i].second, 3);
+	}
+
+	mapstate.transfermapstatetoVA(800, 600);
+
+	gamewindow.clear();
+	gamewindow.draw(mapstate);
+	gamewindow.draw(text);
+	gamewindow.display();
+
+	return 1;
+}
+
+int simulate(Mapstate& mapstate, int t, double dt, std::pair<int,int> &apple, std::vector<std::pair<int, int>> &snakeparts, std::pair<int, int>& snakeheading, double& tillmove, double& movementcap, double& speed, sf::Text& text)
+{
+	if (apple.first == -1)
+	{
+		bool found = false;
+		while (!found)
 		{
-			right = 0;
-			up = 0;
-			if (windowevent.key.code == sf::Keyboard::Key::Up)
+			apple.first = rand() % mapstate.mapxsize;
+			apple.second = rand() % mapstate.mapysize;
+			
+			bool checking = true;
+			for (int i = 0; i < snakeparts.size(); i++)
 			{
-				up = 1;
+				if (apple.first == snakeparts[i].first && apple.second == snakeparts[i].second)
+				{
+					checking = false;
+					break;
+				}
 			}
-			if (windowevent.key.code == sf::Keyboard::Key::Down)
+			if (checking)
 			{
-				up = -1;
-			}
-			if (windowevent.key.code == sf::Keyboard::Key::Right)
-			{
-				right = 1;
-			}
-			if (windowevent.key.code == sf::Keyboard::Key::Left)
-			{
-				right = -1;
+				found = true;
 			}
 		}
 	}
 
 	{
+		int right = 0;
+		int up = 0;
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Up))
+		{
+			up = 1;
+		}
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Down))
+		{
+			up = -1;
+		}
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Right))
+		{
+			right = 1;
+		}
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Left))
+		{
+			right = -1;
+		}
+
 		if (right == 1)
 		{
-			if(snakeparts.size() > 1)
+			if (snakeparts.size() > 1)
 			{
 				if (snakeparts[0].first >= snakeparts[1].first)
 				{
@@ -97,57 +143,6 @@ int handleinput(sf::RenderWindow& gamewindow, std::pair<int,int>& snakeheading, 
 			else {
 				snakeheading.first = 0;
 				snakeheading.second = 1;
-			}
-		}
-	}
-
-	return 1;
-}
-
-int render(sf::RenderWindow &gamewindow, Mapstate &mapstate, std::pair<int, int>& apple, std::vector<std::pair<int, int>>& snakeparts, double& speed,sf::Text text, sf::Font font)
-{
-	if (!(apple.first < 0 || apple.first > mapstate.mapxsize - 1 || apple.second < 0 || apple.second > mapstate.mapysize - 1))
-	{
-		mapstate.settilecolor(apple.first, apple.second, 1);
-	}
-
-	for (int i = 0; i < snakeparts.size(); i++)
-	{
-		mapstate.settilecolor(snakeparts[i].first, snakeparts[i].second, 3);
-	}
-
-	mapstate.transfermapstatetoVA(800, 600);
-
-	gamewindow.clear();
-	gamewindow.draw(mapstate);
-	gamewindow.draw(text);
-	gamewindow.display();
-
-	return 1;
-}
-
-int simulate(Mapstate& mapstate, int t, double dt, std::pair<int,int> &apple, std::vector<std::pair<int, int>> &snakeparts, std::pair<int, int> snakeheading, double& tillmove, double& movementcap, double& speed, sf::Text& text)
-{
-	if (apple.first == -1)
-	{
-		bool found = false;
-		while (!found)
-		{
-			apple.first = rand() % mapstate.mapxsize;
-			apple.second = rand() % mapstate.mapysize;
-			
-			bool checking = true;
-			for (int i = 0; i < snakeparts.size(); i++)
-			{
-				if (apple.first == snakeparts[i].first && apple.second == snakeparts[i].second)
-				{
-					checking = false;
-					break;
-				}
-			}
-			if (checking)
-			{
-				found = true;
 			}
 		}
 	}
@@ -246,10 +241,10 @@ int screenloopandinit(sf::RenderWindow& gamewindow)
 	std::pair<int, int> apple = { -1, -1 };
 
 	double t = 0.0;
-	const double dt = (1.0/60.0)/2;
+	const double dt = (1.0 / 60.0) / 2;
 
 	double tillmove = 0;
-	double movementcap = dt*30;
+	double movementcap = dt * 30;
 
 	double speed = 1;
 
@@ -259,42 +254,40 @@ int screenloopandinit(sf::RenderWindow& gamewindow)
 	//int framenum = 0;
 	//int ticknum = 0;
 
-	gamewindow.create(sf::VideoMode(800, 600), "Snake " + versiontag, sf::Style::Close | sf::Style::Titlebar);
-
-	{
-		sf::Image icon;
-		icon.loadFromFile("rsc/icon.png");
-		gamewindow.setIcon(icon.getSize().x, icon.getSize().y, icon.getPixelsPtr());
-	}
-	
 	sf::Font font;
 	font.loadFromFile("rsc/coolvetica rg.otf");
-	
+
 	sf::Text text;
 	text.setFont(font);
-	text.setCharacterSize(20);
+	text.setCharacterSize(30);
 	text.setFillColor(sf::Color::White);
-	text.setString("Welcome to snake\nBy HG2024\n" + versiontag);
+	text.setString("Welcome to snake\nBy Hubert Gonera\n" + versiontag);
 
 	gamewindow.setVerticalSyncEnabled(true);
 
 	bool lost = false;
 	bool won = false;
+	bool quit = false;
 
-	while (!lost && !won)
+	while (!lost && !won && !quit)
 	{
+		int temp = 0;;
 		sf::Time frameTime = clock.restart();
 		accumulator = accumulator + frameTime.asSeconds();
 
 		//std::cout << t << " " << framenum << " " << ticknum << " " << framenum / t << " " << ticknum / t << " " << accumulator << "\n";
 		//std::cout << tillmove << " " << snakeheading.first << " " << snakeheading.second <<" "<<snakeparts[0].first<<" "<<snakeparts[0].second<< "\n";
 
-		handleinput(gamewindow, snakeheading, snakeparts);
+		temp = handleinput(gamewindow);
+		if (temp == 2)
+		{
+			quit = true;
+		}
 
 		while (accumulator >= dt)
 		{
 			//std::cout << "                                                      USED\n";
-			int temp = simulate(mapstate, t, dt,apple,snakeparts, snakeheading, tillmove, movementcap,speed, text);
+			temp = simulate(mapstate, t, dt, apple, snakeparts, snakeheading, tillmove, movementcap, speed, text);
 			if (temp == 2)
 			{
 				lost = true;
@@ -305,15 +298,63 @@ int screenloopandinit(sf::RenderWindow& gamewindow)
 			//ticknum++;
 		}
 		//framenum++;
-		render(gamewindow, mapstate,apple,snakeparts,speed,text,font);
+		render(gamewindow, mapstate, apple, snakeparts, speed, text, font);
 	}
 
-	if (lost)
+	if (quit)
 	{
+		return 0;
+	}
+	else if (lost)
+	{
+		text.setString("Lost!");
+		text.setCharacterSize(60);
+		{
+			sf::FloatRect textrect = text.getLocalBounds();
+			int h = textrect.height;
+			int w = textrect.width;
+			text.setOrigin(textrect.left + textrect.width / 2.0f, textrect.top + textrect.height / 2.0f);
+			text.setPosition(sf::Vector2f(800 / 2.0f, 600 / 2.0f));
+		}
+
+		gamewindow.draw(text);
+		gamewindow.display();
+
+		sf::Clock endclock;
+		sf::Time elapsed;
+
+		elapsed = endclock.getElapsedTime();
+
+		while (elapsed.asSeconds() <= 2)
+		{
+			elapsed = endclock.getElapsedTime();
+		}
 		return 2;
 	}
 	else if (won)
 	{
+		text.setString("Won!");
+		text.setCharacterSize(60);
+		{
+			sf::FloatRect textrect = text.getLocalBounds();
+			int h = textrect.height;
+			int w = textrect.width;
+			text.setOrigin(textrect.left + textrect.width / 2.0f, textrect.top + textrect.height / 2.0f);
+			text.setPosition(sf::Vector2f(800 / 2.0f, 600 / 2.0f));
+		}
+
+		gamewindow.draw(text);
+		gamewindow.display();
+
+		sf::Clock endclock;
+		sf::Time elapsed;
+
+		elapsed = endclock.getElapsedTime();
+
+		while (elapsed.asSeconds() <= 2)
+		{
+			elapsed = endclock.getElapsedTime();
+		}
 		return 1;
 	}
 	else {
