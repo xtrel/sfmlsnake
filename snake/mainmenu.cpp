@@ -57,6 +57,25 @@ int mainmenu(sf::RenderWindow& gamewindow)
 					quit = true;
 				}
 			}
+			if (windowevent.type == sf::Event::KeyReleased)
+			{
+				if (windowevent.key.code == sf::Keyboard::Enter || windowevent.key.code == sf::Keyboard::Space)
+				{
+					gameloopreturncode = screenloopandinit(gamewindow);
+					if (gameloopreturncode == 0)
+					{
+						gamewindow.close();
+						returncode = 1;
+						quit = true;
+					}
+				}
+				else if (windowevent.key.code == sf::Keyboard::Q)
+				{
+					gamewindow.close();
+					returncode = 1;
+					quit = true;
+				}
+			}
 		}
 
 		gamewindow.clear();
