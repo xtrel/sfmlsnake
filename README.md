@@ -17,6 +17,9 @@ In the main menu you can also use SPACE or ENTER to start a game, or Q to quit.
 
 **Patches:**
 * Small changes in README.
+	* -> Added credits.
+	* -> Added info on how to build the game yourself.
+* Added functions for reading and saving data, as well as writing logs.
 
 ## Versioning:
 
