@@ -176,6 +176,9 @@
     <None Include="..\README.md">
       <DeploymentContent>true</DeploymentContent>
     </None>
+    <None Include="..\updatelogs.md">
+      <DeploymentContent>true</DeploymentContent>
+    </None>
     <None Include="sfml-graphics-2.dll">
       <DeploymentContent>true</DeploymentContent>
     </None>
