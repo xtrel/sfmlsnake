@@ -61,5 +61,6 @@
     </None>
     <None Include="..\README.md" />
     <None Include="..\updatelogs.md" />
+    <None Include="READMEdev.md" />
   </ItemGroup>
 </Project>

@@ -1,5 +1,17 @@
 # Previous update notes:
 
+## V1.2.0.0
+*20.10.2024*
+
+**Major:**
+* Fully implemented highscore saving and loading, but as of now only the highest score is displayed, with no name.
+	* -> In the future, it will be easy to add names to each highscore, as well as displaying any amount of them.
+
+**Patches:**
+* Optimizations.
+* Changes to README.
+* Moved previous update logs to a seperate file.
+
 ## V1.1.1.1
 *20.10.2024*
 
