@@ -234,7 +234,7 @@ int simulate(Mapstate& mapstate, int t, double dt, std::pair<int,int> &apple, st
 	return 1;
 }
 
-int screenloopandinit(sf::RenderWindow& gamewindow)
+int screenloopandinit(sf::RenderWindow& gamewindow, int& score)
 {
 	Mapstate mapstate(16, 12);
 
@@ -304,6 +304,8 @@ int screenloopandinit(sf::RenderWindow& gamewindow)
 		//framenum++;
 		render(gamewindow, mapstate, apple, snakeparts, speed, text, font);
 	}
+
+	score = snakeparts.size();
 
 	if (quit)
 	{

@@ -1,5 +1,5 @@
 #pragma once
-#pragma comment(linker, "/SUBSYSTEM:windows /ENTRY:mainCRTStartup") //combined with windows subsystem in project settings, linker, system, makes no console
+//#pragma comment(linker, "/SUBSYSTEM:windows /ENTRY:mainCRTStartup") //combined with windows subsystem in project settings, linker, system, makes no console
 
 #include <SFML/Window.hpp>
 #include <SFML/Graphics.hpp>
@@ -8,12 +8,12 @@
 #include <iostream>
 #include <vector>
 
-const std::string versiontag = "Vdev";
-const std::string builddate = "Ddev";
+const std::string versiontag = "V1.2.0.0";
+const std::string builddate = "20.10.2024";
 
 int mainmenu(sf::RenderWindow& gamewindow);
 
-int screenloopandinit(sf::RenderWindow& gamewindow);
+int screenloopandinit(sf::RenderWindow& gamewindow, int& score);
 
 std::vector<std::string> loadfromdatatxt();
 bool writetolog(std::string text, std::string path = "log.txt");

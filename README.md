@@ -1,4 +1,4 @@
-# Vdev - Ddev - Hubert Gonera
+# V1.2.0.0 - 20.10.2024 - Hubert Gonera
 
 ## Welcome
 
@@ -15,7 +15,12 @@ In the main menu you can also use SPACE or ENTER to start a game, or Q to quit.
 
 ## Update notes:
 
+**Major:**
+* Fully implemented highscore saving and loading, but as of now only the highest score is displayed, with no name.
+	* -> In the future, it will be easy to add names to each highscore, as well as displaying any amount of them.
+
 **Patches:**
+* Optimizations.
 * Changes to README.
 * Moved previous update logs to a seperate file.
 
@@ -31,14 +36,17 @@ Version format: COMPATIBILITY.MAJOR.MINOR.PATCH
 Each README has its build version in the beginning, and build date in dd/mm/yyyy.
 
 If that build version and build date is Vdev or Ddev, that means you have a version that is in developement, and is not yet released.
-If you want a README for a specific version, please download the release or source code for that README.
-The same thing applies if you see Vdev or Ddev in the game - it means you are running a development version, or you changed those values in mainheader.h.
+
+Or, for all of Github readers, that README is the version most recently commited, and may contain work-in-progress update notes.
+
+If you want a README for a specific version, please download the release or source code of that version.
+The same thing applies if you see Vdev or Ddev in the game - it means you are running a development version, or you changed those values in mainheader.h before building.
 
 ## Credits
 Thanks to everyone who created and manages SFML.
 https://www.sfml-dev.org/
 
-Big thanks to Miros³aw Zelent and Damian Stelmach for giving me an easy introduction to c++ in the first place, many years ago.
+Big thanks to Miroslaw Zelent and Damian Stelmach for giving me an easy introduction to c++ in the first place, many years ago.
 https://www.youtube.com/channel/UCzn6vAfspIcagLax1fck_jw
 
 ## Building the game yourself
