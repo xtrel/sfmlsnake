@@ -175,7 +175,7 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
-    <None Include="README.md">
+    <None Include="..\README.md">
       <DeploymentContent>true</DeploymentContent>
     </None>
     <None Include="sfml-graphics-2.dll">
