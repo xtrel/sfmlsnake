@@ -1,9 +1,14 @@
-# V1.2.0.0 - 20.10.2024 - Hubert Gonera
+# V1.2.0.1 - 20.10.2024 - Hubert Gonera
 
 ## Welcome
 
 Welcome to snake.
-This is a simple game. You need to get the biggest snake possible, by eating fruit.
+I have made this game to familiarize myself with SFML in C++, as well as managing a Github repo.
+
+I am You know the premise of this game, but in the extremely unlikely event that you do not, here is a rundown:
+* You are a snake.
+* You want to grow, till you fill the whole map.
+* The only way you can grow, is by eating fruit.
 
 ## Controls:
 
@@ -15,14 +20,8 @@ In the main menu you can also use SPACE or ENTER to start a game, or Q to quit.
 
 ## Update notes:
 
-**Major:**
-* Fully implemented highscore saving and loading, but as of now only the highest score is displayed, with no name.
-	* -> In the future, it will be easy to add names to each highscore, as well as displaying any amount of them.
-
 **Patches:**
-* Optimizations.
-* Changes to README.
-* Moved previous update logs to a seperate file.
+* Small changes to README, as well as project architecture.
 
 ## Versioning:
 
@@ -34,13 +33,6 @@ Version format: COMPATIBILITY.MAJOR.MINOR.PATCH
 * PATCH - No new features, just bug fixes.
 
 Each README has its build version in the beginning, and build date in dd/mm/yyyy.
-
-If that build version and build date is Vdev or Ddev, that means you have a version that is in developement, and is not yet released.
-
-Or, for all of Github readers, that README is the version most recently commited, and may contain work-in-progress update notes.
-
-If you want a README for a specific version, please download the release or source code of that version.
-The same thing applies if you see Vdev or Ddev in the game - it means you are running a development version, or you changed those values in mainheader.h before building.
 
 ## Credits
 Thanks to everyone who created and manages SFML.
