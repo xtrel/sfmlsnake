@@ -6,6 +6,8 @@ int main(int argc, char* args[])
 
     srand(time(0));
 
+    writetolog("hello");
+
     mainmenu(gamewindow);
 
     return 0;
