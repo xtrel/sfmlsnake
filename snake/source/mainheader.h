@@ -8,8 +8,8 @@
 #include <iostream>
 #include <vector>
 
-const std::string versiontag = "Vdev";
-const std::string builddate = "Ddev";
+const std::string versiontag = "V1.1.1.1";
+const std::string builddate = "20.10.2024";
 
 int mainmenu(sf::RenderWindow& gamewindow);
 
@@ -17,6 +17,7 @@ int screenloopandinit(sf::RenderWindow& gamewindow);
 
 std::vector<std::string> loadfromdatatxt();
 bool writetolog(std::string text);
+int savetodatatxt(std::vector<std::string> datavector);
 
 class Mapstate : public sf::Drawable
 {
