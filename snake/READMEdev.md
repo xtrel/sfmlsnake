@@ -1,7 +1,11 @@
-HOW TO SETUP README.md AND updatelogs.md FOR RELEASE:
+HOW TO PREPARE FOR RELEASE:
 Copy everything below into README.md, and set proper version tags and date.
 Copy patch notes with proper version tag and date into updatelogs.md.
+Set proper version tags and date constants in mainheader.h
 Clear patch notes here.
+
+Make sure you dont include gamedata folder in release.
+Delete debugging file.
 
 # Vdev - Ddev - Hubert Gonera
 
@@ -24,6 +28,7 @@ If you hit a wall, or yourself, you lose.
 In the main menu you can also use SPACE or ENTER to start a game, or Q to quit.
 
 ## Update notes:
+
 
 ## Versioning:
 
