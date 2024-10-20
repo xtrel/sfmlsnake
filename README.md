@@ -1,4 +1,4 @@
-# V1.2.0.1 - 20.10.2024 - Hubert Gonera
+# V1.2.0.2 - 20.10.2024 - Hubert Gonera
 
 ## Welcome
 
@@ -21,7 +21,7 @@ In the main menu you can also use SPACE or ENTER to start a game, or Q to quit.
 ## Update notes:
 
 **Patches:**
-* Small changes to README, as well as project architecture.
+* Fixed updatelogs.md
 
 ## Versioning:
 

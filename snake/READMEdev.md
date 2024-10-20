@@ -1,3 +1,8 @@
+HOW TO SETUP README.md AND updatelogs.md FOR RELEASE:
+Copy everything below into README.md, and set proper version tags and date.
+Copy patch notes with proper version tag and date into updatelogs.md.
+Clear patch notes here.
+
 # Vdev - Ddev - Hubert Gonera
 
 ## Welcome
@@ -19,9 +24,6 @@ If you hit a wall, or yourself, you lose.
 In the main menu you can also use SPACE or ENTER to start a game, or Q to quit.
 
 ## Update notes:
-
-**Patches:**
-* Small changes to README, as well as project architecture.
 
 ## Versioning:
 
