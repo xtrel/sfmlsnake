@@ -1,5 +1,12 @@
 # Previous update notes:
 
+## V1.2.0.3
+*20.10.2024*
+
+**Patches:**
+* Fixed in-game version tag.
+* Hid console window.
+
 ## V1.2.0.2
 *20.10.2024*
 
