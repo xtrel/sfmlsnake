@@ -20,6 +20,9 @@ In the main menu you can also use SPACE or ENTER to start a game, or Q to quit.
 
 ## Update notes:
 
+**Patches:**
+* Small changes to README, as well as project architecture.
+
 ## Versioning:
 
 Version format: COMPATIBILITY.MAJOR.MINOR.PATCH
