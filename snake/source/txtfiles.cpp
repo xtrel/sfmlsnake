@@ -2,10 +2,19 @@
 
 #include <fstream>
 
+#include <cassert>
+#include <cstdlib>
+#include <filesystem>
+
 std::vector<std::string> loadfromdatatxt()
 {
 	std::ifstream fin;
 	fin.open("gamedata/data.txt");
+
+	if (!fin.is_open())
+	{
+		return {"ERROR"};
+	}
 
 	std::vector<std::string> retvector;
 	std::string tempstring;
@@ -25,6 +34,19 @@ int savetodatatxt(std::vector<std::string> datavector)
 	std::ofstream fout;
 	fout.open("gamedata/data.txt");
 
+	if (!fout.is_open())
+	{
+		std::filesystem::create_directory("gamedata");
+		fout.close();
+		fout.open("gamedata/data.txt");
+	}
+
+	if (!fout.is_open())
+	{
+		return -1;
+		fout.close();
+	}
+
 	for (int i = 0; i < datavector.size(); i++)
 	{
 		fout << datavector[i] << "\n";
@@ -35,10 +57,10 @@ int savetodatatxt(std::vector<std::string> datavector)
 	return 1;
 }
 
-bool writetolog(std::string text)
+bool writetolog(std::string text, std::string path)
 {
 	std::ifstream fin;
-	fin.open("gamedata/log.txt");
+	fin.open("gamedata/" + path);
 
 	std::vector<std::string> file;
 	std::string tempstring;
@@ -53,7 +75,21 @@ bool writetolog(std::string text)
 	file.push_back(text);
 
 	std::ofstream fout;
-	fout.open("gamedata/log.txt");
+	fout.open("gamedata/" + path);
+
+	if (!fout.is_open())
+	{
+		std::filesystem::create_directory("gamedata");
+		fout.close();
+		fout.open("gamedata/" + path);
+	}
+
+	if (!fout.is_open())
+	{
+		return -1;
+		fout.close();
+	}
+
 
 	for (int i = 0; i < file.size(); i++)
 	{

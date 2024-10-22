@@ -16,7 +16,7 @@ int mainmenu(sf::RenderWindow& gamewindow);
 int screenloopandinit(sf::RenderWindow& gamewindow);
 
 std::vector<std::string> loadfromdatatxt();
-bool writetolog(std::string text);
+bool writetolog(std::string text, std::string path = "log.txt");
 int savetodatatxt(std::vector<std::string> datavector);
 
 class Mapstate : public sf::Drawable
