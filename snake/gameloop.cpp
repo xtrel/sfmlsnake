@@ -1,5 +1,6 @@
 #include "mainheader.h"
 #include <chrono>
+#include <string>
 
 int handleinput(sf::RenderWindow& gamewindow, std::pair<int,int>& snakeheading)
 {
@@ -41,7 +42,7 @@ int handleinput(sf::RenderWindow& gamewindow, std::pair<int,int>& snakeheading)
 	return 1;
 }
 
-int render(sf::RenderWindow &gamewindow, Mapstate &mapstate, std::pair<int, int>& apple, std::vector<std::pair<int, int>>& snakeparts)
+int render(sf::RenderWindow &gamewindow, Mapstate &mapstate, std::pair<int, int>& apple, std::vector<std::pair<int, int>>& snakeparts, double& speed,sf::Text text)
 {
 	if (!(apple.first < 0 || apple.first > mapstate.mapxsize - 1 || apple.second < 0 || apple.second > mapstate.mapysize - 1))
 	{
@@ -57,12 +58,13 @@ int render(sf::RenderWindow &gamewindow, Mapstate &mapstate, std::pair<int, int>
 
 	gamewindow.clear();
 	gamewindow.draw(mapstate);
+	gamewindow.draw(text);
 	gamewindow.display();
 
 	return 1;
 }
 
-int simulate(Mapstate& mapstate, int t, double dt, std::pair<int,int> &apple, std::vector<std::pair<int, int>> &snakeparts, std::pair<int, int> snakeheading, double& tillmove, double& movementcap, double& speed)
+int simulate(Mapstate& mapstate, int t, double dt, std::pair<int,int> &apple, std::vector<std::pair<int, int>> &snakeparts, std::pair<int, int> snakeheading, double& tillmove, double& movementcap, double& speed, sf::Text& text)
 {
 	if (apple.first == -1)
 	{
@@ -149,7 +151,13 @@ int simulate(Mapstate& mapstate, int t, double dt, std::pair<int,int> &apple, st
 				apple.first = -1;
 				apple.second = -1;
 
-				speed = speed - 0.01;
+				speed = speed+0.01;
+
+				int temp = snakeparts.size();
+				std::string speedstring = std::to_string(speed);
+				speedstring = speedstring.substr(0, 4);
+
+				text.setString("Points:" + std::to_string(snakeparts.size()) + " Speed:" + speedstring);
 
 				snakeparts.push_back(oldhead);
 			}
@@ -189,8 +197,23 @@ int screenloopandinit()
 	//int framenum = 0;
 	//int ticknum = 0;
 
-	sf::RenderWindow gamewindow(sf::VideoMode(800, 600), "Snake", sf::Style::Close | sf::Style::Titlebar);
-	//gamewindow.setVerticalSyncEnabled(true);
+	sf::RenderWindow gamewindow(sf::VideoMode(800, 600), "Snake V1.0.0", sf::Style::Close | sf::Style::Titlebar);
+	{
+		sf::Image icon;
+		icon.loadFromFile("rsc/icon.png");
+		gamewindow.setIcon(icon.getSize().x, icon.getSize().y, icon.getPixelsPtr());
+	}
+	
+	sf::Font font;
+	font.loadFromFile("rsc/coolvetica rg.otf");
+	
+	sf::Text text;
+	text.setFont(font);
+	text.setCharacterSize(20);
+	text.setFillColor(sf::Color::White);
+	text.setString("Welcome to snake\nBy HG2024\nV1.0.0");
+
+	gamewindow.setVerticalSyncEnabled(true);
 
 	while (gamewindow.isOpen())
 	{
@@ -205,7 +228,7 @@ int screenloopandinit()
 		while (accumulator >= dt)
 		{
 			//std::cout << "                                                      USED\n";
-			int temp = simulate(mapstate, t, dt,apple,snakeparts, snakeheading, tillmove, movementcap,speed);
+			int temp = simulate(mapstate, t, dt,apple,snakeparts, snakeheading, tillmove, movementcap,speed, text);
 			if (temp == 2)
 			{
 				gamewindow.close();
@@ -216,7 +239,7 @@ int screenloopandinit()
 			//ticknum++;
 		}
 		//framenum++;
-		render(gamewindow, mapstate,apple,snakeparts);
+		render(gamewindow, mapstate,apple,snakeparts,speed,text);
 	}
 
 	return 0;
