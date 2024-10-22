@@ -139,7 +139,6 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="drawing.cpp" />
     <ClCompile Include="snake.cpp" />
     <ClCompile Include="gameloop.cpp" />
   </ItemGroup>
