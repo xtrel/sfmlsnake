@@ -1,4 +1,4 @@
-V1.0.1.2
+V1.0.1.3
 10.10.2024
 Hubert Gonera
 
@@ -15,9 +15,7 @@ Right arrow to set direction to the right. Left to set to the left, etc.
 
 		Update notes:
 
-* Corrected game window name.
-* Corrected in-game version tag display.
-* Fixed "passing by yourself" bug.
+* Minor edits to Versioning section of README.
 
 
 
@@ -25,7 +23,7 @@ Right arrow to set direction to the right. Left to set to the left, etc.
 
 COMPATIBILITY.MAJOR.MINOR.PATCH
 
-COMPATIBILITY (denoted by !) - Wheter or not this version will work with save files of another.
+COMPATIBILITY (denoted by !) - Wheter or not this version savefiles etc. will work with another version. Some parts may still work with previous versions.
 MAJOR (denoted by ***) - Incermented if added new feature systems, heavily reworked existing ones, or added large features.
 MINOR (denoted by **) - Incremented if added small to medium features in existing systems. NOT INCREMENTED if new feature systems were added. Then MAJOR is incremented.
 PATCH (denoted by *) - No new features, just bug fixes.
@@ -35,6 +33,13 @@ Each README has its build version in the beginning, and build date in dd/mm/yyyy
 
 
 		Previous update notes:
+
+	V1.0.1.2
+	10.10.2024
+
+* Corrected game window name.
+* Corrected in-game version tag display.
+* Fixed "passing by yourself" bug.
 
 	V1.0.1.1
 	10.10.2024

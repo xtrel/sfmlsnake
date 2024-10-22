@@ -8,7 +8,7 @@
 #include <iostream>
 #include <vector>
 
-const std::string versiontag = "V1.0.1.2";
+const std::string versiontag = "V1.0.2.0";
 
 int screenloopandinit();
 

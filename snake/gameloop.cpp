@@ -213,7 +213,7 @@ int simulate(Mapstate& mapstate, int t, double dt, std::pair<int,int> &apple, st
 				apple.first = -1;
 				apple.second = -1;
 
-				speed = speed+0.01;
+				speed = speed + ((snakeparts.size() + 3) / snakeparts.size() - snakeparts.size() / 100) * 0.05;
 
 				int temp = snakeparts.size();
 				std::string speedstring = std::to_string(speed);
