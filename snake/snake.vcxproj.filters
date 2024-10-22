@@ -18,24 +18,24 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="snake.cpp">
+    <ClCompile Include="source\gameloop.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="gameloop.cpp">
+    <ClCompile Include="source\mainmenu.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="mainmenu.cpp">
+    <ClCompile Include="source\snake.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="txtfiles.cpp">
+    <ClCompile Include="source\txtfiles.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="mainheader.h">
+    <ClInclude Include="resource2.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="resource2.h">
+    <ClInclude Include="source\mainheader.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -59,8 +59,7 @@
     <None Include="sfml-window-2.dll">
       <Filter>SFML</Filter>
     </None>
-    <None Include="README.md">
-      <Filter>Resource Files</Filter>
-    </None>
+    <None Include="..\README.md" />
+    <None Include="..\updatelogs.md" />
   </ItemGroup>
 </Project>
