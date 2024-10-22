@@ -1,6 +1,5 @@
 #include "mainheader.h"
 
-
 int main(int argc, char* args[])
 {
     screenloopandinit();
