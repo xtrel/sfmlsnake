@@ -1,5 +1,17 @@
 # Previous update notes:
 
+## V1.2.0.2
+*20.10.2024*
+
+**Patches:**
+* Fixed updatelogs.md
+
+## V1.2.0.1
+*20.10.2024*
+
+**Patches:**
+* Small changes to README, as well as project architecture.
+
 ## V1.2.0.0
 *20.10.2024*
 
