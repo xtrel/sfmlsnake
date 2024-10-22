@@ -1,4 +1,4 @@
-# Vdev - 13.10.2024 - Hubert Gonera
+# V1.1.0.0 - 14.10.2024 - Hubert Gonera
 
 ## Welcome
 
@@ -9,10 +9,21 @@ This is a simple game. You need to get the biggest snake possible, by eating fru
 
 Right arrow to set direction to the right. Left to set to the left, etc.
 
-If you hit a wall, or yourself, the game closes. Sorry.
+If you hit a wall, or yourself, you lose.
 
 ## Update notes:
 
+**Major:**
+* Added main menu.
+* Added lose screen.
+* Added basic button class for creating simple buttons.
+
+**Minor:**
+* Moved keyboard events over to the simulation part of the gameloop. As a result, controls feel way more immidiate now.
+
+**Patch:**
+* Various small optimizations.
+* Increased text size during gameplay.
 
 ## Versioning:
 
