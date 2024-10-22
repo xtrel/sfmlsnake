@@ -20,6 +20,21 @@ std::vector<std::string> loadfromdatatxt()
 	return retvector;
 }
 
+int savetodatatxt(std::vector<std::string> datavector)
+{
+	std::ofstream fout;
+	fout.open("gamedata/data.txt");
+
+	for (int i = 0; i < datavector.size(); i++)
+	{
+		fout << datavector[i] << "\n";
+	}
+
+	fout.close();
+
+	return 1;
+}
+
 bool writetolog(std::string text)
 {
 	std::ifstream fin;

@@ -1,11 +1,9 @@
-# Vdev - Ddev - Hubert Gonera
+# V1.1.1.1 - 20.10.2024 - Hubert Gonera
 
 ## Welcome
 
 Welcome to snake.
 This is a simple game. You need to get the biggest snake possible, by eating fruit.
-
-Disclaimer: The bottom part of this README are updatelogs, if you are really stressed about space, you can delete those. (Though it will be at most 1 megabyte)
 
 ## Controls:
 
@@ -30,6 +28,23 @@ Version format: COMPATIBILITY.MAJOR.MINOR.PATCH
 * PATCH - No new features, just bug fixes.
 
 Each README has its build version in the beginning, and build date in dd/mm/yyyy.
+
+## Credits
+Thanks to everyone who created and manages SFML.
+https://www.sfml-dev.org/
+
+Big thanks to Miros³aw Zelent and Damian Stelmach for giving me an easy introduction to c++ in the first place, many years ago.
+https://www.youtube.com/channel/UCzn6vAfspIcagLax1fck_jw
+
+## Building the game yourself
+
+### SFML
+This version was made using SFML 2.6.1 for VS2022 32-bit.
+https://www.sfml-dev.org/files/SFML-2.6.1-windows-vc17-32-bit.zip
+
+Remember to download it and link it properly to your IDE.
+
+The game uses dynamic linking, and the requiered .dll files are already in the repo.
 
 # Previous update notes:
 
