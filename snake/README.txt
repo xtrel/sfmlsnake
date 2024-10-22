@@ -1,4 +1,4 @@
-V1.0.1.0
+V1.0.1.1
 10.10.2024
 Hubert Gonera
 
@@ -15,11 +15,8 @@ Right arrow to set direction to the right. Left to set to the left, etc.
 
 		Update notes:
 
-* Added README:
--> Defined Versioning
--> Added content
-
-** Increased TPS from 60 to 120
+* Made VS2022 automatically add neccessesary files to build directory. (Such as .dlls and README)
+* Small formatting changes to README
 
 
 
@@ -38,7 +35,17 @@ Each README has its build version in the beginning, and build date in dd/mm/yyyy
 
 		Previous update notes:
 
-V1.0.0
-09.10.2024
+	V1.0.1.0
+	10.10.2024
+
+* Added README:
+-> Defined Versioning
+-> Added content
+
+** Increased TPS from 60 to 120
+
+	V1.0.0
+	09.10.2024
+
 No README in this version. This update note was added in V1.0.1.0.
 First functional version with minimal features, and some bugs.
