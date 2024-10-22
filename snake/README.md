@@ -1,9 +1,11 @@
-# V1.1.1.0 - 16.10.2024 - Hubert Gonera
+# Vdev - Ddev - Hubert Gonera
 
 ## Welcome
 
 Welcome to snake.
 This is a simple game. You need to get the biggest snake possible, by eating fruit.
+
+Disclaimer: The bottom part of this README are updatelogs, if you are really stressed about space, you can delete those. (Though it will be at most 1 megabyte)
 
 ## Controls:
 
@@ -11,13 +13,12 @@ Right arrow to set direction to the right. Left to set to the left, etc.
 
 If you hit a wall, or yourself, you lose.
 
+In the main menu you can also use SPACE or ENTER to start a game, or Q to quit.
+
 ## Update notes:
 
-**Minor:**
-* Pressing space and enter now also start the game, and Q closes it. (This is so the game can also be played without a mouse.)
-
-**Patch:**
-* Refined speed formula.
+**Patches:**
+* Small changes in README.
 
 ## Versioning:
 
@@ -31,6 +32,15 @@ Version format: COMPATIBILITY.MAJOR.MINOR.PATCH
 Each README has its build version in the beginning, and build date in dd/mm/yyyy.
 
 # Previous update notes:
+
+## V1.1.1.0
+*16.10.2024*
+
+**Minor:**
+* Pressing space and enter now also start the game, and Q closes it. (This is so the game can also be played without a mouse.)
+
+**Patch:**
+* Refined speed formula.
 
 ## V1.1.0.0
 *14.10.2024*
