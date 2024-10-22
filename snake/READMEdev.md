@@ -7,6 +7,8 @@ Clear patch notes here.
 Make sure you dont include gamedata folder in release.
 Delete debugging file.
 
+Edited authors of previous commits, that were made only locally. As such, every commit is now set to 22.10.2024. For future info, around 6.10 project was started, and 13.10 first workable version was created.
+
 # Vdev - Ddev - Hubert Gonera
 
 ## Welcome
