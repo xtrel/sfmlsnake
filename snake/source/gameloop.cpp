@@ -24,10 +24,12 @@ int render(sf::RenderWindow &gamewindow, Mapstate &mapstate, std::pair<int, int>
 		mapstate.settilecolor(apple.first, apple.second, 1);
 	}
 
-	for (int i = 0; i < snakeparts.size(); i++)
+	for (int i = 1; i < snakeparts.size(); i++)
 	{
-		mapstate.settilecolor(snakeparts[i].first, snakeparts[i].second, 3);
+		double val = abs(abs(255 * sin((i + 50) / 25.f)) - i / 5.f);
+		mapstate.settilecolorRGB(snakeparts[i].first, snakeparts[i].second, 25, 25, floor(val), 255);
 	}
+	mapstate.settilecolorRGB(snakeparts[0].first, snakeparts[0].second, 0, 0, 255, 255);
 
 	mapstate.transfermapstatetoVA(800, 600);
 
@@ -245,10 +247,10 @@ int screenloopandinit(sf::RenderWindow& gamewindow, int& score)
 	std::pair<int, int> apple = { -1, -1 };
 
 	double t = 0.0;
-	const double dt = (1.0 / 60.0) / 2;
+	const double dt = (1.0 / 64.0) / 4;
 
 	double tillmove = 0;
-	double movementcap = dt * 30;
+	double movementcap = dt * 15*4;
 
 	double speed = 1;
 
@@ -311,59 +313,57 @@ int screenloopandinit(sf::RenderWindow& gamewindow, int& score)
 	{
 		return 0;
 	}
-	else if (lost)
-	{
-		text.setString("Lost!");
-		text.setCharacterSize(60);
-		{
-			sf::FloatRect textrect = text.getLocalBounds();
-			int h = textrect.height;
-			int w = textrect.width;
-			text.setOrigin(textrect.left + textrect.width / 2.0f, textrect.top + textrect.height / 2.0f);
-			text.setPosition(sf::Vector2f(800 / 2.0f, 600 / 2.0f));
-		}
 
-		gamewindow.draw(text);
-		gamewindow.display();
+	int retcode = -1;
 
-		sf::Clock endclock;
-		sf::Time elapsed;
-
-		elapsed = endclock.getElapsedTime();
-
-		while (elapsed.asSeconds() <= 1.5)
-		{
-			elapsed = endclock.getElapsedTime();
-		}
-		return 2;
-	}
-	else if (won)
+	if (won)
 	{
 		text.setString("Won!");
-		text.setCharacterSize(60);
+		retcode = 1;
+	}
+	if (lost)
+	{
+		text.setString("Lost!");
+		retcode = 2;
+	}
+
+	text.setCharacterSize(60);
+	{
+		sf::FloatRect textrect = text.getLocalBounds();
+		int h = textrect.height;
+		int w = textrect.width;
+		text.setOrigin(textrect.left + textrect.width / 2.0f, textrect.top + textrect.height / 2.0f);
+		text.setPosition(sf::Vector2f(800 / 2.0f, 600 / 2.0f));
+	}
+
+	gamewindow.draw(text);
+	gamewindow.display();
+
+	sf::Clock endclock;
+	sf::Time elapsed;
+
+	elapsed = endclock.getElapsedTime();
+
+	while (elapsed.asSeconds() <= 5)
+	{
+		sf::Event windowevent;
+		while (gamewindow.pollEvent(windowevent))
 		{
-			sf::FloatRect textrect = text.getLocalBounds();
-			int h = textrect.height;
-			int w = textrect.width;
-			text.setOrigin(textrect.left + textrect.width / 2.0f, textrect.top + textrect.height / 2.0f);
-			text.setPosition(sf::Vector2f(800 / 2.0f, 600 / 2.0f));
+			if (windowevent.type == sf::Event::Closed)
+			{
+				return 0;
+			}
+			if (windowevent.type == sf::Event::KeyReleased)
+			{
+				if (windowevent.key.code == sf::Keyboard::Enter || windowevent.key.code == sf::Keyboard::Space)
+				{
+					return retcode;
+				}
+			}
 		}
-
-		gamewindow.draw(text);
-		gamewindow.display();
-
-		sf::Clock endclock;
-		sf::Time elapsed;
-
 		elapsed = endclock.getElapsedTime();
+	}
+	return retcode;
 
-		while (elapsed.asSeconds() <= 1.5)
-		{
-			elapsed = endclock.getElapsedTime();
-		}
-		return 1;
-	}
-	else {
-		return -1;
-	}
+	return -1;
 }

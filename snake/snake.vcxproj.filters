@@ -16,6 +16,9 @@
     <Filter Include="SFML">
       <UniqueIdentifier>{9d3e846b-4de3-4910-8fc6-f07aaff33cfc}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Markdowns">
+      <UniqueIdentifier>{63cb2ba5-a5f3-453d-b53a-713b5f3178a7}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="source\gameloop.cpp">
@@ -50,17 +53,23 @@
     </Image>
   </ItemGroup>
   <ItemGroup>
-    <None Include="sfml-graphics-2.dll">
-      <Filter>SFML</Filter>
-    </None>
     <None Include="sfml-system-2.dll">
       <Filter>SFML</Filter>
     </None>
     <None Include="sfml-window-2.dll">
       <Filter>SFML</Filter>
     </None>
-    <None Include="..\README.md" />
-    <None Include="..\updatelogs.md" />
-    <None Include="READMEdev.md" />
+    <None Include="sfml-graphics-2.dll">
+      <Filter>SFML</Filter>
+    </None>
+    <None Include="..\updatelogs.md">
+      <Filter>Markdowns</Filter>
+    </None>
+    <None Include="..\README.md">
+      <Filter>Markdowns</Filter>
+    </None>
+    <None Include="READMEdev.md">
+      <Filter>Markdowns</Filter>
+    </None>
   </ItemGroup>
 </Project>

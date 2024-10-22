@@ -7,8 +7,6 @@ Clear patch notes here.
 Make sure you dont include gamedata folder in release.
 Delete debugging file.
 
-Edited authors of previous commits, that were made only locally. As such, every commit is now set to 22.10.2024. For future info, around 6.10 project was started, and 13.10 first workable version was created.
-
 # Vdev - Ddev - Hubert Gonera
 
 ## Welcome
@@ -31,14 +29,13 @@ In the main menu you can also use SPACE or ENTER to start a game, or Q to quit.
 
 ## Update notes:
 
-
 ## Versioning:
 
 Version format: COMPATIBILITY.MAJOR.MINOR.PATCH
 
 * COMPATIBILITY - Wheter or not this version savefiles etc. will work with another version. Some parts may still work with previous versions.
 * MAJOR - Incermented if added new feature systems, heavily reworked existing ones, or added large features.
-* MINOR - Incremented if added small to medium features in existing systems, or if they were reworked slightly. NOT INCREMENTED if new feature systems were added. Then MAJOR is incremented.
+* MINOR - Incremented if added small to medium features in existing systems, or if they were reworked. NOT INCREMENTED if new feature systems were added. Then MAJOR is incremented.
 * PATCH - No new features, just bug fixes.
 
 Each README has its build version in the beginning, and build date in dd/mm/yyyy.

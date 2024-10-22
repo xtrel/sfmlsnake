@@ -1,11 +1,11 @@
-# V1.2.0.3 - 20.10.2024- Hubert Gonera
+# V1.2.1.0 - 22.10.2024 - Hubert Gonera
 
 ## Welcome
 
 Welcome to snake.
 I have made this game to familiarize myself with SFML in C++, as well as managing a Github repo.
 
-I am sure You know the premise of this game, but in the extremely unlikely event that you do not, here is a rundown:
+I am You know the premise of this game, but in the extremely unlikely event that you do not, here is a rundown:
 * You are a snake.
 * You want to grow, till you fill the whole map.
 * The only way you can grow, is by eating fruit.
@@ -20,9 +20,13 @@ In the main menu you can also use SPACE or ENTER to start a game, or Q to quit.
 
 ## Update notes:
 
-**Patches:**
-* Fixed in-game version tag.
-* Hid console window.
+**Minor:**
+* Added color grading to the snake's body, so it is easier to see which part is moving where.
+* Increased TPS to 256Hz
+* Lose and win screen now stays for 5 seconds, however you can press enter or space to exit to main menu instantly.
+
+**Patch:**
+* Small changes to README.
 
 ## Versioning:
 
@@ -30,7 +34,7 @@ Version format: COMPATIBILITY.MAJOR.MINOR.PATCH
 
 * COMPATIBILITY - Wheter or not this version savefiles etc. will work with another version. Some parts may still work with previous versions.
 * MAJOR - Incermented if added new feature systems, heavily reworked existing ones, or added large features.
-* MINOR - Incremented if added small to medium features in existing systems, or if they were reworked slightly. NOT INCREMENTED if new feature systems were added. Then MAJOR is incremented.
+* MINOR - Incremented if added small to medium features in existing systems, or if they were reworked. NOT INCREMENTED if new feature systems were added. Then MAJOR is incremented.
 * PATCH - No new features, just bug fixes.
 
 Each README has its build version in the beginning, and build date in dd/mm/yyyy.

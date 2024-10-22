@@ -8,8 +8,8 @@
 #include <iostream>
 #include <vector>
 
-const std::string versiontag = "V1.2.0.3";
-const std::string builddate = "20.10.2024";
+const std::string versiontag = "V1.2.1.0";
+const std::string builddate = "22.10.2024";
 
 int mainmenu(sf::RenderWindow& gamewindow);
 
@@ -156,6 +156,12 @@ public:
 			mapstate[x][y] = { 0,0,255,255 };
 		}
 		else { return -1; }
+		return 1;
+	}
+
+	int settilecolorRGB(int x, int y, int r, int g, int b, int a)
+	{
+		mapstate[x][y] = { r,g,b,a };
 		return 1;
 	}
 

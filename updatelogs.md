@@ -1,5 +1,16 @@
 # Previous update notes:
 
+## V1.2.1.0
+*22.10.2024*
+
+**Minor:**
+* Added color grading to the snake's body, so it is easier to see which part is moving where.
+* Increased TPS to 256Hz
+* Lose and win screen now stays for 5 seconds, however you can press enter or space to exit to main menu instantly.
+
+**Patch:**
+* Small changes to README.
+
 ## V1.2.0.3
 *20.10.2024*
 
