@@ -3,4 +3,5 @@
 int main()
 {
     screenloopandinit();
+    return 0;
 }
