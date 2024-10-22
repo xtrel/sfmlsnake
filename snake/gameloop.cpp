@@ -62,14 +62,16 @@ int render(sf::RenderWindow &gamewindow, Mapstate &mapstate, std::pair<int, int>
 	return 1;
 }
 
-int simulate(Mapstate& mapstate, int t, double dt, std::pair<int,int> &apple, std::vector<std::pair<int, int>> &snakeparts, std::pair<int, int> snakeheading, double& tillmove, double& movementcap)
+int simulate(Mapstate& mapstate, int t, double dt, std::pair<int,int> &apple, std::vector<std::pair<int, int>> &snakeparts, std::pair<int, int> snakeheading, double& tillmove, double& movementcap, double& speed)
 {
+	if (apple.first == -1)
 	{
 		bool found = false;
-		while (apple.first < 0 || apple.first > mapstate.mapxsize - 1 || apple.second < 0 || apple.second > mapstate.mapysize - 1 || apple.first == -1 || apple.second == -1 || !found)
+		while (!found)
 		{
 			apple.first = rand() % mapstate.mapxsize;
 			apple.second = rand() % mapstate.mapysize;
+			
 			bool checking = true;
 			for (int i = 0; i < snakeparts.size(); i++)
 			{
@@ -86,7 +88,7 @@ int simulate(Mapstate& mapstate, int t, double dt, std::pair<int,int> &apple, st
 		}
 	}
 
-	tillmove = tillmove + dt;
+	tillmove = tillmove + dt*speed;
 
 	bool ate = false;
 	bool wallcollide = false;
@@ -102,6 +104,15 @@ int simulate(Mapstate& mapstate, int t, double dt, std::pair<int,int> &apple, st
 			if(temphead.second < 0) wallcollide = true;
 			if(temphead.first > mapstate.mapxsize - 1) wallcollide = true;
 			if(temphead.second > mapstate.mapysize - 1) wallcollide = true;
+
+			for (int i = 2; i < snakeparts.size(); i++)
+			{
+				if (temphead.first == snakeparts[i].first && temphead.second == snakeparts[i].second)
+				{
+					wallcollide = true;
+					break;
+				}
+			}
 		}
 		if (!wallcollide)
 		{
@@ -138,6 +149,8 @@ int simulate(Mapstate& mapstate, int t, double dt, std::pair<int,int> &apple, st
 				apple.first = -1;
 				apple.second = -1;
 
+				speed = speed - 0.01;
+
 				snakeparts.push_back(oldhead);
 			}
 		}
@@ -168,6 +181,8 @@ int screenloopandinit()
 	double tillmove = 0;
 	double movementcap = dt*15;
 
+	double speed = 1;
+
 	double accumulator = 0.0;
 	sf::Clock clock;
 
@@ -183,14 +198,14 @@ int screenloopandinit()
 		accumulator = accumulator + frameTime.asSeconds();
 
 		//std::cout << t << " " << framenum << " " << ticknum << " " << framenum / t << " " << ticknum / t << " " << accumulator << "\n";
-		std::cout << tillmove << " " << snakeheading.first << " " << snakeheading.second <<" "<<snakeparts[0].first<<" "<<snakeparts[0].second<< "\n";
+		//std::cout << tillmove << " " << snakeheading.first << " " << snakeheading.second <<" "<<snakeparts[0].first<<" "<<snakeparts[0].second<< "\n";
 
 		handleinput(gamewindow, snakeheading);
 
 		while (accumulator >= dt)
 		{
 			//std::cout << "                                                      USED\n";
-			int temp = simulate(mapstate, t, dt,apple,snakeparts, snakeheading, tillmove, movementcap);
+			int temp = simulate(mapstate, t, dt,apple,snakeparts, snakeheading, tillmove, movementcap,speed);
 			if (temp == 2)
 			{
 				gamewindow.close();
