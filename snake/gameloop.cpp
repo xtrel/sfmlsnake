@@ -65,6 +65,8 @@ int simulate(Mapstate& mapstate, int t, double dt, std::pair<int,int> &apple, st
 		}
 	}
 
+	int truesnakesize = snakeparts.size() + 1;
+
 	{
 		int right = 0;
 		int up = 0;
@@ -208,13 +210,15 @@ int simulate(Mapstate& mapstate, int t, double dt, std::pair<int,int> &apple, st
 				apple.first = -1;
 				apple.second = -1;
 
-				speed = speed + ((snakeparts.size() + 3) / snakeparts.size() - snakeparts.size() / 100) * 0.05;
+				//V1.1.0.0 speed = speed + ((snakeparts.size() + 3) / snakeparts.size() - snakeparts.size() / 100) * 0.05;
+
+				speed = (-pow((0.013 * truesnakesize), 2)) + (truesnakesize / 25.0f) + 1.0f;
 
 				int temp = snakeparts.size();
 				std::string speedstring = std::to_string(speed);
 				speedstring = speedstring.substr(0, 4);
 
-				text.setString("Points:" + std::to_string(snakeparts.size()) + " Speed:" + speedstring);
+				text.setString("Points:" + std::to_string(truesnakesize) + " Speed:" + speedstring);
 
 				snakeparts.push_back(oldhead);
 			}
@@ -325,7 +329,7 @@ int screenloopandinit(sf::RenderWindow& gamewindow)
 
 		elapsed = endclock.getElapsedTime();
 
-		while (elapsed.asSeconds() <= 2)
+		while (elapsed.asSeconds() <= 1.5)
 		{
 			elapsed = endclock.getElapsedTime();
 		}
@@ -351,7 +355,7 @@ int screenloopandinit(sf::RenderWindow& gamewindow)
 
 		elapsed = endclock.getElapsedTime();
 
-		while (elapsed.asSeconds() <= 2)
+		while (elapsed.asSeconds() <= 1.5)
 		{
 			elapsed = endclock.getElapsedTime();
 		}

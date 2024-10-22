@@ -1,4 +1,4 @@
-# V1.1.0.0 - 14.10.2024 - Hubert Gonera
+# V1.1.1.0 - 16.10.2024 - Hubert Gonera
 
 ## Welcome
 
@@ -13,17 +13,11 @@ If you hit a wall, or yourself, you lose.
 
 ## Update notes:
 
-**Major:**
-* Added main menu.
-* Added lose screen.
-* Added basic button class for creating simple buttons.
-
 **Minor:**
-* Moved keyboard events over to the simulation part of the gameloop. As a result, controls feel way more immidiate now.
+* Pressing space and enter now also start the game, and Q closes it. (This is so the game can also be played without a mouse.)
 
 **Patch:**
-* Various small optimizations.
-* Increased text size during gameplay.
+* Refined speed formula.
 
 ## Versioning:
 
@@ -37,6 +31,21 @@ Version format: COMPATIBILITY.MAJOR.MINOR.PATCH
 Each README has its build version in the beginning, and build date in dd/mm/yyyy.
 
 # Previous update notes:
+
+## V1.1.0.0
+*14.10.2024*
+
+**Major:**
+* Added main menu.
+* Added lose screen.
+* Added basic button class for creating simple buttons.
+
+**Minor:**
+* Moved keyboard events over to the simulation part of the gameloop. As a result, controls feel way more immidiate now.
+
+**Patch:**
+* Various small optimizations.
+* Increased text size during gameplay.
 
 ## V1.0.2.0
 *13.10.2024*
