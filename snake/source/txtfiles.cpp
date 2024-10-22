@@ -6,6 +6,21 @@
 #include <cstdlib>
 #include <filesystem>
 
+/*
+CURRENT FORMAT OF data.txt
+
+0 - Version tag
+1 - number of highscores
+2 - highscore
+2+1 - name
+4 - highscore
+4+1 -name
+...
+NoH - highscore
+NoH + 1 - name
+
+*/
+
 std::vector<std::string> loadfromdatatxt()
 {
 	std::ifstream fin;
