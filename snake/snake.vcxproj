@@ -151,6 +151,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="mainmenu.cpp" />
     <ClCompile Include="snake.cpp" />
     <ClCompile Include="gameloop.cpp" />
   </ItemGroup>

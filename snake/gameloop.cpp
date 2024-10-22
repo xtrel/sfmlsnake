@@ -104,7 +104,7 @@ int handleinput(sf::RenderWindow& gamewindow, std::pair<int,int>& snakeheading, 
 	return 1;
 }
 
-int render(sf::RenderWindow &gamewindow, Mapstate &mapstate, std::pair<int, int>& apple, std::vector<std::pair<int, int>>& snakeparts, double& speed,sf::Text text)
+int render(sf::RenderWindow &gamewindow, Mapstate &mapstate, std::pair<int, int>& apple, std::vector<std::pair<int, int>>& snakeparts, double& speed,sf::Text text, sf::Font font)
 {
 	if (!(apple.first < 0 || apple.first > mapstate.mapxsize - 1 || apple.second < 0 || apple.second > mapstate.mapysize - 1))
 	{
@@ -235,7 +235,7 @@ int simulate(Mapstate& mapstate, int t, double dt, std::pair<int,int> &apple, st
 	return 1;
 }
 
-int screenloopandinit()
+int screenloopandinit(sf::RenderWindow& gamewindow)
 {
 	Mapstate mapstate(16, 12);
 
@@ -259,7 +259,8 @@ int screenloopandinit()
 	//int framenum = 0;
 	//int ticknum = 0;
 
-	sf::RenderWindow gamewindow(sf::VideoMode(800, 600), "Snake " + versiontag, sf::Style::Close | sf::Style::Titlebar);
+	gamewindow.create(sf::VideoMode(800, 600), "Snake " + versiontag, sf::Style::Close | sf::Style::Titlebar);
+
 	{
 		sf::Image icon;
 		icon.loadFromFile("rsc/icon.png");
@@ -277,7 +278,10 @@ int screenloopandinit()
 
 	gamewindow.setVerticalSyncEnabled(true);
 
-	while (gamewindow.isOpen())
+	bool lost = false;
+	bool won = false;
+
+	while (!lost && !won)
 	{
 		sf::Time frameTime = clock.restart();
 		accumulator = accumulator + frameTime.asSeconds();
@@ -293,7 +297,7 @@ int screenloopandinit()
 			int temp = simulate(mapstate, t, dt,apple,snakeparts, snakeheading, tillmove, movementcap,speed, text);
 			if (temp == 2)
 			{
-				gamewindow.close();
+				lost = true;
 			}
 
 			accumulator = accumulator - dt;
@@ -301,8 +305,18 @@ int screenloopandinit()
 			//ticknum++;
 		}
 		//framenum++;
-		render(gamewindow, mapstate,apple,snakeparts,speed,text);
+		render(gamewindow, mapstate,apple,snakeparts,speed,text,font);
 	}
 
-	return 0;
+	if (lost)
+	{
+		return 2;
+	}
+	else if (won)
+	{
+		return 1;
+	}
+	else {
+		return -1;
+	}
 }

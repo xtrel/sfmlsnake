@@ -1,4 +1,4 @@
-# V1.0.2.0 - 13.10.2024 - Hubert Gonera
+# Vdev - 13.10.2024 - Hubert Gonera
 
 ## Welcome
 
@@ -13,12 +13,6 @@ If you hit a wall, or yourself, the game closes. Sorry.
 
 ## Update notes:
 
-**Minor:**
-* Reworked the speed function. It is now not incremental, but instead follows something akin to a very flattened parabola.
-* Moved from .txt README format over to .mb. Changed the versioning section a bit, as well as moved previous patchnotes to the current standard.
-
-**Patches:**
-* Added seed randomization for varying the location of fruit between runs. Previously, the fruit spawned in consistant locations in each run.
 
 ## Versioning:
 
@@ -32,6 +26,16 @@ Version format: COMPATIBILITY.MAJOR.MINOR.PATCH
 Each README has its build version in the beginning, and build date in dd/mm/yyyy.
 
 # Previous update notes:
+
+## V1.0.2.0
+*13.10.2024*
+
+**Minor:**
+* Reworked the speed function. It is now not incremental, but instead follows something akin to a very flattened parabola.
+* Moved from .txt README format over to .mb. Changed the versioning section a bit, as well as moved previous patchnotes to the current standard.
+
+**Patches:**
+* Added seed randomization for varying the location of fruit between runs. Previously, the fruit spawned in consistant locations in each run.
 
 ## V1.0.1.2
 *10.10.2024*
