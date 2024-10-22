@@ -5,7 +5,7 @@
 std::vector<std::string> loadfromdatatxt()
 {
 	std::ifstream fin;
-	fin.open("data.txt");
+	fin.open("gamedata/data.txt");
 
 	std::vector<std::string> retvector;
 	std::string tempstring;
@@ -23,7 +23,7 @@ std::vector<std::string> loadfromdatatxt()
 bool writetolog(std::string text)
 {
 	std::ifstream fin;
-	fin.open("log.txt");
+	fin.open("gamedata/log.txt");
 
 	std::vector<std::string> file;
 	std::string tempstring;
@@ -38,7 +38,7 @@ bool writetolog(std::string text)
 	file.push_back(text);
 
 	std::ofstream fout;
-	fout.open("log.txt");
+	fout.open("gamedata/log.txt");
 
 	for (int i = 0; i < file.size(); i++)
 	{

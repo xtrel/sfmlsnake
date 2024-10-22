@@ -151,14 +151,8 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="txtfiles.cpp" />
-    <ClCompile Include="mainmenu.cpp" />
-    <ClCompile Include="snake.cpp" />
-    <ClCompile Include="gameloop.cpp" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="mainheader.h" />
     <ClInclude Include="resource2.h" />
+    <ClInclude Include="source\mainheader.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="snake1.rc" />
@@ -187,5 +181,11 @@
     <None Include="sfml-window-2.dll">
       <DeploymentContent>true</DeploymentContent>
     </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="source\gameloop.cpp" />
+    <ClCompile Include="source\mainmenu.cpp" />
+    <ClCompile Include="source\snake.cpp" />
+    <ClCompile Include="source\txtfiles.cpp" />
   </ItemGroup>
 </Project>
