@@ -2,7 +2,8 @@
 
 int updatehighscores(std::vector < std::pair<int, std::string>>& highscores, int currentscore, int& highscore)
 {
-	highscores.push_back({ currentscore,"placeholder" });
+	std::string tempstring = "placeholder;"+versiontag;
+	highscores.push_back({ currentscore,tempstring});
 
 	for (int i = highscores.size() - 1; i > 0; i--)
 	{
@@ -14,9 +15,9 @@ int updatehighscores(std::vector < std::pair<int, std::string>>& highscores, int
 		}
 	}
 
-	if (highscores.size() > 5)
+	if (highscores.size() > 10)
 	{
-		highscores.resize(5);
+		highscores.resize(10);
 	}
 
 	highscore = highscores[0].first;
@@ -43,6 +44,7 @@ int savedata(std::vector < std::pair<int, std::string>>& highscores)
 int mainmenu(sf::RenderWindow& gamewindow)
 {
 	std::vector < std::pair<int, std::string>> highscores;
+	std::vector <std::string> highscorenames;
 	{
 		std::vector<std::string> loadeddata = loadfromdatatxt();
 
@@ -55,7 +57,19 @@ int mainmenu(sf::RenderWindow& gamewindow)
 			{
 				highscores.push_back({ stoi(loadeddata[i]), loadeddata[i + 1] });
 			}
-		}	
+		}
+		for (int i = 0; i < highscores.size(); i++)
+		{
+			size_t pos = highscores[i].second.find(';');
+			if (pos == std::string::npos)
+			{
+				highscorenames.push_back(highscores[i].second);
+				highscores[i].second = highscores[i].second + ";before V1.2.1.1";
+			}
+			else {
+				highscorenames.push_back(highscores[i].second.substr(0, pos));
+			}
+		}
 	}
 
 
@@ -87,7 +101,7 @@ int mainmenu(sf::RenderWindow& gamewindow)
 	{
 		highscoretext.setString("Current highscore: " + std::to_string(highscore));
 	}
-	highscoretext.setPosition(0, 560);
+	highscoretext.setPosition(0, 500);
 
 	Button playbutton(font, "Play", { 60,200 }, { 100,50 }, 5, 25);
 	playbutton.buttonedgeupdate();

@@ -29,6 +29,9 @@ In the main menu you can also use SPACE or ENTER to start a game, or Q to quit.
 
 ## Update notes:
 
+**Patches:**
+* Small changes to saving mechanisms - added capability to give a version tag to each highscore. Ensured backward compatibilty with previous saves, now if the game detects a highscore without a versiontag, it adds the "before V1.2.1.1" tag into it.
+
 ## Versioning:
 
 Version format: COMPATIBILITY.MAJOR.MINOR.PATCH
