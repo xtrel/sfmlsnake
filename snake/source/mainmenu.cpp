@@ -101,7 +101,7 @@ int mainmenu(sf::RenderWindow& gamewindow)
 	{
 		highscoretext.setString("Current highscore: " + std::to_string(highscore));
 	}
-	highscoretext.setPosition(0, 500);
+	highscoretext.setPosition(0, 560);
 
 	Button playbutton(font, "Play", { 60,200 }, { 100,50 }, 5, 25);
 	playbutton.buttonedgeupdate();
