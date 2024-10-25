@@ -23,13 +23,27 @@ int render(sf::RenderWindow &gamewindow, Mapstate &mapstate, std::pair<int, int>
 	{
 		mapstate.settilecolor(apple.first, apple.second, 1);
 	}
-
+	int valr = 255 - 1;
+	int valg = 255 - 1;
+	int valb = 0;
 	for (int i = 1; i < snakeparts.size(); i++)
 	{
-		double val = abs(abs(255 * sin((i + 50) / 25.f)) - i / 5.f);
-		mapstate.settilecolorRGB(snakeparts[i].first, snakeparts[i].second, 25, 25, floor(val), 255);
+		
+		if (i %  2 == 0)
+		{
+			valr = 255-i;
+			valg = 255-i;
+			valb = 0;
+		}
+		else if (i % 2 == 1)
+		{
+			valr = 2*i;
+			valg = 192-2*i;
+			valb = 0;
+		}
+		mapstate.settilecolorRGB(snakeparts[i].first, snakeparts[i].second, valr, valg, valb, 255);
 	}
-	mapstate.settilecolorRGB(snakeparts[0].first, snakeparts[0].second, 0, 0, 255, 255);
+	mapstate.settilecolorRGB(snakeparts[0].first, snakeparts[0].second, 140, 140, 140, 255);
 
 	mapstate.transfermapstatetoVA(800, 600);
 
@@ -72,19 +86,19 @@ int simulate(Mapstate& mapstate, int t, double dt, std::pair<int,int> &apple, st
 	{
 		int right = 0;
 		int up = 0;
-		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Up))
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Up) || sf::Keyboard::isKeyPressed(sf::Keyboard::Key::W))
 		{
 			up = 1;
 		}
-		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Down))
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Down) || sf::Keyboard::isKeyPressed(sf::Keyboard::Key::S))
 		{
 			up = -1;
 		}
-		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Right))
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Right) || sf::Keyboard::isKeyPressed(sf::Keyboard::Key::D))
 		{
 			right = 1;
 		}
-		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Left))
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Left) || sf::Keyboard::isKeyPressed(sf::Keyboard::Key::A))
 		{
 			right = -1;
 		}
