@@ -71,5 +71,8 @@
     <None Include="READMEdev.md">
       <Filter>Markdowns</Filter>
     </None>
+    <None Include="..\LICENSE">
+      <Filter>Markdowns</Filter>
+    </None>
   </ItemGroup>
 </Project>

@@ -15,7 +15,7 @@ By Hubert Gonera
 Welcome to snake.
 I have made this game to familiarize myself with SFML in C++, as well as managing a Github repo.
 
-I am You know the premise of this game, but in the extremely unlikely event that you do not, here is a rundown:
+I am sure You know the premise of this game, but in the extremely unlikely event that you do not, here is a rundown:
 * You are a snake.
 * You want to grow, till you fill the whole map.
 * The only way you can grow, is by eating fruit.

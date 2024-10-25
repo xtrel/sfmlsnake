@@ -1,5 +1,11 @@
 # Previous update notes:
 
+## V1.2.2.1
+*25.10.2024*
+
+**Patches:**
+* Fixed typos in README.
+
 ## V1.2.2.0
 *25.10.2024*
 

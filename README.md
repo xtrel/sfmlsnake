@@ -1,4 +1,4 @@
-# V1.2.2.0 - 25.10.2024
+# V1.2.2.1 - 25.10.2024
 By Hubert Gonera
 
 ## Welcome
@@ -6,7 +6,7 @@ By Hubert Gonera
 Welcome to snake.
 I have made this game to familiarize myself with SFML in C++, as well as managing a Github repo.
 
-I am You know the premise of this game, but in the extremely unlikely event that you do not, here is a rundown:
+I am sure You know the premise of this game, but in the extremely unlikely event that you do not, here is a rundown:
 * You are a snake.
 * You want to grow, till you fill the whole map.
 * The only way you can grow, is by eating fruit.
@@ -23,12 +23,8 @@ After winning or losing, the game will display a message for 5 seconds, then qui
 
 ## Update notes:
 
-**Minor:**
-* Changed font and game icon.
-
 **Patches:**
-* Small changes to saving mechanisms - added capability to give a version tag to each highscore. Ensured backward compatibilty with previous saves, now if the game detects a highscore without a versiontag, it adds the "before V1.2.2.0" tag into it.
-* Small changes to README.
+* Fixed typos in README.
 
 ## Versioning:
 
