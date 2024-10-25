@@ -8,8 +8,8 @@
 #include <iostream>
 #include <vector>
 
-const std::string versiontag = "V1.2.1.0";
-const std::string builddate = "22.10.2024";
+const std::string versiontag = "V1.2.2.0";
+const std::string builddate = "25.10.2024";
 
 int mainmenu(sf::RenderWindow& gamewindow);
 

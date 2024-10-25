@@ -1,4 +1,5 @@
-# V1.2.1.0 - 22.10.2024 - Hubert Gonera
+# V1.2.2.0 - 25.10.2024
+By Hubert Gonera
 
 ## Welcome
 
@@ -18,14 +19,15 @@ If you hit a wall, or yourself, you lose.
 
 In the main menu you can also use SPACE or ENTER to start a game, or Q to quit.
 
+After winning or losing, the game will display a message for 5 seconds, then quit to main menu. You can skip this by pressing enter or space.
+
 ## Update notes:
 
 **Minor:**
-* Added color grading to the snake's body, so it is easier to see which part is moving where.
-* Increased TPS to 256Hz
-* Lose and win screen now stays for 5 seconds, however you can press enter or space to exit to main menu instantly.
+* Changed font and game icon.
 
-**Patch:**
+**Patches:**
+* Small changes to saving mechanisms - added capability to give a version tag to each highscore. Ensured backward compatibilty with previous saves, now if the game detects a highscore without a versiontag, it adds the "before V1.2.2.0" tag into it.
 * Small changes to README.
 
 ## Versioning:

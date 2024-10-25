@@ -261,7 +261,7 @@ int screenloopandinit(sf::RenderWindow& gamewindow, int& score)
 	//int ticknum = 0;
 
 	sf::Font font;
-	font.loadFromFile("rsc/coolvetica rg.otf");
+	font.loadFromFile("rsc/munro.ttf");
 
 	sf::Text text;
 	text.setFont(font);

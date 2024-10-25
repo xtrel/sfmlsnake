@@ -91,7 +91,7 @@ int mainmenu(sf::RenderWindow& gamewindow)
 	
 
 	sf::Font font;
-	font.loadFromFile("rsc/coolvetica rg.otf");
+	font.loadFromFile("rsc/munro.ttf");
 
 	sf::Text titletext("Snake " + versiontag + "\nBy Hubert Gonera\n" + builddate, font, 40);
 	titletext.setPosition(10, 0);

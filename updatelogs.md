@@ -1,5 +1,15 @@
 # Previous update notes:
 
+## V1.2.2.0
+*25.10.2024*
+
+**Minor:**
+* Changed font and game icon.
+
+**Patches:**
+* Small changes to saving mechanisms - added capability to give a version tag to each highscore. Ensured backward compatibilty with previous saves, now if the game detects a highscore without a versiontag, it adds the "before V1.2.2.0" tag into it.
+* Small changes to README.
+
 ## V1.2.1.0
 *22.10.2024*
 

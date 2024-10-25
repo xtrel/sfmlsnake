@@ -7,7 +7,8 @@ Clear patch notes here.
 Make sure you dont include gamedata folder in release.
 Delete debugging file.
 
-# Vdev - Ddev - Hubert Gonera
+# Vdev - ddev
+By Hubert Gonera
 
 ## Welcome
 
@@ -27,10 +28,9 @@ If you hit a wall, or yourself, you lose.
 
 In the main menu you can also use SPACE or ENTER to start a game, or Q to quit.
 
-## Update notes:
+After winning or losing, the game will display a message for 5 seconds, then quit to main menu. You can skip this by pressing enter or space.
 
-**Patches:**
-* Small changes to saving mechanisms - added capability to give a version tag to each highscore. Ensured backward compatibilty with previous saves, now if the game detects a highscore without a versiontag, it adds the "before V1.2.1.1" tag into it.
+## Update notes:
 
 ## Versioning:
 
