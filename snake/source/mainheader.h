@@ -1,5 +1,5 @@
 #pragma once
-#pragma comment(linker, "/SUBSYSTEM:windows /ENTRY:mainCRTStartup") //combined with windows subsystem in project settings, linker, system, makes no console
+//#pragma comment(linker, "/SUBSYSTEM:windows /ENTRY:mainCRTStartup") //combined with windows subsystem in project settings, linker, system, makes no console
 
 #include <SFML/Window.hpp>
 #include <SFML/Graphics.hpp>
@@ -8,8 +8,12 @@
 #include <iostream>
 #include <vector>
 
-const std::string versiontag = "V1.2.3.0";
-const std::string builddate = "26.10.2024";
+const std::string versiontag = "Vdev";
+const std::string builddate = "Ddev";
+
+extern int screenreswidth;
+extern int screenresheight;
+extern bool fullscreen;
 
 int mainmenu(sf::RenderWindow& gamewindow);
 
@@ -18,6 +22,10 @@ int screenloopandinit(sf::RenderWindow& gamewindow, int& score);
 std::vector<std::string> loadfromdatatxt();
 bool writetolog(std::string text, std::string path = "log.txt");
 int savetodatatxt(std::vector<std::string> datavector);
+
+int TORELXPOS(double pos);
+int TORELYPOS(double pos);
+int TORELSIZE(double pos);
 
 class Mapstate : public sf::Drawable
 {

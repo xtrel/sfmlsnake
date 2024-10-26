@@ -1,5 +1,36 @@
 #include "mainheader.h"
 
+int screenreswidth = 1600;
+int screenresheight = 1200;
+bool fullscreen = false;
+bool fullscreennativeres = false;
+bool noscreenoptions = true;
+
+int TORELXPOS(double pos)
+{
+	pos = pos / 800.f;
+	pos = pos * screenreswidth;
+	return round(pos);
+}
+
+int TORELSIZE(double pos)
+{
+	double pos1 = pos / 800.f;
+	pos1 = pos1 * screenreswidth;
+
+	double pos2 = pos / 600.f;
+	pos2 = pos2 * screenresheight;
+
+	return round((pos1+pos2)/2.f);
+}
+
+int TORELYPOS(double pos)
+{
+	pos = pos / 600.f;
+	pos = pos * screenresheight;
+	return round(pos);
+}
+
 int updatehighscores(std::vector < std::pair<int, std::string>>& highscores, int currentscore, int& highscore)
 {
 	std::string tempstring = "placeholder;"+versiontag;
@@ -72,12 +103,29 @@ int mainmenu(sf::RenderWindow& gamewindow)
 		}
 	}
 
-
-	gamewindow.create(sf::VideoMode(800, 600), "Snake " + versiontag, sf::Style::Close | sf::Style::Titlebar);
 	{
-		sf::Image icon;
-		icon.loadFromFile("rsc/icon.png");
-		gamewindow.setIcon(icon.getSize().x, icon.getSize().y, icon.getPixelsPtr());
+		int fullscreenflag = 0;
+		if (noscreenoptions)
+		{
+			screenreswidth = sf::VideoMode::getDesktopMode().width / 2;
+			screenresheight = (3.f / 4.f) * screenreswidth;
+		}
+		if (fullscreennativeres)
+		{
+			screenreswidth = sf::VideoMode::getDesktopMode().width;
+			screenresheight = sf::VideoMode::getDesktopMode().height;
+			fullscreenflag = 8;
+		}
+		else if (fullscreen)
+		{
+			fullscreenflag = 8;
+		}
+		gamewindow.create(sf::VideoMode(screenreswidth, screenresheight), "Snake " + versiontag, sf::Style::Close | sf::Style::Titlebar | fullscreenflag);
+		{
+			sf::Image icon;
+			icon.loadFromFile("rsc/icon.png");
+			gamewindow.setIcon(icon.getSize().x, icon.getSize().y, icon.getPixelsPtr());
+		}
 	}
 
 	bool quitfull = false;
@@ -89,25 +137,24 @@ int mainmenu(sf::RenderWindow& gamewindow)
 		highscore = highscores[0].first;
 	}
 	
-
 	sf::Font font;
 	font.loadFromFile("rsc/munro.ttf");
 
-	sf::Text titletext("Snake " + versiontag + "\nBy Hubert Gonera\n" + builddate, font, 40);
-	titletext.setPosition(10, 0);
+	sf::Text titletext("Snake " + versiontag + "\nBy Hubert Gonera\n" + builddate, font, TORELSIZE(40));
+	titletext.setPosition(TORELXPOS(10), TORELYPOS(10));
 
-	sf::Text highscoretext("Current highscore: None", font, 30);
+	sf::Text highscoretext("Current highscore: None", font, TORELSIZE(30));
 	if (highscore != -1)
 	{
 		highscoretext.setString("Current highscore: " + std::to_string(highscore));
 	}
-	highscoretext.setPosition(0, 560);
+	highscoretext.setPosition(TORELXPOS(10), TORELYPOS(560));
 
-	Button playbutton(font, "Play", { 60,200 }, { 100,50 }, 5, 25);
+	Button playbutton(font, "Play", { TORELXPOS(60),TORELYPOS(200) }, { TORELXPOS(100),TORELYPOS(50) }, TORELSIZE(5), TORELSIZE(25));
 	playbutton.buttonedgeupdate();
 	playbutton.buttontextupdate();
 
-	Button quitbutton(font, "Quit", { 60,260 }, { 100,50 }, 5, 25);
+	Button quitbutton(font, "Quit", { TORELXPOS(60),TORELYPOS(260) }, { TORELXPOS(100),TORELYPOS(50) }, TORELSIZE(5), TORELSIZE(25));
 	quitbutton.buttonedgeupdate();
 	quitbutton.buttontextupdate();
 
