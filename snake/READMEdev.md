@@ -23,6 +23,7 @@ I am sure You know the premise of this game, but in the extremely unlikely event
 ## Controls:
 
 Right arrow to set direction to the right. Left to set to the left, etc.
+You can also use WASD.
 
 If you hit a wall, or yourself, you lose.
 
@@ -31,10 +32,6 @@ In the main menu you can also use SPACE or ENTER to start a game, or Q to quit.
 After winning or losing, the game will display a message for 5 seconds, then quit to main menu. You can skip this by pressing enter or space.
 
 ## Update notes:
-
-**Minor:**
-* Changed snake graphics
-* Added wasd controlls
 
 ## Versioning:
 
@@ -53,6 +50,9 @@ https://www.sfml-dev.org/
 
 Big thanks to Miroslaw Zelent and Damian Stelmach for giving me an easy introduction to c++ in the first place, many years ago.
 https://www.youtube.com/channel/UCzn6vAfspIcagLax1fck_jw
+
+Thanks to Tymon Drop for designing the snake graphics in V1.2.3.0 and implementing WASD controls.
+https://github.com/Kimoworwa
 
 ## Building the game yourself
 

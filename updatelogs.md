@@ -1,5 +1,13 @@
 # Previous update notes:
 
+## V1.2.3.0
+*26.10.2024*
+
+**Minor:**
+* Changed snake graphics.
+* Added wasd controlls.
+* Changed game icon.
+
 ## V1.2.2.1
 *25.10.2024*
 
