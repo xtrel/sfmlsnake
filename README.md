@@ -1,11 +1,12 @@
-# V1.2.1.0 - 22.10.2024 - Hubert Gonera
+# V1.2.2.1 - 25.10.2024
+By Hubert Gonera
 
 ## Welcome
 
 Welcome to snake.
 I have made this game to familiarize myself with SFML in C++, as well as managing a Github repo.
 
-I am You know the premise of this game, but in the extremely unlikely event that you do not, here is a rundown:
+I am sure You know the premise of this game, but in the extremely unlikely event that you do not, here is a rundown:
 * You are a snake.
 * You want to grow, till you fill the whole map.
 * The only way you can grow, is by eating fruit.
@@ -18,15 +19,12 @@ If you hit a wall, or yourself, you lose.
 
 In the main menu you can also use SPACE or ENTER to start a game, or Q to quit.
 
+After winning or losing, the game will display a message for 5 seconds, then quit to main menu. You can skip this by pressing enter or space.
+
 ## Update notes:
 
-**Minor:**
-* Added color grading to the snake's body, so it is easier to see which part is moving where.
-* Increased TPS to 256Hz
-* Lose and win screen now stays for 5 seconds, however you can press enter or space to exit to main menu instantly.
-
-**Patch:**
-* Small changes to README.
+**Patches:**
+* Fixed typos in README.
 
 ## Versioning:
 
