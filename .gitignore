@@ -5,6 +5,7 @@
 
 # My additions
 snake/gamedata/
+snake/snake.vcxproj.user
 
 # User-specific files
 *.rsuser
