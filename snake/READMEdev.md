@@ -32,6 +32,10 @@ After winning or losing, the game will display a message for 5 seconds, then qui
 
 ## Update notes:
 
+**Minor:**
+* Changed snake graphics
+* Added wasd controlls
+
 ## Versioning:
 
 Version format: COMPATIBILITY.MAJOR.MINOR.PATCH
