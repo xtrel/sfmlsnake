@@ -44,11 +44,6 @@ int updatehighscores(std::vector < std::pair<int, std::string>>& highscores, int
 		}
 	}
 
-	if (highscores.size() > 10)
-	{
-		highscores.resize(10);
-	}
-
 	highscore = highscores[0].first;
 	return 1;
 }
@@ -73,18 +68,24 @@ int savehighscoredata(std::vector < std::pair<int, std::string>>& highscores)
 int loadhighscores(std::vector < std::pair<int, std::string>>& highscores, std::vector <std::string>& highscorenames)
 {
 	std::vector<std::string> loadeddata = loadfromtxt();
+
+	highscores.resize(0);
+	highscorenames.resize(0);
+
 	if (loadeddata[0] == "ERROR")
 	{
 		return -1;
 	}
 	else {
-		for (int i = 2; i <= stoi(loadeddata[1]) * 2; i = i + 2) //loades highscores
+		for (int i = 2; i < stoi(loadeddata[1])*2+2; i=i+2) //loades highscores
 		{
 			highscores.push_back({ stoi(loadeddata[i]), loadeddata[i + 1] });
 		}
 	}
+	std::system("cls");
 	for (int i = 0; i < highscores.size(); i++)
 	{
+		std::cout << highscores[i].first << " " << highscores[i].second << "\n";
 		size_t pos = highscores[i].second.find(';');
 		if (pos == std::string::npos)
 		{
