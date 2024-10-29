@@ -26,6 +26,8 @@ int handleinput(sf::RenderWindow& gamewindow)
 
 int render(sf::RenderWindow &gamewindow, Mapstate &mapstate, std::pair<int, int>& apple, std::vector<std::pair<int, int>>& snakeparts, double& speed,sf::Text text, sf::Font font)
 {
+	mapstate.fillmapstatewithrgb(10, 10, 10, 255);
+
 	if (!(apple.first < 0 || apple.first > mapstate.mapxsize - 1 || apple.second < 0 || apple.second > mapstate.mapysize - 1))
 	{
 		mapstate.settilecolor(apple.first, apple.second, 1);

@@ -33,9 +33,6 @@ After winning or losing, the game will display a message for 5 seconds, then qui
 
 ## Update notes:
 
-**Minor:**
-* You can now close the game during a round using Q.
-
 ## Versioning:
 
 Version format: COMPATIBILITY.MAJOR.MINOR.PATCH
@@ -44,6 +41,11 @@ Version format: COMPATIBILITY.MAJOR.MINOR.PATCH
 * MAJOR - Incermented if added new feature systems, heavily reworked existing ones, or added large features.
 * MINOR - Incremented if added small to medium features in existing systems, or if they were reworked. NOT INCREMENTED if new feature systems were added. Then MAJOR is incremented.
 * PATCH - No new features, just bug fixes.
+
+A version that contains the -alpha-n suffix is in development. New systems, features or reworks are underway, but the game itself is also playable
+(albeit with bugs and unpolished). The n after alpha stands for the current alpha version. Think of the -alpha suffix as something analogous to 0.y.z
+versions in the semantic versioning system (https://semver.org/). Many changes are coming, and when the version is ready, the suffix is deleted and the
+version with just the tag is released.
 
 Each README has its build version in the beginning, and build date in dd/mm/yyyy.
 

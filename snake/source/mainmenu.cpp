@@ -44,11 +44,6 @@ int updatehighscores(std::vector < std::pair<int, std::string>>& highscores, int
 		}
 	}
 
-	if (highscores.size() > 10)
-	{
-		highscores.resize(10);
-	}
-
 	highscore = highscores[0].first;
 	return 1;
 }

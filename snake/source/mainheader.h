@@ -8,8 +8,8 @@
 #include <iostream>
 #include <vector>
 
-const std::string versiontag = "Vdev";
-const std::string builddate = "Ddev";
+const std::string versiontag = "V1.3.0.0-alpha-1";
+const std::string builddate = "29.10.2024";
 
 extern int screenreswidth;
 extern int screenresheight;
@@ -91,6 +91,18 @@ public:
 				{
 					mapstate[x][y] = { 0,0,255,255 };
 				}
+			}
+		}
+		return 1;
+	}
+
+	int fillmapstatewithrgb(int r, int g, int b, int a)
+	{
+		for (int x = 0; x < mapxsize; x++)
+		{
+			for (int y = 0; y < mapysize; y++)
+			{
+				mapstate[x][y] = { r,g,b,a };
 			}
 		}
 		return 1;
