@@ -82,10 +82,8 @@ int loadhighscores(std::vector < std::pair<int, std::string>>& highscores, std::
 			highscores.push_back({ stoi(loadeddata[i]), loadeddata[i + 1] });
 		}
 	}
-	std::system("cls");
 	for (int i = 0; i < highscores.size(); i++)
 	{
-		std::cout << highscores[i].first << " " << highscores[i].second << "\n";
 		size_t pos = highscores[i].second.find(';');
 		if (pos == std::string::npos)
 		{
