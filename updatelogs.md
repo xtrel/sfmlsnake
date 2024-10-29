@@ -1,5 +1,11 @@
 # Previous update notes:
 
+## V1.2.4.0
+*29.10.2024*
+
+**Minor:**
+* Reworked snake graphics.
+
 ## V1.2.3.0
 *26.10.2024*
 

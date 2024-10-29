@@ -23,6 +23,7 @@ int render(sf::RenderWindow &gamewindow, Mapstate &mapstate, std::pair<int, int>
 	{
 		mapstate.settilecolor(apple.first, apple.second, 1);
 	}
+	/*
 	int valr = 255 - 1;
 	int valg = 255 - 1;
 	int valb = 0;
@@ -42,6 +43,21 @@ int render(sf::RenderWindow &gamewindow, Mapstate &mapstate, std::pair<int, int>
 			valb = 0;
 		}
 		mapstate.settilecolorRGB(snakeparts[i].first, snakeparts[i].second, valr, valg, valb, 255);
+	}
+	*/
+	/*
+	for (int i = 1; i < snakeparts.size(); i++)
+	{
+		double val = abs(abs(255 * sin((i + 50) / 25.f)) - i / 5.f);
+		mapstate.settilecolorRGB(snakeparts[i].first, snakeparts[i].second, 25, 25, floor(val), 255);
+	}
+	*/
+	for (int i = 1; i < snakeparts.size(); i++)
+	{
+		double valb = abs(abs(255 * sin((3*i + 70) / 25.f)) - 2 * i / 5.f);
+		double valg = abs(abs(255 * cos((3*i/3.f + 65) / 25.f)) - 1.5f * i / 5.f);
+		double valr = abs(abs(255 * sin((4*i + 70) / 25.f)) - 2 * i / 5.f);
+		mapstate.settilecolorRGB(snakeparts[i].first, snakeparts[i].second, floor(valr/3.5f), floor(valg / 2.f), floor(valb), 255);
 	}
 	mapstate.settilecolorRGB(snakeparts[0].first, snakeparts[0].second, 140, 140, 140, 255);
 
