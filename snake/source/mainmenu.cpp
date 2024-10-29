@@ -1,8 +1,8 @@
 #include "mainheader.h"
 
-int screenreswidth = 3840;
-int screenresheight = 2160;
-bool fullscreen = true;
+int screenreswidth = 800;
+int screenresheight = 600;
+bool fullscreen = false;
 
 int TORELXPOS(double pos)
 {
@@ -53,7 +53,7 @@ int updatehighscores(std::vector < std::pair<int, std::string>>& highscores, int
 	return 1;
 }
 
-int savedata(std::vector < std::pair<int, std::string>>& highscores)
+int savehighscoredata(std::vector < std::pair<int, std::string>>& highscores)
 {
 	std::vector<std::string> savevector;
 	savevector.push_back(versiontag);
@@ -66,7 +66,35 @@ int savedata(std::vector < std::pair<int, std::string>>& highscores)
 		savevector.push_back(highscores[i].second);
 	}
 
-	savetodatatxt(savevector);
+	savetotxt(savevector);
+	return 1;
+}
+
+int loadhighscores(std::vector < std::pair<int, std::string>>& highscores, std::vector <std::string>& highscorenames)
+{
+	std::vector<std::string> loadeddata = loadfromtxt();
+	if (loadeddata[0] == "ERROR")
+	{
+		return -1;
+	}
+	else {
+		for (int i = 2; i <= stoi(loadeddata[1]) * 2; i = i + 2) //loades highscores
+		{
+			highscores.push_back({ stoi(loadeddata[i]), loadeddata[i + 1] });
+		}
+	}
+	for (int i = 0; i < highscores.size(); i++)
+	{
+		size_t pos = highscores[i].second.find(';');
+		if (pos == std::string::npos)
+		{
+			highscorenames.push_back(highscores[i].second);
+			highscores[i].second = highscores[i].second + ";before V1.2.1.1";
+		}
+		else {
+			highscorenames.push_back(highscores[i].second.substr(0, pos));
+		}
+	}
 	return 1;
 }
 
@@ -75,28 +103,24 @@ int mainmenu(sf::RenderWindow& gamewindow)
 	std::vector < std::pair<int, std::string>> highscores;
 	std::vector <std::string> highscorenames;
 	{
-		std::vector<std::string> loadeddata = loadfromdatatxt();
+		std::vector<std::string> loadeddata = loadfromtxt();
 
-		if (loadeddata[0] == "ERROR")
-		{
+		{ //data.txt
+			loadhighscores(highscores, highscorenames);
+		}
 
-		}
-		else {
-			for (int i = 2; i <= stoi(loadeddata[1])*2; i = i + 2) //loades highscores
+		loadeddata.resize(0);
+
+		{ //set.txt
+			loadeddata = loadfromtxt("set.txt");
+			if (loadeddata[0] == "ERROR")
 			{
-				highscores.push_back({ stoi(loadeddata[i]), loadeddata[i + 1] });
-			}
-		}
-		for (int i = 0; i < highscores.size(); i++)
-		{
-			size_t pos = highscores[i].second.find(';');
-			if (pos == std::string::npos)
-			{
-				highscorenames.push_back(highscores[i].second);
-				highscores[i].second = highscores[i].second + ";before V1.2.1.1";
+				savetotxt({ "800","600","0" }, "set.txt");
 			}
 			else {
-				highscorenames.push_back(highscores[i].second.substr(0, pos));
+				screenreswidth = std::stoi(loadeddata[0]);
+				screenresheight = std::stoi(loadeddata[1]);
+				fullscreen = std::stoi(loadeddata[2]);
 			}
 		}
 	}
@@ -186,7 +210,8 @@ int mainmenu(sf::RenderWindow& gamewindow)
 				gameloopreturncode = screenloopandinit(gamewindow, scorefromround);
 				updatehighscores(highscores, scorefromround,highscore);
 				highscoretext.setString("Current highscore: " + std::to_string(highscore));
-				savedata(highscores);
+				savehighscoredata(highscores);
+				loadhighscores(highscores, highscorenames);
 				if (gameloopreturncode == 0)
 				{
 					quit = true;

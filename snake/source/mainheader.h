@@ -19,9 +19,9 @@ int mainmenu(sf::RenderWindow& gamewindow);
 
 int screenloopandinit(sf::RenderWindow& gamewindow, int& score);
 
-std::vector<std::string> loadfromdatatxt(std::string filename = "data.txt");
+std::vector<std::string> loadfromtxt(std::string filename = "data.txt");
 bool writetolog(std::string text, std::string path = "log.txt");
-int savetodatatxt(std::vector<std::string> datavector, std::string filename = "data.txt");
+int savetotxt(std::vector<std::string> datavector, std::string filename = "data.txt");
 
 int TORELXPOS(double pos);
 int TORELYPOS(double pos);

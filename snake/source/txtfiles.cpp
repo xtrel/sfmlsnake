@@ -21,7 +21,7 @@ NoH + 1 - name
 
 */
 
-std::vector<std::string> loadfromdatatxt(std::string filename)
+std::vector<std::string> loadfromtxt(std::string filename)
 {
 	std::ifstream fin;
 	fin.open("gamedata/"+ filename);
@@ -44,7 +44,7 @@ std::vector<std::string> loadfromdatatxt(std::string filename)
 	return retvector;
 }
 
-int savetodatatxt(std::vector<std::string> datavector,std::string filename)
+int savetotxt(std::vector<std::string> datavector,std::string filename)
 {
 	std::ofstream fout;
 	fout.open("gamedata/"+ filename);
