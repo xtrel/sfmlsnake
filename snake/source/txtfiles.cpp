@@ -34,7 +34,7 @@ std::vector<std::string> loadfromtxt(std::string filename)
 	std::vector<std::string> retvector;
 	std::string tempstring;
 
-	while (fin >> tempstring)
+	while (std::getline(fin,tempstring))
 	{
 		retvector.push_back(tempstring);
 	}
