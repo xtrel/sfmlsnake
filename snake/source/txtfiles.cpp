@@ -21,10 +21,10 @@ NoH + 1 - name
 
 */
 
-std::vector<std::string> loadfromdatatxt()
+std::vector<std::string> loadfromdatatxt(std::string filename)
 {
 	std::ifstream fin;
-	fin.open("gamedata/data.txt");
+	fin.open("gamedata/"+ filename);
 
 	if (!fin.is_open())
 	{
@@ -44,16 +44,16 @@ std::vector<std::string> loadfromdatatxt()
 	return retvector;
 }
 
-int savetodatatxt(std::vector<std::string> datavector)
+int savetodatatxt(std::vector<std::string> datavector,std::string filename)
 {
 	std::ofstream fout;
-	fout.open("gamedata/data.txt");
+	fout.open("gamedata/"+ filename);
 
 	if (!fout.is_open())
 	{
 		std::filesystem::create_directory("gamedata");
 		fout.close();
-		fout.open("gamedata/data.txt");
+		fout.open("gamedata/"+ filename);
 	}
 
 	if (!fout.is_open())

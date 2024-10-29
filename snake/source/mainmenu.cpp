@@ -1,10 +1,8 @@
 #include "mainheader.h"
 
-int screenreswidth = 1600;
-int screenresheight = 1200;
-bool fullscreen = false;
-bool fullscreennativeres = false;
-bool noscreenoptions = true;
+int screenreswidth = 3840;
+int screenresheight = 2160;
+bool fullscreen = true;
 
 int TORELXPOS(double pos)
 {
@@ -105,18 +103,7 @@ int mainmenu(sf::RenderWindow& gamewindow)
 
 	{
 		int fullscreenflag = 0;
-		if (noscreenoptions)
-		{
-			screenreswidth = sf::VideoMode::getDesktopMode().width / 2;
-			screenresheight = (3.f / 4.f) * screenreswidth;
-		}
-		if (fullscreennativeres)
-		{
-			screenreswidth = sf::VideoMode::getDesktopMode().width;
-			screenresheight = sf::VideoMode::getDesktopMode().height;
-			fullscreenflag = 8;
-		}
-		else if (fullscreen)
+		if (fullscreen)
 		{
 			fullscreenflag = 8;
 		}
