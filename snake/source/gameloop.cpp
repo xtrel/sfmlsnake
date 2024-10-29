@@ -12,6 +12,13 @@ int handleinput(sf::RenderWindow& gamewindow)
 		{
 			return 2;
 		}
+		if (windowevent.type == sf::Event::KeyReleased)
+		{
+			if (windowevent.key.code == sf::Keyboard::Q)
+			{
+				return 2;
+			}
+		}
 	}
 
 	return 1;
@@ -61,7 +68,7 @@ int render(sf::RenderWindow &gamewindow, Mapstate &mapstate, std::pair<int, int>
 	}
 	mapstate.settilecolorRGB(snakeparts[0].first, snakeparts[0].second, 140, 140, 140, 255);
 
-	mapstate.transfermapstatetoVA(800, 600);
+	mapstate.transfermapstatetoVA(screenreswidth, screenresheight);
 
 	gamewindow.clear();
 	gamewindow.draw(mapstate);
@@ -295,7 +302,7 @@ int screenloopandinit(sf::RenderWindow& gamewindow, int& score)
 
 	sf::Text text;
 	text.setFont(font);
-	text.setCharacterSize(30);
+	text.setCharacterSize(TORELSIZE(30));
 	text.setFillColor(sf::Color::White);
 	text.setString("Welcome to snake\nBy Hubert Gonera\n" + versiontag);
 
@@ -357,13 +364,13 @@ int screenloopandinit(sf::RenderWindow& gamewindow, int& score)
 		retcode = 2;
 	}
 
-	text.setCharacterSize(60);
+	text.setCharacterSize(TORELSIZE(60));
 	{
 		sf::FloatRect textrect = text.getLocalBounds();
 		int h = textrect.height;
 		int w = textrect.width;
 		text.setOrigin(textrect.left + textrect.width / 2.0f, textrect.top + textrect.height / 2.0f);
-		text.setPosition(sf::Vector2f(800 / 2.0f, 600 / 2.0f));
+		text.setPosition(sf::Vector2f(TORELXPOS(400), TORELYPOS(300)));
 	}
 
 	gamewindow.draw(text);
@@ -388,6 +395,10 @@ int screenloopandinit(sf::RenderWindow& gamewindow, int& score)
 				if (windowevent.key.code == sf::Keyboard::Enter || windowevent.key.code == sf::Keyboard::Space)
 				{
 					return retcode;
+				}
+				if (windowevent.key.code == sf::Keyboard::Q)
+				{
+					return 0;
 				}
 			}
 		}

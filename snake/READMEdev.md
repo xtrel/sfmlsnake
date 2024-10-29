@@ -33,6 +33,9 @@ After winning or losing, the game will display a message for 5 seconds, then qui
 
 ## Update notes:
 
+**Minor:**
+* You can now close the game during a round using Q.
+
 ## Versioning:
 
 Version format: COMPATIBILITY.MAJOR.MINOR.PATCH

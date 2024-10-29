@@ -8,16 +8,24 @@
 #include <iostream>
 #include <vector>
 
-const std::string versiontag = "V1.2.4.1";
-const std::string builddate = "29.10.2024";
+const std::string versiontag = "Vdev";
+const std::string builddate = "Ddev";
+
+extern int screenreswidth;
+extern int screenresheight;
+extern bool fullscreen;
 
 int mainmenu(sf::RenderWindow& gamewindow);
 
 int screenloopandinit(sf::RenderWindow& gamewindow, int& score);
 
-std::vector<std::string> loadfromdatatxt();
+std::vector<std::string> loadfromtxt(std::string filename = "data.txt");
 bool writetolog(std::string text, std::string path = "log.txt");
-int savetodatatxt(std::vector<std::string> datavector);
+int savetotxt(std::vector<std::string> datavector, std::string filename = "data.txt");
+
+int TORELXPOS(double pos);
+int TORELYPOS(double pos);
+int TORELSIZE(double pos);
 
 class Mapstate : public sf::Drawable
 {
