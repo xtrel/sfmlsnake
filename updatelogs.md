@@ -1,5 +1,12 @@
 # Previous update notes:
 
+## V1.3.0.0-alpha-2
+*29.10.2024*
+
+**Patches:**
+* Fixed "Game not opening for certain data.txt files" bug.
+* Fixed saving and reloading of highscores.
+
 ## V1.3.0.0-alpha-1
 *29.10.2024*
 

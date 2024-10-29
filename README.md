@@ -1,4 +1,4 @@
-# V1.3.0.0-alpha-1 - 29.10.2024
+# V1.3.0.0-alpha-2 - 29.10.2024
 By Hubert Gonera
 
 ## Welcome
@@ -24,27 +24,13 @@ After winning or losing, the game will display a message for 5 seconds, then qui
 
 ## Update notes:
 
-**Major:**
-* Added the set.txt file to gamedata folder (or it will be generated on first run). It contains three lines, first is resolution width,
-second is height, and the third contains either 0 for window mode or 1 for fullscreen.
-In the future a proper settings GUI will be implemented. This is the main reason as for the alpha suffix.
-
-**Minor:**
-* You can now close the game during a round using Q.
-* Background of the game is now a very dark gray, so that during fullscreen play in an aspect ratio different from the monitor, you can see the
-worlds edges.
-* Highscore saving and loading system now reloades and resaves the highscores after each run. Normally this wouldn't be needed, but in the case that
-many people will be playing on the same .exe file, this should prevent overwriting highscore data. (And yes, I am surprised that such people exist,
-but oh well, the cost to add this redundancy is bascially zero, so I might as well.)
-* Uncapped the amount of saved highscores.
-
 **Patches:**
-* Changes to versioning.
-* Backend optimizations and code restructuring.
+* Fixed "Game not opening for certain data.txt files" bug.
+* Fixed saving and reloading of highscores.
 
 ## Versioning:
 
-Version format: COMPATIBILITY.MAJOR.MINOR.PATCH(-suffix-n)
+Version format: COMPATIBILITY.MAJOR.MINOR.PATCH
 
 * COMPATIBILITY - Wheter or not this version savefiles etc. will work with another version. Some parts may still work with previous versions.
 * MAJOR - Incermented if added new feature systems, heavily reworked existing ones, or added large features.
@@ -53,26 +39,26 @@ Version format: COMPATIBILITY.MAJOR.MINOR.PATCH(-suffix-n)
 
 A version that contains the -alpha-n suffix is in development. New systems, features or reworks are underway, but the game itself is also playable
 (albeit with bugs and unpolished). The n after alpha stands for the current alpha version. Think of the -alpha suffix as something analogous to 0.y.z
-versions in the semantic versioning system (semver.org). Many changes are coming, and when the version is ready, the suffix is deleted and the
+versions in the semantic versioning system (https://semver.org/). Many changes are coming, and when the version is ready, the suffix is deleted and the
 version with just the tag is released.
 
 Each README has its build version in the beginning, and build date in dd/mm/yyyy.
 
 ## Credits
 Thanks to everyone who created and manages SFML.
-www.sfml-dev.org
+https://www.sfml-dev.org/
 
 Big thanks to Miroslaw Zelent and Damian Stelmach for giving me an easy introduction to c++ in the first place, many years ago.
-www.youtube.com/channel/UCzn6vAfspIcagLax1fck_jw
+https://www.youtube.com/channel/UCzn6vAfspIcagLax1fck_jw
 
 Thanks to Tymon Drop for designing the snake graphics in V1.2.3.0 and implementing WASD controls.
-github.com/Kimoworwa
+https://github.com/Kimoworwa
 
 ## Building the game yourself
 
 ### SFML
 This version was made using SFML 2.6.1 for VS2022 32-bit.
-www.sfml-dev.org/files/SFML-2.6.1-windows-vc17-32-bit.zip
+https://www.sfml-dev.org/files/SFML-2.6.1-windows-vc17-32-bit.zip
 
 Remember to download it and link it properly to your IDE.
 

@@ -1,5 +1,5 @@
 #pragma once
-//#pragma comment(linker, "/SUBSYSTEM:windows /ENTRY:mainCRTStartup") //combined with windows subsystem in project settings, linker, system, makes no console
+#pragma comment(linker, "/SUBSYSTEM:windows /ENTRY:mainCRTStartup") //combined with windows subsystem in project settings, linker, system, makes no console
 
 #include <SFML/Window.hpp>
 #include <SFML/Graphics.hpp>
@@ -8,7 +8,7 @@
 #include <iostream>
 #include <vector>
 
-const std::string versiontag = "V1.3.0.0-alpha-1";
+const std::string versiontag = "V1.3.0.0-alpha-2";
 const std::string builddate = "29.10.2024";
 
 extern int screenreswidth;
