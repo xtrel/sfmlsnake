@@ -1,4 +1,4 @@
-# V1.2.4.0 - 29.10.2024
+# V1.2.4.1 - 29.10.2024
 By Hubert Gonera
 
 ## Welcome
@@ -24,8 +24,8 @@ After winning or losing, the game will display a message for 5 seconds, then qui
 
 ## Update notes:
 
-**Minor:**
-* Reworked snake graphics.
+**Patches:**
+* Updated game icon.
 
 ## Versioning:
 

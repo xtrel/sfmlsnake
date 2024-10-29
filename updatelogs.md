@@ -1,5 +1,11 @@
 # Previous update notes:
 
+## V1.2.4.1
+*29.10.2024*
+
+**Patches:**
+* Updated game icon.
+
 ## V1.2.4.0
 *29.10.2024*
 
