@@ -1,4 +1,4 @@
-# V1.3.0.0-alpha-2 - 29.10.2024
+# V1.3.0.0-alpha-3 - 30.10.2024
 By Hubert Gonera
 
 ## Welcome
@@ -25,8 +25,8 @@ After winning or losing, the game will display a message for 5 seconds, then qui
 ## Update notes:
 
 **Patches:**
-* Fixed "Game not opening for certain data.txt files" bug.
-* Fixed saving and reloading of highscores.
+* Changes to versioning.
+* Fixed snake reloading.
 
 ## Versioning:
 
