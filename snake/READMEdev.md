@@ -33,6 +33,9 @@ After winning or losing, the game will display a message for 5 seconds, then qui
 
 ## Update notes:
 
+**Patches:**
+* Changes to versioning.
+
 ## Versioning:
 
 Version format: COMPATIBILITY.MAJOR.MINOR.PATCH
@@ -46,6 +49,12 @@ A version that contains the -alpha-n suffix is in development. New systems, feat
 (albeit with bugs and unpolished). The n after alpha stands for the current alpha version. Think of the -alpha suffix as something analogous to 0.y.z
 versions in the semantic versioning system (https://semver.org/). Many changes are coming, and when the version is ready, the suffix is deleted and the
 version with just the tag is released.
+
+When exiting an alpha version, or when a more important version updates than another one, all the previous changes get added to update notes below the update notes for that version, like so:
+* [Update notes for version 1.3.2.0 updating from 1.3.1.5]
+* [All the update notes between version 1.3.1.0 and 1.3.2.0]
+This does not apply to patch notes in updatelogs.md. They only get patch notes for that version.
+
 
 Each README has its build version in the beginning, and build date in dd/mm/yyyy.
 
