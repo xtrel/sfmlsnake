@@ -207,10 +207,10 @@ int mainmenu(sf::RenderWindow& gamewindow)
 			{
 				int scorefromround = -1;
 				gameloopreturncode = screenloopandinit(gamewindow, scorefromround);
+   loadhighscores(highscores, highscorenames);
 				updatehighscores(highscores, scorefromround,highscore);
 				highscoretext.setString("Current highscore: " + std::to_string(highscore));
 				savehighscoredata(highscores);
-				loadhighscores(highscores, highscorenames);
 				if (gameloopreturncode == 0)
 				{
 					quit = true;
