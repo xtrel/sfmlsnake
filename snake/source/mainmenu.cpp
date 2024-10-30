@@ -1,101 +1,9 @@
 #include "mainheader.h"
+#include "mainmenuheader.h"
 
 int screenreswidth = 800;
 int screenresheight = 600;
 bool fullscreen = false;
-
-int TORELXPOS(double pos)
-{
-	pos = pos / 800.f;
-	pos = pos * screenreswidth;
-	return round(pos);
-}
-
-int TORELSIZE(double pos)
-{
-	double pos1 = pos / 800.f;
-	pos1 = pos1 * screenreswidth;
-
-	double pos2 = pos / 600.f;
-	pos2 = pos2 * screenresheight;
-
-	return round((pos1+pos2)/2.f);
-}
-
-int TORELYPOS(double pos)
-{
-	pos = pos / 600.f;
-	pos = pos * screenresheight;
-	return round(pos);
-}
-
-int updatehighscores(std::vector < std::pair<int, std::string>>& highscores, int currentscore, int& highscore)
-{
-	std::string tempstring = "placeholder;"+versiontag;
-	highscores.push_back({ currentscore,tempstring});
-
-	for (int i = highscores.size() - 1; i > 0; i--)
-	{
-		if (highscores[i].first > highscores[i - 1].first)
-		{
-			std::pair<int, std::string> temp = highscores[i - 1];
-			highscores[i - 1] = highscores[i];
-			highscores[i] = temp;
-		}
-	}
-
-	highscore = highscores[0].first;
-	return 1;
-}
-
-int savehighscoredata(std::vector < std::pair<int, std::string>>& highscores)
-{
-	std::vector<std::string> savevector;
-	savevector.push_back(versiontag);
-	
-	savevector.push_back(std::to_string(highscores.size()));
-
-	for (int i = 0; i < highscores.size(); i++)
-	{
-		savevector.push_back(std::to_string(highscores[i].first));
-		savevector.push_back(highscores[i].second);
-	}
-
-	savetotxt(savevector);
-	return 1;
-}
-
-int loadhighscores(std::vector < std::pair<int, std::string>>& highscores, std::vector <std::string>& highscorenames)
-{
-	std::vector<std::string> loadeddata = loadfromtxt();
-
-	highscores.resize(0);
-	highscorenames.resize(0);
-
-	if (loadeddata[0] == "ERROR")
-	{
-		return -1;
-	}
-	else {
-		for (int i = 2; i < stoi(loadeddata[1])*2+2; i=i+2) //loades highscores
-		{
-			highscores.push_back({ stoi(loadeddata[i]), loadeddata[i + 1] });
-		}
-	}
-	for (int i = 0; i < highscores.size(); i++)
-	{
-		size_t pos = highscores[i].second.find(';');
-		if (pos == std::string::npos)
-		{
-			highscorenames.push_back(highscores[i].second);
-			highscores[i].second = highscores[i].second + ";before V1.2.1.1";
-		}
-		else {
-			highscorenames.push_back(highscores[i].second.substr(0, pos));
-		}
-	}
-	return 1;
-}
 
 int mainmenu(sf::RenderWindow& gamewindow)
 {
@@ -123,21 +31,8 @@ int mainmenu(sf::RenderWindow& gamewindow)
 			}
 		}
 	}
-
-	{
-		int fullscreenflag = 0;
-		if (fullscreen)
-		{
-			fullscreenflag = 8;
-		}
-		gamewindow.create(sf::VideoMode(screenreswidth, screenresheight), "Snake " + versiontag, sf::Style::Close | sf::Style::Titlebar | fullscreenflag);
-		{
-			sf::Image icon;
-			icon.loadFromFile("rsc/icon.png");
-			gamewindow.setIcon(icon.getSize().x, icon.getSize().y, icon.getPixelsPtr());
-		}
-		gamewindow.setVerticalSyncEnabled(true);
-	}
+	
+	createwindow(gamewindow);
 
 	bool quitfull = false;
 	int returncode = 0;
@@ -151,23 +46,19 @@ int mainmenu(sf::RenderWindow& gamewindow)
 	sf::Font font;
 	font.loadFromFile("rsc/munro.ttf");
 
-	sf::Text titletext("Snake " + versiontag + "\nBy Hubert Gonera\n" + builddate, font, TORELSIZE(40));
+	sf::Text titletext("Snake " + versiontag + "\nBy Hubert Gonera\n" + builddate, font, TORELXPOS(40));
 	titletext.setPosition(TORELXPOS(10), TORELYPOS(10));
 
-	sf::Text highscoretext("Current highscore: None", font, TORELSIZE(30));
+	sf::Text highscoretext("Current highscore: None", font, TORELXPOS(30));
 	if (highscore != -1)
 	{
 		highscoretext.setString("Current highscore: " + std::to_string(highscore));
 	}
 	highscoretext.setPosition(TORELXPOS(10), TORELYPOS(560));
 
-	Button playbutton(font, "Play", { TORELXPOS(60),TORELYPOS(200) }, { TORELXPOS(100),TORELYPOS(50) }, TORELSIZE(5), TORELSIZE(25));
-	playbutton.buttonedgeupdate();
-	playbutton.buttontextupdate();
-
-	Button quitbutton(font, "Quit", { TORELXPOS(60),TORELYPOS(260) }, { TORELXPOS(100),TORELYPOS(50) }, TORELSIZE(5), TORELSIZE(25));
-	quitbutton.buttonedgeupdate();
-	quitbutton.buttontextupdate();
+	Button playbutton(font, "Play", { TORELXPOS(60),TORELYPOS(200) }, { TORELXPOS(100),TORELYPOS(50) }, TORELXPOS(5), TORELXPOS(25));
+	Button quitbutton(font, "Quit", { TORELXPOS(60),TORELYPOS(320) }, { TORELXPOS(100),TORELYPOS(50) }, TORELXPOS(5), TORELXPOS(25));
+	Button setbutton(font, "Settings", { TORELXPOS(60),TORELYPOS(260) }, { TORELXPOS(100),TORELYPOS(50) }, TORELXPOS(5), TORELXPOS(25));
 
 	while (!quitfull)
 	{
@@ -178,6 +69,7 @@ int mainmenu(sf::RenderWindow& gamewindow)
 		{
 			bool startgame = false;
 			bool quit = false;
+			bool settings = false;
 			if (windowevent.type == sf::Event::Closed)
 			{
 				quit = true;
@@ -191,6 +83,10 @@ int mainmenu(sf::RenderWindow& gamewindow)
 				else if (quitbutton.arethosethisbuttoncords({ sf::Mouse::getPosition(gamewindow).x,sf::Mouse::getPosition(gamewindow).y }))
 				{
 					quit = true;
+				}
+				else if (setbutton.arethosethisbuttoncords({ sf::Mouse::getPosition(gamewindow).x,sf::Mouse::getPosition(gamewindow).y }))
+				{
+					settings = true;
 				}
 			}
 			if (windowevent.type == sf::Event::KeyReleased)
@@ -208,11 +104,21 @@ int mainmenu(sf::RenderWindow& gamewindow)
 			{
 				int scorefromround = -1;
 				gameloopreturncode = screenloopandinit(gamewindow, scorefromround);
-   loadhighscores(highscores, highscorenames);
+				loadhighscores(highscores, highscorenames);
 				updatehighscores(highscores, scorefromround,highscore);
 				highscoretext.setString("Current highscore: " + std::to_string(highscore));
 				savehighscoredata(highscores);
 				if (gameloopreturncode == 0)
+				{
+					quit = true;
+				}
+			}
+
+			if (settings)
+			{
+				int settingsmenuretcode;
+				settingsmenuretcode = settingsmenu(gamewindow, font);
+				if (settingsmenuretcode == 2)
 				{
 					quit = true;
 				}
@@ -231,6 +137,7 @@ int mainmenu(sf::RenderWindow& gamewindow)
 		gamewindow.draw(highscoretext);
 		gamewindow.draw(playbutton);
 		gamewindow.draw(quitbutton);
+		gamewindow.draw(setbutton);
 		gamewindow.display();
 	}
 

@@ -1,0 +1,103 @@
+#include "mainheader.h"
+
+int updatehighscores(std::vector < std::pair<int, std::string>>& highscores, int currentscore, int& highscore)
+{
+	std::string tempstring = "placeholder;" + versiontag;
+	highscores.push_back({ currentscore,tempstring });
+
+	for (int i = highscores.size() - 1; i > 0; i--)
+	{
+		if (highscores[i].first > highscores[i - 1].first)
+		{
+			std::pair<int, std::string> temp = highscores[i - 1];
+			highscores[i - 1] = highscores[i];
+			highscores[i] = temp;
+		}
+	}
+
+	highscore = highscores[0].first;
+	return 1;
+}
+
+int TORELXPOS(double pos, int srw)
+{
+	pos = pos / 800.f;
+	pos = pos * srw;
+	return round(pos);
+}
+
+int TORELYPOS(double pos, int srh)
+{
+	pos = pos / 600.f;
+	pos = pos * srh;
+	return round(pos);
+}
+
+int savehighscoredata(std::vector < std::pair<int, std::string>>& highscores)
+{
+	std::vector<std::string> savevector;
+	savevector.push_back(versiontag);
+
+	savevector.push_back(std::to_string(highscores.size()));
+
+	for (int i = 0; i < highscores.size(); i++)
+	{
+		savevector.push_back(std::to_string(highscores[i].first));
+		savevector.push_back(highscores[i].second);
+	}
+
+	savetotxt(savevector);
+	return 1;
+}
+
+int loadhighscores(std::vector < std::pair<int, std::string>>& highscores, std::vector <std::string>& highscorenames)
+{
+	std::vector<std::string> loadeddata = loadfromtxt();
+
+	highscores.resize(0);
+	highscorenames.resize(0);
+
+	if (loadeddata[0] == "ERROR")
+	{
+		return -1;
+	}
+	else {
+		for (int i = 2; i < stoi(loadeddata[1]) * 2 + 2; i = i + 2) //loades highscores
+		{
+			highscores.push_back({ stoi(loadeddata[i]), loadeddata[i + 1] });
+		}
+	}
+	for (int i = 0; i < highscores.size(); i++)
+	{
+		size_t pos = highscores[i].second.find(';');
+		if (pos == std::string::npos)
+		{
+			highscorenames.push_back(highscores[i].second);
+			highscores[i].second = highscores[i].second + ";before V1.2.1.1";
+		}
+		else {
+			highscorenames.push_back(highscores[i].second.substr(0, pos));
+		}
+	}
+	return 1;
+}
+
+int createwindow(sf::RenderWindow& gamewindow)
+{
+	if (gamewindow.isOpen())
+	{
+		gamewindow.close();
+	}
+	int fullscreenflag = 0;
+	if (fullscreen)
+	{
+		fullscreenflag = 8;
+	}
+	gamewindow.create(sf::VideoMode(screenreswidth, screenresheight), "Snake " + versiontag, sf::Style::Close | sf::Style::Titlebar | fullscreenflag);
+	{
+		sf::Image icon;
+		icon.loadFromFile("rsc/icon.png");
+		gamewindow.setIcon(icon.getSize().x, icon.getSize().y, icon.getPixelsPtr());
+	}
+	gamewindow.setVerticalSyncEnabled(true);
+}

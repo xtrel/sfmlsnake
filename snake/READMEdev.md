@@ -4,7 +4,7 @@
 
 -> Copy patch notes with proper version tag and date into updatelogs.md.
 
--> If update concerns a more major version flag, copy all required patch notes as well.
+-> If update concerns a more major version flag than the previous one, copy all required patch notes as well.
 
 -> Set proper version tags and date constants in mainheader.h.
 
@@ -40,13 +40,6 @@ After winning or losing, the game will display a message for 5 seconds, then qui
 
 ## Update notes:
 
-**Minor:**
-* Changed TPS to 128Hz, because of very small (but annoying) input lag on older machines with higher TPS.
-
-**Patches:**
-* Changes to versioning.
-* Added tinydialogfiles, not used yet.
-* Changes to "Building yourself" section.
 
 ## Versioning:
 
@@ -99,4 +92,5 @@ In your IDE include the tinyfiledialogs.h, and link the tinyfiledialogs.c.
 
 
 ### Notice
-Bear in mind I am very much a beginner in terms of installing libraries manually, and I may have got the terminology somewhere wrong. But since I somehow figured it out, you can too.
+Bear in mind I am very much a beginner in terms of installing libraries manually, and I may have got the terminology somewhere wrong.
+But since I somehow figured it out, you can too.

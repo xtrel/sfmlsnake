@@ -24,7 +24,8 @@ int handleinput(sf::RenderWindow& gamewindow)
 	return 1;
 }
 
-int render(sf::RenderWindow &gamewindow, Mapstate &mapstate, std::pair<int, int>& apple, std::vector<std::pair<int, int>>& snakeparts,std::pair<int, int>& snakeheading ,sf::Text text, sf::Font font, double& tillmove, const double movementcap)
+int render(sf::RenderWindow &gamewindow, Mapstate &mapstate, std::pair<int, int>& apple, std::vector<std::pair<int, int>>& snakeparts,std::pair<int, int>& snakeheading,
+	sf::Text text, sf::Font font, double& tillmove, const double movementcap)
 {
 	mapstate.fillmapstatewithrgb(10, 10, 10, 255);
 
@@ -83,7 +84,8 @@ int render(sf::RenderWindow &gamewindow, Mapstate &mapstate, std::pair<int, int>
 	return 1;
 }
 
-int simulate(Mapstate& mapstate, int t, double dt, std::pair<int,int> &apple, std::vector<std::pair<int, int>> &snakeparts, std::pair<int, int>& snakeheading, double& tillmove,const double movementcap, double& speed, sf::Text& text)
+int simulate(Mapstate& mapstate, int t, double dt, std::pair<int,int> &apple, std::vector<std::pair<int, int>> &snakeparts, std::pair<int, int>& snakeheading,
+	double& tillmove,const double movementcap, double& speed, sf::Text& text)
 {
 	if (apple.first == -1)
 	{
@@ -317,7 +319,7 @@ int screenloopandinit(sf::RenderWindow& gamewindow, int& score)
 
 	sf::Text text;
 	text.setFont(font);
-	text.setCharacterSize(TORELSIZE(30));
+	text.setCharacterSize(TORELXPOS(30));
 	text.setFillColor(sf::Color::White);
 	text.setString("Welcome to snake\nBy Hubert Gonera\n" + versiontag);
 
@@ -379,7 +381,7 @@ int screenloopandinit(sf::RenderWindow& gamewindow, int& score)
 		retcode = 2;
 	}
 
-	text.setCharacterSize(TORELSIZE(60));
+	text.setCharacterSize(TORELXPOS(60));
 	{
 		sf::FloatRect textrect = text.getLocalBounds();
 		int h = textrect.height;

@@ -157,6 +157,7 @@
   <ItemGroup>
     <ClInclude Include="resource2.h" />
     <ClInclude Include="source\mainheader.h" />
+    <ClInclude Include="source\mainmenuheader.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="snake1.rc" />
@@ -195,6 +196,8 @@
     <ClCompile Include="..\..\..\tinyfiledialogs\tinyfiledialogs.c" />
     <ClCompile Include="source\gameloop.cpp" />
     <ClCompile Include="source\mainmenu.cpp" />
+    <ClCompile Include="source\mainmenufunctions.cpp" />
+    <ClCompile Include="source\settingsmenu.cpp" />
     <ClCompile Include="source\snake.cpp" />
     <ClCompile Include="source\txtfiles.cpp" />
   </ItemGroup>

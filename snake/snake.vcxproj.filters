@@ -36,6 +36,12 @@
     <ClCompile Include="..\..\..\tinyfiledialogs\tinyfiledialogs.c">
       <Filter>Libraries</Filter>
     </ClCompile>
+    <ClCompile Include="source\mainmenufunctions.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="source\settingsmenu.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="source\mainheader.h">
@@ -43,6 +49,9 @@
     </ClInclude>
     <ClInclude Include="resource2.h">
       <Filter>Resource Files</Filter>
+    </ClInclude>
+    <ClInclude Include="source\mainmenuheader.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -1,5 +1,19 @@
 # Previous update notes:
 
+## V1.3.0.0-alpha-4
+*30.10.2024*
+
+**Major:**
+* Added basic settings menu along with changing and saving of fullscreen option.
+
+**Minor:**
+* Changed TPS to 128Hz, because of very small (but annoying) input lag on older machines with higher TPS.
+
+**Patches:**
+* Changes to versioning.
+* Added tinydialogfiles, not used yet.
+* Changes to "Building yourself" section.
+
 ## V1.3.0.0-alpha-3
 *30.10.2024*
 

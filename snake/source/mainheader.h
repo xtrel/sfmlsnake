@@ -8,8 +8,8 @@
 #include <iostream>
 #include <vector>
 
-const std::string versiontag = "Vdev";
-const std::string builddate = "Ddev";
+const std::string versiontag = "V1.3.0.0-alpha-4";
+const std::string builddate = "30.10.2024";
 
 extern int screenreswidth;
 extern int screenresheight;
@@ -23,9 +23,8 @@ std::vector<std::string> loadfromtxt(std::string filename = "data.txt");
 bool writetolog(std::string text, std::string path = "log.txt");
 int savetotxt(std::vector<std::string> datavector, std::string filename = "data.txt");
 
-int TORELXPOS(double pos);
-int TORELYPOS(double pos);
-int TORELSIZE(double pos);
+int TORELXPOS(double pos, int srw = screenreswidth);
+int TORELYPOS(double pos, int srh = screenresheight);
 
 class Mapstate : public sf::Drawable
 {
@@ -207,7 +206,7 @@ class Button : public sf::Drawable
 {
 public:
 	
-	Button(sf::Font font, std::string string = "Default", std::pair<int, int> screenpos = { 10,10 }, std::pair<int, int> screensize = { 5,5 }, int borderw = 5, int fontsize = 10)
+	Button(sf::Font font, std::string string = "Default", std::pair<int, int> screenpos = { 10,10 }, std::pair<int, int> screensize = { 5,5 }, int borderw = 5, int fontsize = 10, bool startupdate = true)
 	{
 		buttonstring = string;
 		buttonfont = font;
@@ -233,6 +232,11 @@ public:
 		vertices[8].color = sf::Color::White;
 		vertices[9].color = sf::Color::White;
 
+		if (startupdate)
+		{
+			buttonedgeupdate();
+			buttontextupdate();
+		}
 	}
 
 	int buttonedgeupdate()
@@ -310,6 +314,8 @@ private:
 	
 	sf::Text buttontext;
 	sf::Font buttonfont;
+
+	std::vector<int> initvalues;
 
 	sf::VertexArray vertices;
 
