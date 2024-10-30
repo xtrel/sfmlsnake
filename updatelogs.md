@@ -1,5 +1,12 @@
 # Previous update notes:
 
+## V1.3.0.0-alpha-3
+*30.10.2024*
+
+**Patches:**
+* Changes to versioning.
+* Fixed snake reloading.
+
 ## V1.3.0.0-alpha-2
 *29.10.2024*
 
