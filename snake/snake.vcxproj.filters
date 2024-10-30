@@ -13,11 +13,11 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
-    <Filter Include="SFML">
-      <UniqueIdentifier>{9d3e846b-4de3-4910-8fc6-f07aaff33cfc}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Markdowns">
       <UniqueIdentifier>{63cb2ba5-a5f3-453d-b53a-713b5f3178a7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Libraries">
+      <UniqueIdentifier>{9d3e846b-4de3-4910-8fc6-f07aaff33cfc}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -33,13 +33,16 @@
     <ClCompile Include="source\txtfiles.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\..\tinyfiledialogs\tinyfiledialogs.c">
+      <Filter>Libraries</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="resource2.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="source\mainheader.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="resource2.h">
+      <Filter>Resource Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -54,13 +57,13 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="sfml-system-2.dll">
-      <Filter>SFML</Filter>
+      <Filter>Libraries</Filter>
     </None>
     <None Include="sfml-window-2.dll">
-      <Filter>SFML</Filter>
+      <Filter>Libraries</Filter>
     </None>
     <None Include="sfml-graphics-2.dll">
-      <Filter>SFML</Filter>
+      <Filter>Libraries</Filter>
     </None>
     <None Include="..\updatelogs.md">
       <Filter>Markdowns</Filter>

@@ -24,7 +24,7 @@ int handleinput(sf::RenderWindow& gamewindow)
 	return 1;
 }
 
-int render(sf::RenderWindow &gamewindow, Mapstate &mapstate, std::pair<int, int>& apple, std::vector<std::pair<int, int>>& snakeparts, double& speed,sf::Text text, sf::Font font)
+int render(sf::RenderWindow &gamewindow, Mapstate &mapstate, std::pair<int, int>& apple, std::vector<std::pair<int, int>>& snakeparts,std::pair<int, int>& snakeheading ,sf::Text text, sf::Font font, double& tillmove, const double movementcap)
 {
 	mapstate.fillmapstatewithrgb(10, 10, 10, 255);
 
@@ -61,16 +61,19 @@ int render(sf::RenderWindow &gamewindow, Mapstate &mapstate, std::pair<int, int>
 		mapstate.settilecolorRGB(snakeparts[i].first, snakeparts[i].second, 25, 25, floor(val), 255);
 	}
 	*/
-	for (int i = 1; i < snakeparts.size(); i++)
 	{
-		double valb = abs(abs(255 * sin((3*i + 70) / 25.f)) - 2 * i / 5.f);
-		double valg = abs(abs(255 * cos((3*i/3.f + 65) / 25.f)) - 1.5f * i / 5.f);
-		double valr = abs(abs(255 * sin((4*i + 70) / 25.f)) - 2 * i / 5.f);
-		mapstate.settilecolorRGB(snakeparts[i].first, snakeparts[i].second, floor(valr/3.5f), floor(valg / 2.f), floor(valb), 255);
-	}
-	mapstate.settilecolorRGB(snakeparts[0].first, snakeparts[0].second, 140, 140, 140, 255);
+		for (int i = 1; i < snakeparts.size(); i++)
+		{
+			double valb = abs(abs(255 * sin((3 * i + 70) / 25.f)) - 2 * i / 5.f);
+			double valg = abs(abs(255 * cos((3 * i / 3.f + 65) / 25.f)) - 1.5f * i / 5.f);
+			double valr = abs(abs(255 * sin((4 * i + 70) / 25.f)) - 2 * i / 5.f);
+			mapstate.settilecolorRGB(snakeparts[i].first, snakeparts[i].second, floor(valr / 3.5f), floor(valg / 2.f), floor(valb), 255);
+		}
 
-	mapstate.transfermapstatetoVA(screenreswidth, screenresheight);
+		mapstate.settilecolorRGB(snakeparts[0].first, snakeparts[0].second, 140, 140, 140, 255);
+		mapstate.transfermapstatetoVA(screenreswidth, screenresheight);
+
+	}
 
 	gamewindow.clear();
 	gamewindow.draw(mapstate);
@@ -80,7 +83,7 @@ int render(sf::RenderWindow &gamewindow, Mapstate &mapstate, std::pair<int, int>
 	return 1;
 }
 
-int simulate(Mapstate& mapstate, int t, double dt, std::pair<int,int> &apple, std::vector<std::pair<int, int>> &snakeparts, std::pair<int, int>& snakeheading, double& tillmove, double& movementcap, double& speed, sf::Text& text)
+int simulate(Mapstate& mapstate, int t, double dt, std::pair<int,int> &apple, std::vector<std::pair<int, int>> &snakeparts, std::pair<int, int>& snakeheading, double& tillmove,const double movementcap, double& speed, sf::Text& text)
 {
 	if (apple.first == -1)
 	{
@@ -286,10 +289,20 @@ int screenloopandinit(sf::RenderWindow& gamewindow, int& score)
 	std::pair<int, int> apple = { -1, -1 };
 
 	double t = 0.0;
+	const double dt = 1 / (128.0f);
+
+	double tillmove = 0;
+	const double movementcap = (1 / 64.0f) * 15;
+
+	/*
 	const double dt = (1.0 / 64.0) / 4;
+	0.00390625
+
+	movement cap 0.234375
 
 	double tillmove = 0;
 	double movementcap = dt * 15*4;
+	*/
 
 	double speed = 1;
 
@@ -343,7 +356,7 @@ int screenloopandinit(sf::RenderWindow& gamewindow, int& score)
 			//ticknum++;
 		}
 		//framenum++;
-		render(gamewindow, mapstate, apple, snakeparts, speed, text, font);
+		render(gamewindow, mapstate, apple, snakeparts,snakeheading, text, font, tillmove,movementcap);
 	}
 
 	score = snakeparts.size();

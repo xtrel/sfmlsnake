@@ -8,8 +8,8 @@
 #include <iostream>
 #include <vector>
 
-const std::string versiontag = "V1.3.0.0-alpha-2";
-const std::string builddate = "29.10.2024";
+const std::string versiontag = "Vdev";
+const std::string builddate = "Ddev";
 
 extern int screenreswidth;
 extern int screenresheight;
@@ -159,6 +159,10 @@ public:
 
 	int settilecolor(int x, int y, int color)
 	{
+		if (x > mapxsize-1 || x < 0 || y < 0 || y > mapysize-1)
+		{
+			return -1;
+		}
 		if (color == 0)
 		{
 			mapstate[x][y] = { 0,0,0,255 };

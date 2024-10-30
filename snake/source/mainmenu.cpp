@@ -136,6 +136,7 @@ int mainmenu(sf::RenderWindow& gamewindow)
 			icon.loadFromFile("rsc/icon.png");
 			gamewindow.setIcon(icon.getSize().x, icon.getSize().y, icon.getPixelsPtr());
 		}
+		gamewindow.setVerticalSyncEnabled(true);
 	}
 
 	bool quitfull = false;
