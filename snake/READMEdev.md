@@ -1,5 +1,6 @@
 HOW TO PREPARE FOR RELEASE:
 Copy everything below into README.md, and set proper version tags and date.
+If updating a more major version, copy patch notes from previous versions.
 Copy patch notes with proper version tag and date into updatelogs.md.
 Set proper version tags and date constants in mainheader.h
 Clear patch notes here.
