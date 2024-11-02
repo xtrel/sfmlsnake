@@ -1,10 +1,10 @@
 #include "mainheader.h"
 
-std::string getplayernamemenu(sf::Font font, sf::RenderWindow& gamewindow, bool& quitgame)
+std::string getstringfromplayermenu(sf::Font font, sf::RenderWindow& gamewindow, bool& quitgame,std::string msgstring)
 {
 	sf::Text text;
 	text.setFont(font);
-	text.setString("Enter your name or nickname below.\nLeave blank for default name.\nPress enter to confirm.");
+	text.setString(msgstring);
 	text.setCharacterSize(TORELXPOS(40));
 	{
 		sf::FloatRect textrect = text.getLocalBounds();

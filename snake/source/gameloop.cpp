@@ -438,7 +438,7 @@ int screenloopandinit(sf::RenderWindow& gamewindow, int& score,std::string& name
 	}
 
 	bool quitgame = false;
-	std::string playername = getplayernamemenu(font,gamewindow, quitgame);
+	std::string playername = getstringfromplayermenu(font,gamewindow, quitgame);
 	name = playername;
 
 	if (quitgame)

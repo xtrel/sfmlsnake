@@ -20,7 +20,7 @@ int mainmenu(sf::RenderWindow& gamewindow);
 
 int screenloopandinit(sf::RenderWindow& gamewindow, int& score,std::string& name, sf::Font font);
 
-std::string getplayernamemenu(sf::Font font, sf::RenderWindow& gamewindow,bool& quitgame);
+std::string getstringfromplayermenu(sf::Font font, sf::RenderWindow& gamewindow, bool& quitgame, std::string msgstring = "Enter your name or nickname below.\nLeave blank for default name.\nPress enter to confirm.");
 
 std::vector<std::string> loadfromtxt(std::string filename = "data.txt");
 bool writetolog(std::string text, std::string path = "log.txt");

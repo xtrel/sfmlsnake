@@ -12,7 +12,7 @@ int mainmenurecalcbuttons(sf::Font& font, sf::Text& titletext, sf::Text& highsco
 	titletext.setPosition(TORELXPOS(10), TORELYPOS(10));
 
 	highscoretext.setCharacterSize(TORELXPOS(30));
-	highscoretext.setPosition(TORELXPOS(10), TORELYPOS(560));
+	highscoretext.setPosition(TORELXPOS(10), TORELYPOS(550));
 
 	playbutton.recalculatepos({ TORELXPOS(60),TORELYPOS(220) }, { TORELXPOS(100),TORELYPOS(50) }, TORELXPOS(5), TORELXPOS(25));
 	quitbutton.recalculatepos({ TORELXPOS(60),TORELYPOS(340) }, { TORELXPOS(100),TORELYPOS(50) }, TORELXPOS(5), TORELXPOS(25));
@@ -45,13 +45,14 @@ int mainmenu(sf::RenderWindow& gamewindow)
 			loadeddata = loadfromtxt("set.txt");
 			if (loadeddata[0] == "ERROR")
 			{
-				savetotxt({ "800","600","0","0"}, "set.txt"); //default settings ig
+				savetotxt({ "800","600","0","0","placeholder"}, "set.txt"); //default settings ig
 			}
 			else {
 				screenreswidth = std::stoi(loadeddata[0]);
 				screenresheight = std::stoi(loadeddata[1]);
 				fullscreen = std::stoi(loadeddata[2]);
 				visitedsettingsyet = std::stoi(loadeddata[3]);
+				defaultplayername = loadeddata[4];
 			}
 		}
 	}
@@ -121,6 +122,10 @@ int mainmenu(sf::RenderWindow& gamewindow)
 				else if (windowevent.key.code == sf::Keyboard::Q)
 				{
 					quit = true;
+				}
+				else if (windowevent.key.code == sf::Keyboard::S)
+				{
+					settings = true;
 				}
 			}
 			if (startgame)
