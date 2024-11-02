@@ -5,7 +5,7 @@ int screenreswidth = 800;
 int screenresheight = 600;
 bool fullscreen = false;
 
-int mainmenurecalcbuttons(sf::Font& font, sf::Text& titletext, sf::Text& highscoretext, Button& playbutton, Button& quitbutton, Button& setbutton)
+int mainmenurecalcbuttons(sf::Font& font, sf::Text& titletext, sf::Text& highscoretext, Button& playbutton, Button& quitbutton, Button& setbutton, sf::Sprite& mainmenugameicon, Button& logobox)
 {
 	titletext.setCharacterSize(TORELXPOS(40));
 	titletext.setPosition(TORELXPOS(10), TORELYPOS(10));
@@ -16,6 +16,12 @@ int mainmenurecalcbuttons(sf::Font& font, sf::Text& titletext, sf::Text& highsco
 	playbutton.recalculatepos({ TORELXPOS(60),TORELYPOS(220) }, { TORELXPOS(100),TORELYPOS(50) }, TORELXPOS(5), TORELXPOS(25));
 	quitbutton.recalculatepos({ TORELXPOS(60),TORELYPOS(340) }, { TORELXPOS(100),TORELYPOS(50) }, TORELXPOS(5), TORELXPOS(25));
 	setbutton.recalculatepos({ TORELXPOS(60),TORELYPOS(280) }, { TORELXPOS(100),TORELYPOS(50) }, TORELXPOS(5), TORELXPOS(25));
+
+	mainmenugameicon.setScale(sf::Vector2f(screenreswidth / 800.f, screenresheight / 600.f));
+	mainmenugameicon.setPosition(sf::Vector2f(TORELXPOS(800-128), TORELYPOS(0)));
+
+	logobox.recalculatepos({ TORELXPOS(800 - 64),TORELXPOS(64) }, { TORELXPOS(128),TORELYPOS(128) }, TORELXPOS(5));
+
 	return 1;
 }
 
@@ -48,7 +54,7 @@ int mainmenu(sf::RenderWindow& gamewindow)
 			}
 		}
 	}
-	
+
 	createwindow(gamewindow);
 
 	bool quitfull = false;
@@ -63,6 +69,11 @@ int mainmenu(sf::RenderWindow& gamewindow)
 	sf::Font font;
 	font.loadFromFile("rsc/munro.ttf");
 
+	sf::Sprite mainmenugameicon;
+	sf::Texture gameicontexture;
+	gameicontexture.loadFromFile("rsc/icon.png");
+	mainmenugameicon.setTexture(gameicontexture);
+
 	sf::Text titletext("Snake " + versiontag + "\nBy Hubert Gonera\n" + builddate, font);
 	sf::Text highscoretext("Current highscore: None", font);
 	if (highscore != -1)
@@ -73,8 +84,9 @@ int mainmenu(sf::RenderWindow& gamewindow)
 	Button playbutton(font, "Play");
 	Button quitbutton(font, "Quit");
 	Button setbutton(font, "Settings");
+	Button logobox(font, " ");
 
-	mainmenurecalcbuttons(font, titletext, highscoretext, playbutton, quitbutton, setbutton);
+	mainmenurecalcbuttons(font, titletext, highscoretext, playbutton, quitbutton, setbutton, mainmenugameicon, logobox);
 
 	while (!quitfull)
 	{
@@ -138,7 +150,7 @@ int mainmenu(sf::RenderWindow& gamewindow)
 				{
 					quit = true;
 				}
-				mainmenurecalcbuttons(font, titletext, highscoretext, playbutton, quitbutton, setbutton);
+				mainmenurecalcbuttons(font, titletext, highscoretext, playbutton, quitbutton, setbutton,mainmenugameicon, logobox);
 			}
 
 			if (quit)
@@ -149,12 +161,14 @@ int mainmenu(sf::RenderWindow& gamewindow)
 			}
 		}
 
-		gamewindow.clear();
+		gamewindow.clear(sf::Color(10, 10, 10, 255));
 		gamewindow.draw(titletext);
 		gamewindow.draw(highscoretext);
 		gamewindow.draw(playbutton);
 		gamewindow.draw(quitbutton);
 		gamewindow.draw(setbutton);
+		gamewindow.draw(mainmenugameicon);
+		gamewindow.draw(logobox);
 		gamewindow.display();
 	}
 
