@@ -438,12 +438,17 @@ int screenloopandinit(sf::RenderWindow& gamewindow, int& score,std::string& name
 	}
 
 	bool quitgame = false;
-	std::string playername = getstringfromplayermenu(font,gamewindow, quitgame);
-	name = playername;
-
-	if (quitgame)
+	if (askforcustomnameafteraround)
 	{
-		return 0;
+		std::string playername = getstringfromplayermenu(font, gamewindow, quitgame);
+		name = playername;
+		if (quitgame)
+		{
+			return 0;
+		}
+	}
+	else {
+		name = defaultplayername;
 	}
 
 	return retcode;

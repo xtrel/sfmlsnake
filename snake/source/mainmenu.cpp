@@ -5,6 +5,7 @@ int screenreswidth = 800;
 int screenresheight = 600;
 bool fullscreen = false;
 std::string defaultplayername = "placeholder";
+bool askforcustomnameafteraround = true;
 
 int mainmenurecalcbuttons(sf::Font& font, sf::Text& titletext, sf::Text& highscoretext, Button& playbutton, Button& quitbutton, Button& setbutton, sf::Sprite& mainmenugameicon, Button& logobox)
 {
@@ -45,7 +46,7 @@ int mainmenu(sf::RenderWindow& gamewindow)
 			loadeddata = loadfromtxt("set.txt");
 			if (loadeddata[0] == "ERROR")
 			{
-				savetotxt({ "800","600","0","0","placeholder"}, "set.txt"); //default settings ig
+				savetotxt({ "800","600","0","0","placeholder","1" }, "set.txt"); //default settings ig
 			}
 			else {
 				screenreswidth = std::stoi(loadeddata[0]);
@@ -53,6 +54,7 @@ int mainmenu(sf::RenderWindow& gamewindow)
 				fullscreen = std::stoi(loadeddata[2]);
 				visitedsettingsyet = std::stoi(loadeddata[3]);
 				defaultplayername = loadeddata[4];
+				askforcustomnameafteraround = std::stoi(loadeddata[5]);
 			}
 		}
 	}

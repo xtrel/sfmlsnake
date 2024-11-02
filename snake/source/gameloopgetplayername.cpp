@@ -66,7 +66,7 @@ std::string getstringfromplayermenu(sf::Font font, sf::RenderWindow& gamewindow,
 				choosing = false;
 			}
 		}
-		gamewindow.clear();
+		gamewindow.clear(sf::Color(10, 10, 10, 255));
 		{
 			playertext.setString(playerinput);
 			sf::FloatRect textrect = text.getLocalBounds();

@@ -1,4 +1,4 @@
-# V1.3.0.0-alpha-4 - 30.10.2024
+# V1.3.0.0-alpha-5 - 03.11.2024
 By Hubert Gonera
 
 ## Welcome
@@ -25,15 +25,22 @@ After winning or losing, the game will display a message for 5 seconds, then qui
 ## Update notes:
 
 **Major:**
-* Added basic settings menu along with changing and saving of fullscreen option.
+* Highscores now use names as well. After each round, you will be prompted to give your name (unless turned off). If you don't give any names, the default
+one will be used.
+* Added new settings:
+* * Resolution changing.
+* * Default name changing.
+* * Wheter to ask for a custom name after a round or use the default one.
+* Settings show their current status next to the button or on it.
 
 **Minor:**
-* Changed TPS to 128Hz, because of very small (but annoying) input lag on older machines with higher TPS.
+* Use S in the main menu to go to settings quicker.
+* Game logo has been added to the main menu.
+* Warning about the settings the first time you open them.
 
 **Patches:**
-* Changes to versioning.
-* Added tinydialogfiles, not used yet.
-* Changes to "Building yourself" section.
+* Various back-end changes to make developing easier.
+* Versioning changes.
 
 ## Versioning:
 
@@ -52,10 +59,8 @@ A version that contains the -alpha-n suffix is in development. New systems, feat
 versions in the semantic versioning system (semver.org). Many changes are coming, and when the version is ready, the suffix is deleted and the
 version with just the tag is released.
 
-In each "Update notes" there are notes between the current update, and the previous update of that same flag. This means update logs compare for
-example between 1.3.0.0 and 1.3.0.1 if the current version is 1.3.0.1. And they compare between 1.3.0.0 and 1.4.0.0 if the current version is 1.4.0.0.
-Notably, this means when a version exits alpha, all of the alpha changes get put into the version update notes.
-This does not apply to patch notes in updatelogs.md. They only get patch notes for that version.
+In some cases in the update notes there will be a section covering changes from previous versions. Notably, when exiting the alpha suffix into a full release (eg. 1.3.0.0 from 1.3.0.0-alpha-8), all changes
+from each alpha version (alpha-8, alpha-7 etc.) may be added to release update notes. This does not apply to updatelogs.md, they only contain changes for that version.
 
 Each README has its build version in the beginning, and build date in dd/mm/yyyy.
 
@@ -83,6 +88,7 @@ Link and include it properly in your IDE (or VS).
 This version uses tinyfiledialogs v3.18.2.
 Download it from www.sourceforge.net/projects/tinyfiledialogs.
 In your IDE include the tinyfiledialogs.h, and link the tinyfiledialogs.c.
+
 
 ### Notice
 Bear in mind I am very much a beginner in terms of installing libraries manually, and I may have got the terminology somewhere wrong.

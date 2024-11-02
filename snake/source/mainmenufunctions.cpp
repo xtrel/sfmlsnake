@@ -32,6 +32,26 @@ int updatehighscores(std::vector < std::pair<int, std::string>>& highscores, std
 	return 1;
 }
 
+int centertext(sf::Text& text, bool centerhor, bool centerver)
+{
+	sf::FloatRect textrect = text.getLocalBounds();
+	int h = textrect.height;
+	int w = textrect.width;
+	if (centerhor)
+	{
+		text.setOrigin(textrect.left + textrect.width / 2.0f, 0);
+	}
+	if (centerver)
+	{
+		text.setOrigin(0, textrect.top + textrect.height / 2.0f);
+	}
+	if (centerver && centerhor)
+	{
+		text.setOrigin(textrect.left + textrect.width / 2.0f, textrect.top + textrect.height / 2.0f);
+	}
+	return 1;
+}
+
 int TORELXPOS(double pos, int srw)
 {
 	pos = pos / 800.f;

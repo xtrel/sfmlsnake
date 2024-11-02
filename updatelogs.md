@@ -1,5 +1,26 @@
 # Previous update notes:
 
+## V1.3.0.0-alpha-5
+*03.11.2024*
+
+**Major:**
+* Highscores now use names as well. After each round, you will be prompted to give your name (unless turned off). If you don't give any names, the default
+one will be used.
+* Added new settings:
+* * Resolution changing.
+* * Default name changing.
+* * Wheter to ask for a custom name after a round or use the default one.
+* Settings show their current status next to the button or on it.
+
+**Minor:**
+* Use S in the main menu to go to settings quicker.
+* Game logo has been added to the main menu.
+* Warning about the settings the first time you open them.
+
+**Patches:**
+* Various back-end changes to make developing easier.
+* Versioning changes.
+
 ## V1.3.0.0-alpha-4
 *30.10.2024*
 

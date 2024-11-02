@@ -8,13 +8,14 @@
 #include <iostream>
 #include <vector>
 
-const std::string versiontag = "Vdev";
-const std::string builddate = "Ddev";
+const std::string versiontag = "V1.3.0.0-alpha-5";
+const std::string builddate = "03.11.2024";
 
 extern int screenreswidth;
 extern int screenresheight;
 extern bool fullscreen;
 extern std::string defaultplayername;
+extern bool askforcustomnameafteraround;
 
 int mainmenu(sf::RenderWindow& gamewindow);
 
@@ -28,6 +29,7 @@ int savetotxt(std::vector<std::string> datavector, std::string filename = "data.
 
 int TORELXPOS(double pos, int srw = screenreswidth);
 int TORELYPOS(double pos, int srh = screenresheight);
+int centertext(sf::Text& text, bool centerhor = true, bool centerver = true);
 
 class Mapstate : public sf::Drawable
 {
