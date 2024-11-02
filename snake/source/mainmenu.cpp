@@ -4,6 +4,7 @@
 int screenreswidth = 800;
 int screenresheight = 600;
 bool fullscreen = false;
+std::string defaultplayername = "placeholder";
 
 int mainmenurecalcbuttons(sf::Font& font, sf::Text& titletext, sf::Text& highscoretext, Button& playbutton, Button& quitbutton, Button& setbutton, sf::Sprite& mainmenugameicon, Button& logobox)
 {
@@ -59,12 +60,6 @@ int mainmenu(sf::RenderWindow& gamewindow)
 
 	bool quitfull = false;
 	int returncode = 0;
-
-	int highscore = -1;
-	if (highscores.size() > 0)
-	{
-		highscore = highscores[0].first;
-	}
 	
 	sf::Font font;
 	font.loadFromFile("rsc/munro.ttf");
@@ -76,9 +71,9 @@ int mainmenu(sf::RenderWindow& gamewindow)
 
 	sf::Text titletext("Snake " + versiontag + "\nBy Hubert Gonera\n" + builddate, font);
 	sf::Text highscoretext("Current highscore: None", font);
-	if (highscore != -1)
+	if (highscores.size() > 0)
 	{
-		highscoretext.setString("Current highscore: " + std::to_string(highscore));
+		highscoretext.setString("Current highscore by " + highscorenames[0] + ": " + std::to_string(highscores[0].first));
 	}
 
 	Button playbutton(font, "Play");
@@ -131,10 +126,11 @@ int mainmenu(sf::RenderWindow& gamewindow)
 			if (startgame)
 			{
 				int scorefromround = -1;
-				gameloopreturncode = screenloopandinit(gamewindow, scorefromround);
+				std::string namefromround = "placeholder";
+				gameloopreturncode = screenloopandinit(gamewindow, scorefromround, namefromround, font);
 				loadhighscores(highscores, highscorenames);
-				updatehighscores(highscores, scorefromround,highscore);
-				highscoretext.setString("Current highscore: " + std::to_string(highscore));
+				updatehighscores(highscores,highscorenames, scorefromround, namefromround);
+				highscoretext.setString("Current highscore by " + highscorenames[0] + ": " + std::to_string(highscores[0].first));
 				savehighscoredata(highscores);
 				if (gameloopreturncode == 0)
 				{

@@ -14,10 +14,13 @@ const std::string builddate = "Ddev";
 extern int screenreswidth;
 extern int screenresheight;
 extern bool fullscreen;
+extern std::string defaultplayername;
 
 int mainmenu(sf::RenderWindow& gamewindow);
 
-int screenloopandinit(sf::RenderWindow& gamewindow, int& score);
+int screenloopandinit(sf::RenderWindow& gamewindow, int& score,std::string& name, sf::Font font);
+
+std::string getplayernamemenu(sf::Font font, sf::RenderWindow& gamewindow,bool& quitgame);
 
 std::vector<std::string> loadfromtxt(std::string filename = "data.txt");
 bool writetolog(std::string text, std::string path = "log.txt");

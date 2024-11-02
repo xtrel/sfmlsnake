@@ -1,8 +1,8 @@
 #include "mainheader.h"
 
-int updatehighscores(std::vector < std::pair<int, std::string>>& highscores, int currentscore, int& highscore)
+int updatehighscores(std::vector < std::pair<int, std::string>>& highscores, std::vector <std::string>& highscorenames, int currentscore, std::string namefromround)
 {
-	std::string tempstring = "placeholder;" + versiontag;
+	std::string tempstring = namefromround + ";" + versiontag;
 	highscores.push_back({ currentscore,tempstring });
 
 	for (int i = highscores.size() - 1; i > 0; i--)
@@ -15,7 +15,20 @@ int updatehighscores(std::vector < std::pair<int, std::string>>& highscores, int
 		}
 	}
 
-	highscore = highscores[0].first;
+	highscorenames.resize(0);
+	for (int i = 0; i < highscores.size(); i++) //Could be more efficient
+	{
+		size_t pos = highscores[i].second.find(';');
+		if (pos == std::string::npos)
+		{
+			highscorenames.push_back(highscores[i].second);
+			highscores[i].second = highscores[i].second + ";before V1.2.1.1";
+		}
+		else {
+			highscorenames.push_back(highscores[i].second.substr(0, pos));
+		}
+	}
+
 	return 1;
 }
 

@@ -87,6 +87,11 @@ int render(sf::RenderWindow &gamewindow, Mapstate &mapstate, std::pair<int, int>
 int simulate(Mapstate& mapstate, int t, double dt, std::pair<int,int> &apple, std::vector<std::pair<int, int>> &snakeparts, std::pair<int, int>& snakeheading,
 	double& tillmove,const double movementcap, double& speed, sf::Text& text)
 {
+	if (snakeparts.size() >= 192)
+	{
+		return 3;
+	}
+
 	if (apple.first == -1)
 	{
 		bool found = false;
@@ -280,7 +285,7 @@ int simulate(Mapstate& mapstate, int t, double dt, std::pair<int,int> &apple, st
 	return 1;
 }
 
-int screenloopandinit(sf::RenderWindow& gamewindow, int& score)
+int screenloopandinit(sf::RenderWindow& gamewindow, int& score,std::string& name, sf::Font font)
 {
 	Mapstate mapstate(16, 12);
 
@@ -313,9 +318,6 @@ int screenloopandinit(sf::RenderWindow& gamewindow, int& score)
 
 	//int framenum = 0;
 	//int ticknum = 0;
-
-	sf::Font font;
-	font.loadFromFile("rsc/munro.ttf");
 
 	sf::Text text;
 	text.setFont(font);
@@ -351,6 +353,10 @@ int screenloopandinit(sf::RenderWindow& gamewindow, int& score)
 			if (temp == 2)
 			{
 				lost = true;
+			}
+			if (temp == 3)
+			{
+				won = true;
 			}
 
 			accumulator = accumulator - dt;
@@ -398,30 +404,47 @@ int screenloopandinit(sf::RenderWindow& gamewindow, int& score)
 
 	elapsed = endclock.getElapsedTime();
 
-	while (elapsed.asSeconds() <= 5)
+	bool go = false;
+
+	while (elapsed.asSeconds() <= 5 && !go)
 	{
 		sf::Event windowevent;
 		while (gamewindow.pollEvent(windowevent))
 		{
 			if (windowevent.type == sf::Event::Closed)
 			{
-				return 0;
+				retcode = 0;
+				go = true;
 			}
 			if (windowevent.type == sf::Event::KeyReleased)
 			{
 				if (windowevent.key.code == sf::Keyboard::Enter || windowevent.key.code == sf::Keyboard::Space)
 				{
-					return retcode;
+					go = true;
 				}
 				if (windowevent.key.code == sf::Keyboard::Q)
 				{
-					return 0;
+					retcode = 0;
+					go = true;
 				}
 			}
 		}
 		elapsed = endclock.getElapsedTime();
 	}
-	return retcode;
 
-	return -1;
+	if (retcode == 0)
+	{
+		return retcode;
+	}
+
+	bool quitgame = false;
+	std::string playername = getplayernamemenu(font,gamewindow, quitgame);
+	name = playername;
+
+	if (quitgame)
+	{
+		return 0;
+	}
+
+	return retcode;
 }

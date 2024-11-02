@@ -195,6 +195,7 @@
   <ItemGroup>
     <ClCompile Include="..\..\..\tinyfiledialogs\tinyfiledialogs.c" />
     <ClCompile Include="source\gameloop.cpp" />
+    <ClCompile Include="source\gameloopgetplayername.cpp" />
     <ClCompile Include="source\mainmenu.cpp" />
     <ClCompile Include="source\mainmenufunctions.cpp" />
     <ClCompile Include="source\settingsmenu.cpp" />
