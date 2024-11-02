@@ -5,6 +5,20 @@ int screenreswidth = 800;
 int screenresheight = 600;
 bool fullscreen = false;
 
+int mainmenurecalcbuttons(sf::Font& font, sf::Text& titletext, sf::Text& highscoretext, Button& playbutton, Button& quitbutton, Button& setbutton)
+{
+	titletext.setCharacterSize(TORELXPOS(40));
+	titletext.setPosition(TORELXPOS(10), TORELYPOS(10));
+
+	highscoretext.setCharacterSize(TORELXPOS(30));
+	highscoretext.setPosition(TORELXPOS(10), TORELYPOS(560));
+
+	playbutton.recalculatepos({ TORELXPOS(60),TORELYPOS(220) }, { TORELXPOS(100),TORELYPOS(50) }, TORELXPOS(5), TORELXPOS(25));
+	quitbutton.recalculatepos({ TORELXPOS(60),TORELYPOS(340) }, { TORELXPOS(100),TORELYPOS(50) }, TORELXPOS(5), TORELXPOS(25));
+	setbutton.recalculatepos({ TORELXPOS(60),TORELYPOS(280) }, { TORELXPOS(100),TORELYPOS(50) }, TORELXPOS(5), TORELXPOS(25));
+	return 1;
+}
+
 int mainmenu(sf::RenderWindow& gamewindow)
 {
 	std::vector < std::pair<int, std::string>> highscores;
@@ -46,19 +60,18 @@ int mainmenu(sf::RenderWindow& gamewindow)
 	sf::Font font;
 	font.loadFromFile("rsc/munro.ttf");
 
-	sf::Text titletext("Snake " + versiontag + "\nBy Hubert Gonera\n" + builddate, font, TORELXPOS(40));
-	titletext.setPosition(TORELXPOS(10), TORELYPOS(10));
-
-	sf::Text highscoretext("Current highscore: None", font, TORELXPOS(30));
+	sf::Text titletext("Snake " + versiontag + "\nBy Hubert Gonera\n" + builddate, font);
+	sf::Text highscoretext("Current highscore: None", font);
 	if (highscore != -1)
 	{
 		highscoretext.setString("Current highscore: " + std::to_string(highscore));
 	}
-	highscoretext.setPosition(TORELXPOS(10), TORELYPOS(560));
 
-	Button playbutton(font, "Play", { TORELXPOS(60),TORELYPOS(200) }, { TORELXPOS(100),TORELYPOS(50) }, TORELXPOS(5), TORELXPOS(25));
-	Button quitbutton(font, "Quit", { TORELXPOS(60),TORELYPOS(320) }, { TORELXPOS(100),TORELYPOS(50) }, TORELXPOS(5), TORELXPOS(25));
-	Button setbutton(font, "Settings", { TORELXPOS(60),TORELYPOS(260) }, { TORELXPOS(100),TORELYPOS(50) }, TORELXPOS(5), TORELXPOS(25));
+	Button playbutton(font, "Play");
+	Button quitbutton(font, "Quit");
+	Button setbutton(font, "Settings");
+
+	mainmenurecalcbuttons(font, titletext, highscoretext, playbutton, quitbutton, setbutton);
 
 	while (!quitfull)
 	{
@@ -118,10 +131,11 @@ int mainmenu(sf::RenderWindow& gamewindow)
 			{
 				int settingsmenuretcode;
 				settingsmenuretcode = settingsmenu(gamewindow, font);
-				if (settingsmenuretcode == 2)
+				if (settingsmenuretcode == 0)
 				{
 					quit = true;
 				}
+				mainmenurecalcbuttons(font, titletext, highscoretext, playbutton, quitbutton, setbutton);
 			}
 
 			if (quit)

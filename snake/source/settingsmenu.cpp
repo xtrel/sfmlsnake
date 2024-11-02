@@ -1,15 +1,38 @@
 #include "mainheader.h"
 #include "mainmenuheader.h"
 
+int settingsmenurecalcbuttons(sf::Font& font, Button& backtomenubutton, Button& fullscreenbutton, Button& changeresbutton, std::vector<Button>& resolutionbuttons)
+{
+	backtomenubutton.recalculatepos({ TORELXPOS(100),TORELYPOS(600 - 35) }, { TORELXPOS(180),TORELYPOS(50) }, TORELXPOS(5), TORELXPOS(25));
+	fullscreenbutton.recalculatepos({ TORELXPOS(87.5),TORELYPOS(35) }, { TORELXPOS(160),TORELYPOS(50) }, TORELXPOS(5), TORELXPOS(25));
+	changeresbutton.recalculatepos({ TORELXPOS(107.5),TORELYPOS(95) }, { TORELXPOS(200),TORELYPOS(50) }, TORELXPOS(5), TORELXPOS(25));
+
+	for (int i = 0; i < resolutionbuttons.size(); i++)
+	{
+		resolutionbuttons[i].recalculatepos({TORELXPOS(400),TORELYPOS(35 + i * 60)}, {TORELXPOS(150),TORELYPOS(50)}, TORELXPOS(2.5), TORELXPOS(20));
+	}
+	return 1;
+}
+
 int settingsmenu(sf::RenderWindow& gamewindow, sf::Font font)
 {
 	gamewindow.clear();
 
 	bool quitfull = false;
+	bool drawresolutionchoices = false;
 
-	Button backtomenubutton(font, "Back to menu", { TORELXPOS(100),TORELYPOS(600 - 35) }, { TORELXPOS(180),TORELYPOS(50) }, TORELXPOS(5), TORELXPOS(25));
+	Button backtomenubutton(font, "Back to menu");
+	Button fullscreenbutton(font, "Fullscreen: notloaded");
+	Button changeresbutton(font, "Change resolution");
 
-	Button fullscreenbutton(font, "Fullscreen: notloaded", { TORELXPOS(87.5),TORELYPOS(35) }, { TORELXPOS(160),TORELYPOS(50) }, TORELXPOS(5), TORELXPOS(25));
+	std::vector<Button> resolutionbuttons;
+	std::vector<std::pair<int, int>> resolutions = { {800,600},{1600,1200},{1920,1080},{3840,2160} };
+	for (int i = 0; i < resolutions.size(); i++)
+	{
+		resolutionbuttons.push_back(Button(font, "W" + std::to_string(resolutions[i].first) + "x" + std::to_string(resolutions[i].second) + "H"));
+	}
+
+	settingsmenurecalcbuttons(font, backtomenubutton, fullscreenbutton, changeresbutton, resolutionbuttons);
 
 	while (!quitfull)
 	{
@@ -18,6 +41,7 @@ int settingsmenu(sf::RenderWindow& gamewindow, sf::Font font)
 		{
 			bool backtomenu = false;
 			bool quitgame = false;
+			bool resetwindow = false;
 			if (windowevent.type == sf::Event::Closed)
 			{
 				quitgame = true;
@@ -30,14 +54,24 @@ int settingsmenu(sf::RenderWindow& gamewindow, sf::Font font)
 				}
 				if (fullscreenbutton.arethosethisbuttoncords({ sf::Mouse::getPosition(gamewindow).x,sf::Mouse::getPosition(gamewindow).y }))
 				{
-					if (fullscreen)
+					fullscreen = !fullscreen;
+					resetwindow = true;
+				}
+				if (changeresbutton.arethosethisbuttoncords({ sf::Mouse::getPosition(gamewindow).x,sf::Mouse::getPosition(gamewindow).y }))
+				{
+					drawresolutionchoices = !drawresolutionchoices;
+				}
+				if (drawresolutionchoices)
+				{
+					for (int i = 0; i < resolutionbuttons.size(); i++)
 					{
-						fullscreen = false;
+						if (resolutionbuttons[i].arethosethisbuttoncords({sf::Mouse::getPosition(gamewindow).x,sf::Mouse::getPosition(gamewindow).y}))
+						{
+							screenreswidth = resolutions[i].first;
+							screenresheight = resolutions[i].second;
+							resetwindow = true;
+						}
 					}
-					else {
-						fullscreen = true;
-					}
-					createwindow(gamewindow);
 				}
 			}
 			if (windowevent.type == sf::Event::KeyReleased)
@@ -46,6 +80,12 @@ int settingsmenu(sf::RenderWindow& gamewindow, sf::Font font)
 				{
 					quitgame = true;
 				}
+			}
+			
+			if (resetwindow)
+			{
+				createwindow(gamewindow);
+				settingsmenurecalcbuttons(font, backtomenubutton, fullscreenbutton, changeresbutton, resolutionbuttons);
 			}
 
 			if (quitgame || backtomenu)
@@ -59,7 +99,7 @@ int settingsmenu(sf::RenderWindow& gamewindow, sf::Font font)
 
 			if (quitgame)
 			{
-				return 2;
+				return 0;
 			}
 
 			if (backtomenu)
@@ -80,6 +120,15 @@ int settingsmenu(sf::RenderWindow& gamewindow, sf::Font font)
 		gamewindow.clear();
 		gamewindow.draw(backtomenubutton);
 		gamewindow.draw(fullscreenbutton);
+		gamewindow.draw(changeresbutton);
+		if (drawresolutionchoices)
+		{
+			for (int i = 0; i < resolutionbuttons.size(); i++)
+			{
+				Button tempbutton = resolutionbuttons[i];
+				gamewindow.draw(tempbutton); //sfml for some reason does not like drawing straight from a vector
+			}
+		}
 		gamewindow.display();
 	}
 }

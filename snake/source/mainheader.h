@@ -8,8 +8,8 @@
 #include <iostream>
 #include <vector>
 
-const std::string versiontag = "V1.3.0.0-alpha-4";
-const std::string builddate = "30.10.2024";
+const std::string versiontag = "Vdev";
+const std::string builddate = "Ddev";
 
 extern int screenreswidth;
 extern int screenresheight;
@@ -237,6 +237,24 @@ public:
 			buttonedgeupdate();
 			buttontextupdate();
 		}
+	}
+
+	int recalculatepos(std::pair<int, int> screenpos = { 10,10 }, std::pair<int, int> screensize = { 5,5 }, int borderw = 5, int fontsize = 10, bool startupdate = true)
+	{
+		buttonscreenpos = screenpos;
+		buttonscreensize = screensize;
+
+		buttonfontsize = fontsize;
+
+		borderwidth = borderw;
+
+		if (startupdate)
+		{
+			buttonedgeupdate();
+			buttontextupdate();
+		}
+
+		return 1;
 	}
 
 	int buttonedgeupdate()
