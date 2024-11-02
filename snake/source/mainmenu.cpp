@@ -21,6 +21,8 @@ int mainmenurecalcbuttons(sf::Font& font, sf::Text& titletext, sf::Text& highsco
 
 int mainmenu(sf::RenderWindow& gamewindow)
 {
+	bool visitedsettingsyet = false;
+
 	std::vector < std::pair<int, std::string>> highscores;
 	std::vector <std::string> highscorenames;
 	{
@@ -36,12 +38,13 @@ int mainmenu(sf::RenderWindow& gamewindow)
 			loadeddata = loadfromtxt("set.txt");
 			if (loadeddata[0] == "ERROR")
 			{
-				savetotxt({ "800","600","0" }, "set.txt");
+				savetotxt({ "800","600","0","0"}, "set.txt"); //default settings ig
 			}
 			else {
 				screenreswidth = std::stoi(loadeddata[0]);
 				screenresheight = std::stoi(loadeddata[1]);
 				fullscreen = std::stoi(loadeddata[2]);
+				visitedsettingsyet = std::stoi(loadeddata[3]);
 			}
 		}
 	}
@@ -130,7 +133,7 @@ int mainmenu(sf::RenderWindow& gamewindow)
 			if (settings)
 			{
 				int settingsmenuretcode;
-				settingsmenuretcode = settingsmenu(gamewindow, font);
+				settingsmenuretcode = settingsmenu(gamewindow, font, visitedsettingsyet);
 				if (settingsmenuretcode == 0)
 				{
 					quit = true;

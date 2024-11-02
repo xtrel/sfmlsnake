@@ -6,4 +6,4 @@ int loadhighscores(std::vector < std::pair<int, std::string>>& highscores, std::
 int savehighscoredata(std::vector < std::pair<int, std::string>>& highscores);
 int createwindow(sf::RenderWindow& gamewindow);
 
-int settingsmenu(sf::RenderWindow& gamewindow, sf::Font font);
+int settingsmenu(sf::RenderWindow& gamewindow, sf::Font font,bool& visitedsettingsyet);

@@ -1,11 +1,13 @@
 #include "mainheader.h"
 #include "mainmenuheader.h"
 
-int settingsmenurecalcbuttons(sf::Font& font, Button& backtomenubutton, Button& fullscreenbutton, Button& changeresbutton, std::vector<Button>& resolutionbuttons)
+int settingsmenurecalcbuttons(sf::Font& font, Button& backtomenubutton, Button& fullscreenbutton, Button& changeresbutton, std::vector<Button>& resolutionbuttons, Button& warningbutton)
 {
 	backtomenubutton.recalculatepos({ TORELXPOS(100),TORELYPOS(600 - 35) }, { TORELXPOS(180),TORELYPOS(50) }, TORELXPOS(5), TORELXPOS(25));
 	fullscreenbutton.recalculatepos({ TORELXPOS(87.5),TORELYPOS(35) }, { TORELXPOS(160),TORELYPOS(50) }, TORELXPOS(5), TORELXPOS(25));
 	changeresbutton.recalculatepos({ TORELXPOS(107.5),TORELYPOS(95) }, { TORELXPOS(200),TORELYPOS(50) }, TORELXPOS(5), TORELXPOS(25));
+
+	warningbutton.recalculatepos({ TORELXPOS(400),TORELYPOS(300) }, { TORELXPOS(800), TORELYPOS(600) }, TORELXPOS(10), TORELXPOS(25));
 
 	for (int i = 0; i < resolutionbuttons.size(); i++)
 	{
@@ -14,7 +16,7 @@ int settingsmenurecalcbuttons(sf::Font& font, Button& backtomenubutton, Button& 
 	return 1;
 }
 
-int settingsmenu(sf::RenderWindow& gamewindow, sf::Font font)
+int settingsmenu(sf::RenderWindow& gamewindow, sf::Font font, bool& visitedsettingsyet)
 {
 	gamewindow.clear();
 
@@ -24,6 +26,7 @@ int settingsmenu(sf::RenderWindow& gamewindow, sf::Font font)
 	Button backtomenubutton(font, "Back to menu");
 	Button fullscreenbutton(font, "Fullscreen: notloaded");
 	Button changeresbutton(font, "Change resolution");
+	Button warningbutton(font, "Welcome to the settings menu.\nAs of now, there is no protection when you change the graphics settings.\nIn case of errors, delete the set.txt file in gamedata folder.\nThis will reset all settings to their default values.\nPress anywhere to continue.");
 
 	std::vector<Button> resolutionbuttons;
 	std::vector<std::pair<int, int>> resolutions = { {800,600},{1600,1200},{1920,1080},{3840,2160} };
@@ -32,7 +35,7 @@ int settingsmenu(sf::RenderWindow& gamewindow, sf::Font font)
 		resolutionbuttons.push_back(Button(font, "W" + std::to_string(resolutions[i].first) + "x" + std::to_string(resolutions[i].second) + "H"));
 	}
 
-	settingsmenurecalcbuttons(font, backtomenubutton, fullscreenbutton, changeresbutton, resolutionbuttons);
+	settingsmenurecalcbuttons(font, backtomenubutton, fullscreenbutton, changeresbutton, resolutionbuttons,warningbutton);
 
 	while (!quitfull)
 	{
@@ -48,30 +51,36 @@ int settingsmenu(sf::RenderWindow& gamewindow, sf::Font font)
 			}
 			if (windowevent.type == sf::Event::MouseButtonReleased)
 			{
-				if (backtomenubutton.arethosethisbuttoncords({ sf::Mouse::getPosition(gamewindow).x,sf::Mouse::getPosition(gamewindow).y }))
+				if (visitedsettingsyet)
 				{
-					backtomenu = true;
-				}
-				if (fullscreenbutton.arethosethisbuttoncords({ sf::Mouse::getPosition(gamewindow).x,sf::Mouse::getPosition(gamewindow).y }))
-				{
-					fullscreen = !fullscreen;
-					resetwindow = true;
-				}
-				if (changeresbutton.arethosethisbuttoncords({ sf::Mouse::getPosition(gamewindow).x,sf::Mouse::getPosition(gamewindow).y }))
-				{
-					drawresolutionchoices = !drawresolutionchoices;
-				}
-				if (drawresolutionchoices)
-				{
-					for (int i = 0; i < resolutionbuttons.size(); i++)
+					if (backtomenubutton.arethosethisbuttoncords({ sf::Mouse::getPosition(gamewindow).x,sf::Mouse::getPosition(gamewindow).y }))
 					{
-						if (resolutionbuttons[i].arethosethisbuttoncords({sf::Mouse::getPosition(gamewindow).x,sf::Mouse::getPosition(gamewindow).y}))
+						backtomenu = true;
+					}
+					if (fullscreenbutton.arethosethisbuttoncords({ sf::Mouse::getPosition(gamewindow).x,sf::Mouse::getPosition(gamewindow).y }))
+					{
+						fullscreen = !fullscreen;
+						resetwindow = true;
+					}
+					if (changeresbutton.arethosethisbuttoncords({ sf::Mouse::getPosition(gamewindow).x,sf::Mouse::getPosition(gamewindow).y }))
+					{
+						drawresolutionchoices = !drawresolutionchoices;
+					}
+					if (drawresolutionchoices)
+					{
+						for (int i = 0; i < resolutionbuttons.size(); i++)
 						{
-							screenreswidth = resolutions[i].first;
-							screenresheight = resolutions[i].second;
-							resetwindow = true;
+							if (resolutionbuttons[i].arethosethisbuttoncords({ sf::Mouse::getPosition(gamewindow).x,sf::Mouse::getPosition(gamewindow).y }))
+							{
+								screenreswidth = resolutions[i].first;
+								screenresheight = resolutions[i].second;
+								resetwindow = true;
+							}
 						}
 					}
+				}
+				else {
+					visitedsettingsyet = true;
 				}
 			}
 			if (windowevent.type == sf::Event::KeyReleased)
@@ -85,7 +94,7 @@ int settingsmenu(sf::RenderWindow& gamewindow, sf::Font font)
 			if (resetwindow)
 			{
 				createwindow(gamewindow);
-				settingsmenurecalcbuttons(font, backtomenubutton, fullscreenbutton, changeresbutton, resolutionbuttons);
+				settingsmenurecalcbuttons(font, backtomenubutton, fullscreenbutton, changeresbutton, resolutionbuttons,warningbutton);
 			}
 
 			if (quitgame || backtomenu)
@@ -94,6 +103,7 @@ int settingsmenu(sf::RenderWindow& gamewindow, sf::Font font)
 				savevec.push_back(std::to_string(screenreswidth));
 				savevec.push_back(std::to_string(screenresheight));
 				savevec.push_back(std::to_string(fullscreen));
+				savevec.push_back(std::to_string(visitedsettingsyet));
 				savetotxt(savevec,"set.txt");
 			}
 
@@ -118,15 +128,21 @@ int settingsmenu(sf::RenderWindow& gamewindow, sf::Font font)
 		fullscreenbutton.buttontextupdate();
 
 		gamewindow.clear();
-		gamewindow.draw(backtomenubutton);
-		gamewindow.draw(fullscreenbutton);
-		gamewindow.draw(changeresbutton);
-		if (drawresolutionchoices)
+		if (!visitedsettingsyet)
 		{
-			for (int i = 0; i < resolutionbuttons.size(); i++)
+			gamewindow.draw(warningbutton);
+		}
+		else {
+			gamewindow.draw(backtomenubutton);
+			gamewindow.draw(fullscreenbutton);
+			gamewindow.draw(changeresbutton);
+			if (drawresolutionchoices)
 			{
-				Button tempbutton = resolutionbuttons[i];
-				gamewindow.draw(tempbutton); //sfml for some reason does not like drawing straight from a vector
+				for (int i = 0; i < resolutionbuttons.size(); i++)
+				{
+					Button tempbutton = resolutionbuttons[i];
+					gamewindow.draw(tempbutton); //sfml for some reason does not like drawing straight from a vector
+				}
 			}
 		}
 		gamewindow.display();
