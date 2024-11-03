@@ -22,7 +22,7 @@ int mainmenurecalcbuttons(sf::Font& font, sf::Text& titletext, sf::Text& highsco
 	mainmenugameicon.setScale(sf::Vector2f(screenreswidth / 800.f, screenresheight / 600.f));
 	mainmenugameicon.setPosition(sf::Vector2f(TORELXPOS(800-128), TORELYPOS(0)));
 
-	logobox.recalculatepos({ TORELXPOS(800 - 64),TORELXPOS(64) }, { TORELXPOS(128),TORELYPOS(128) }, TORELXPOS(5));
+	logobox.recalculatepos({ TORELXPOS(800 - 64),TORELYPOS(64) }, { TORELXPOS(128),TORELYPOS(128) }, TORELXPOS(5));
 
 	return 1;
 }
