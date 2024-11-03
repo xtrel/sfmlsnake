@@ -34,21 +34,31 @@ int mainmenu(sf::RenderWindow& gamewindow)
 	std::vector < std::pair<int, std::string>> highscores;
 	std::vector <std::string> highscorenames;
 	{
-		std::vector<std::string> loadeddata = loadfromtxt();
-
-		{ //data.txt
-			loadhighscores(highscores, highscorenames);
-		}
-
-		loadeddata.resize(0);
+		std::vector<std::string> defaultsettings = { "800","600","0","0","placeholder","1" };
+		loadhighscores(highscores, highscorenames);
 
 		{ //set.txt
-			loadeddata = loadfromtxt("set.txt");
+			std::vector<std::string> loadeddata = loadfromtxt("set.txt");
 			if (loadeddata[0] == "ERROR")
 			{
-				savetotxt({ "800","600","0","0","placeholder","1" }, "set.txt"); //default settings ig
+				savetotxt(defaultsettings, "set.txt"); //default settings ig
 			}
 			else {
+				std::vector<int> checkfields = { 0,1,2,3,5 };
+				for (int i = 0; i < checkfields.size(); i++)
+				{
+					if (!is_number(loadeddata[checkfields[i]]))
+					{
+						if (errorboxyesno("Corrupted set.txt file.", "Data in set.txt is corrupted, and contains letters in places it should not. You can attempt to fix it manually. Do you want to reset to defaults?") == 1)
+						{
+							loadeddata = defaultsettings;
+							savetotxt(loadeddata, "set.txt");
+						}
+						else {
+							return -1;
+						}
+					}
+				}
 				screenreswidth = std::stoi(loadeddata[0]);
 				screenresheight = std::stoi(loadeddata[1]);
 				fullscreen = std::stoi(loadeddata[2]);
@@ -59,17 +69,25 @@ int mainmenu(sf::RenderWindow& gamewindow)
 		}
 	}
 
-	createwindow(gamewindow);
-
 	bool quitfull = false;
 	int returncode = 0;
 	
 	sf::Font font;
-	font.loadFromFile("rsc/munro.ttf");
+	if (!font.loadFromFile("rsc/munro.ttf"))
+	{
+		errorbox("Could not load font.", "Could not load munro.ttf in rsc folder. Try reinstalling your game or putting the font back.");
+		return -1;
+	}
+	
 
 	sf::Sprite mainmenugameicon;
 	sf::Texture gameicontexture;
-	gameicontexture.loadFromFile("rsc/icon.png");
+	if (!gameicontexture.loadFromFile("rsc/icon.png"))
+	{
+		errorbox("Could not load icon image.", "Could not load icon.png in rsc folder. Try reinstalling your game or putting the file back.");
+		return -1;
+	}
+
 	mainmenugameicon.setTexture(gameicontexture);
 
 	sf::Text titletext("Snake " + versiontag + "\nBy Hubert Gonera\n" + builddate, font);
@@ -85,6 +103,11 @@ int mainmenu(sf::RenderWindow& gamewindow)
 	Button logobox(font, " ");
 
 	mainmenurecalcbuttons(font, titletext, highscoretext, playbutton, quitbutton, setbutton, mainmenugameicon, logobox);
+
+	if (createwindow(gamewindow) == -1)
+	{
+		return -1;
+	}
 
 	while (!quitfull)
 	{

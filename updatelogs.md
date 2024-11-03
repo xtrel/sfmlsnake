@@ -1,5 +1,13 @@
 # Previous update notes:
 
+## V1.3.0.0-alpha-6
+*03.11.2024*
+
+**Patches:**
+* Fixed logo box misaligment in main menu.
+* Added basic error catching, more to come.
+* Rewritten README.
+
 ## V1.3.0.0-alpha-5
 *03.11.2024*
 

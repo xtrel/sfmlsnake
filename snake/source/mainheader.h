@@ -8,7 +8,7 @@
 #include <iostream>
 #include <vector>
 
-const std::string versiontag = "V1.3.0.0-alpha-5";
+const std::string versiontag = "V1.3.0.0-alpha-6";
 const std::string builddate = "03.11.2024";
 
 extern int screenreswidth;
@@ -30,6 +30,11 @@ int savetotxt(std::vector<std::string> datavector, std::string filename = "data.
 int TORELXPOS(double pos, int srw = screenreswidth);
 int TORELYPOS(double pos, int srh = screenresheight);
 int centertext(sf::Text& text, bool centerhor = true, bool centerver = true);
+
+void errorbox(std::string title = "Default error box", std::string message="Default error box message");
+int errorboxyesno(std::string title = "Default error box", std::string message = "Default error box message"); //1 - yes, 0 - no
+
+bool is_number(const std::string& s); //user31264 and Charles Salvia
 
 class Mapstate : public sf::Drawable
 {

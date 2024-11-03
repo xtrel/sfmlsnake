@@ -1,50 +1,36 @@
-# V1.3.0.0-alpha-5 - 03.11.2024
+# V1.3.0.0-alpha-6 - 03.11.2024
 By Hubert Gonera
 
 ## Welcome
 
-Welcome to snake.
-I have made this game to familiarize myself with SFML in C++, as well as managing a Github repo.
+Welcome to my take on the snake genre.
+I have made this game primarly to familiarize myself with SFML, as well as working on Github on bigger projects.
 
-I am sure You know the premise of this game, but in the extremely unlikely event that you do not, here is a rundown:
+I am sure You know what snake is about, but if You do not, here are the basics:
+
 * You are a snake.
-* You want to grow, till you fill the whole map.
-* The only way you can grow, is by eating fruit.
+* The only way to win is to fill the whole map.
+* To grow you need to eat fruit.
 
 ## Controls:
 
-Right arrow to set direction to the right. Left to set to the left, etc.
-You can also use WASD.
+Use arrows or WASD to change snake direction.
 
-If you hit a wall, or yourself, you lose.
+You can use enter or space to start the game.
+You can (almost anywhere) use Q instead of the X button to close the game.
 
-In the main menu you can also use SPACE or ENTER to start a game, or Q to quit.
-
-After winning or losing, the game will display a message for 5 seconds, then quit to main menu. You can skip this by pressing enter or space.
+The GUI elements work as well, but using only the keyboard is way faster.
 
 ## Update notes:
 
-**Major:**
-* Highscores now use names as well. After each round, you will be prompted to give your name (unless turned off). If you don't give any names, the default
-one will be used.
-* Added new settings:
-* * Resolution changing.
-* * Default name changing.
-* * Wheter to ask for a custom name after a round or use the default one.
-* Settings show their current status next to the button or on it.
-
-**Minor:**
-* Use S in the main menu to go to settings quicker.
-* Game logo has been added to the main menu.
-* Warning about the settings the first time you open them.
-
 **Patches:**
-* Various back-end changes to make developing easier.
-* Versioning changes.
+* Fixed logo box misaligment in main menu.
+* Added basic error catching, more to come.
+* Rewritten README.
 
 ## Versioning:
 
-Version format: COMPATIBILITY.MAJOR.MINOR.PATCH(-suffix)
+Version format: VCOMPATIBILITY.MAJOR.MINOR.PATCH(-suffix)
 
 Version flags:
 

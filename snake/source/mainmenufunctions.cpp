@@ -1,4 +1,5 @@
 #include "mainheader.h"
+#include "tinyfiledialogs.h"
 
 int updatehighscores(std::vector < std::pair<int, std::string>>& highscores, std::vector <std::string>& highscorenames, int currentscore, std::string namefromround)
 {
@@ -129,8 +130,38 @@ int createwindow(sf::RenderWindow& gamewindow)
 	gamewindow.create(sf::VideoMode(screenreswidth, screenresheight), "Snake " + versiontag, sf::Style::Close | sf::Style::Titlebar | fullscreenflag);
 	{
 		sf::Image icon;
-		icon.loadFromFile("rsc/icon.png");
+		if (!icon.loadFromFile("rsc/icon.png"))
+		{
+
+			errorbox("Could not load icon image.", "Could not load icon.png in rsc folder. Try reinstalling your game or putting the file back.");
+			return -1;
+		}
 		gamewindow.setIcon(icon.getSize().x, icon.getSize().y, icon.getPixelsPtr());
 	}
 	gamewindow.setVerticalSyncEnabled(true);
+	if (!gamewindow.isOpen())
+	{
+		errorbox("Error during window creation.", "");
+		return -1;
+	}
+	return 1;
+}
+
+void errorbox(std::string title, std::string message)
+{
+	tinyfd_messageBox(title.c_str(), message.c_str(), "ok", "error", 1);
+	return;
+}
+
+int errorboxyesno(std::string title, std::string message)
+{
+	int retmes = tinyfd_messageBox(title.c_str(), message.c_str(), "yesno", "error", 1);
+	return retmes;
+}
+
+bool is_number(const std::string& s)
+{
+	std::string::const_iterator it = s.begin();
+	while (it != s.end() && std::isdigit(*it)) ++it;
+	return !s.empty() && it == s.end();
 }

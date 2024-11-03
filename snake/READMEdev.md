@@ -19,30 +19,29 @@ By Hubert Gonera
 
 ## Welcome
 
-Welcome to snake.
-I have made this game to familiarize myself with SFML in C++, as well as managing a Github repo.
+Welcome to my take on the snake genre.
+I have made this game primarly to familiarize myself with SFML, as well as working on Github on bigger projects.
 
-I am sure You know the premise of this game, but in the extremely unlikely event that you do not, here is a rundown:
+I am sure You know what snake is about, but if You do not, here are the basics:
+
 * You are a snake.
-* You want to grow, till you fill the whole map.
-* The only way you can grow, is by eating fruit.
+* The only way to win is to fill the whole map.
+* To grow you need to eat fruit.
 
 ## Controls:
 
-Right arrow to set direction to the right. Left to set to the left, etc.
-You can also use WASD.
+Use arrows or WASD to change snake direction.
 
-If you hit a wall, or yourself, you lose.
+You can use enter or space to start the game.
+You can (almost anywhere) use Q instead of the X button to close the game.
 
-In the main menu you can also use SPACE or ENTER to start a game, or Q to quit.
-
-After winning or losing, the game will display a message for 5 seconds, then quit to main menu. You can skip this by pressing enter or space.
+The GUI elements work as well, but using only the keyboard is way faster.
 
 ## Update notes:
 
 ## Versioning:
 
-Version format: COMPATIBILITY.MAJOR.MINOR.PATCH(-suffix)
+Version format: VCOMPATIBILITY.MAJOR.MINOR.PATCH(-suffix)
 
 Version flags:
 

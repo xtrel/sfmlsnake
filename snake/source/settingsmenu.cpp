@@ -128,7 +128,10 @@ int settingsmenu(sf::RenderWindow& gamewindow, sf::Font font, bool& visitedsetti
 			
 			if (resetwindow)
 			{
-				createwindow(gamewindow);
+				if(createwindow(gamewindow) == -1)
+				{
+					return -1;
+				}
 				settingsmenurecalcbuttons(font, backtomenubutton, fullscreenbutton, changeresbutton, resolutionbuttons, warningbutton, changedefname, askfornamebutton, currentresolution, currentdefaultname);
 			}
 
