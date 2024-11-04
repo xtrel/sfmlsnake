@@ -45,6 +45,7 @@ If that setting is set to "Yes", pressing space will use the default name, while
 
 **Patches:**
 * More error-catching in set.txt.
+* Error checking in data.txt.
 
 ## Versioning:
 

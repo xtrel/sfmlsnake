@@ -33,7 +33,7 @@ std::string getstringfromplayermenu(sf::Font font, sf::RenderWindow& gamewindow,
 			if (windowevent.type == sf::Event::TextEntered)
 			{
 				char inputchar = windowevent.text.unicode;
-				if (std::isprint(inputchar) && playerinput.size()<28)
+				if (std::isprint(inputchar) && playerinput.size()<28 && inputchar != ';')
 				{
 					playerinput += inputchar;
 				}

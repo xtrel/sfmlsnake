@@ -1,5 +1,5 @@
 #pragma once
-#pragma comment(linker, "/SUBSYSTEM:windows /ENTRY:mainCRTStartup") //combined with windows subsystem in project settings, linker, system, makes no console
+//#pragma comment(linker, "/SUBSYSTEM:windows /ENTRY:mainCRTStartup") //combined with windows subsystem in project settings, linker, system, makes no console
 
 #include <SFML/Window.hpp>
 #include <SFML/Graphics.hpp>
@@ -34,7 +34,9 @@ int centertext(sf::Text& text, bool centerhor = true, bool centerver = true);
 void errorbox(std::string title = "Default error box", std::string message="Default error box message");
 int errorboxyesno(std::string title = "Default error box", std::string message = "Default error box message"); //1 - yes, 0 - no
 
-bool is_number(const std::string& s); //user31264 and Charles Salvia
+int countacharinastring(std::string string, char lookchar);
+
+bool is_int(const std::string& s); //user31264 and Charles Salvia
 
 class Mapstate : public sf::Drawable
 {

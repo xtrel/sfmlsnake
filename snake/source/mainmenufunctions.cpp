@@ -84,23 +84,146 @@ int savehighscoredata(std::vector < std::pair<int, std::string>>& highscores)
 	return 1;
 }
 
+/*
+CURRENT FORMAT OF data.txt
+
+0 - Version tag
+1 - number of highscores
+2 - highscore
+2+1 - name
+4 - highscore
+4+1 -name
+...
+NoH - highscore
+NoH + 1 - name
+
+*/
+
 int loadhighscores(std::vector < std::pair<int, std::string>>& highscores, std::vector <std::string>& highscorenames)
 {
 	std::vector<std::string> loadeddata = loadfromtxt();
 
+	if (loadeddata.size() == 0 || loadeddata[0] == "ERROR")
+	{
+		return 0;
+	}
+
 	highscores.resize(0);
 	highscorenames.resize(0);
 
-	if (loadeddata[0] == "ERROR")
+	if (!is_int(loadeddata[1]))
 	{
-		return -1;
-	}
-	else {
-		for (int i = 2; i < stoi(loadeddata[1]) * 2 + 2; i = i + 2) //loades highscores
+		if (errorboxyesno("Corrupted data.txt file.", "The amount of highscores contains letters, which it should not. Attempt fix?") == 1)
 		{
-			highscores.push_back({ stoi(loadeddata[i]), loadeddata[i + 1] });
+			for (int i = 0; i < loadeddata[1].length(); i++)
+			{
+				if (!std::isdigit(loadeddata[1][i]))
+				{
+					loadeddata[1].erase(i,1);
+					i = -1;
+				}
+			}
+
+			if (!is_int(loadeddata[1]))
+			{
+				if (errorboxyesno("Corrupted data.txt file.", "Fix failed. Delete file? (Press no to leave)") == 1)
+				{
+					return 0;
+				}
+				else {
+					return -1;
+				}
+			}
+			else {
+				
+			}
+		}
+		else {
+			return -1;
 		}
 	}
+
+	if (stoi(loadeddata[1]) * 2 + 2 != loadeddata.size())
+	{
+		if (errorboxyesno("Corrupted data.txt file.", "Mismatch between saved highscores and their saved amount. Attempt fix?") == 1)
+		{
+			loadeddata[1] = std::to_string((loadeddata.size() - 2)/2);
+
+			if (stoi(loadeddata[1]) * 2 + 2 != loadeddata.size())
+			{
+				if (errorboxyesno("Corrupted data.txt file.", "Fix failed. Delete file? (Press no to leave)") == 1)
+				{
+					return 0;
+				}
+				else {
+					return -1;
+				}
+			}
+			else {
+				
+			}
+		}
+		else {
+			return -1;
+		}
+	}
+
+	for (int i = 2; i < stoi(loadeddata[1]) * 2 + 2; i = i + 2) //loades highscores
+	{
+		if (!is_int(loadeddata[i]))
+		{
+			for (int k = 0; k < loadeddata[i].length(); k++)
+			{
+				if (!std::isdigit(loadeddata[i][k]))
+				{
+					loadeddata[i].erase(k, 1);
+					k = -1;
+				}
+			}
+			if (!is_int(loadeddata[i]))
+			{
+				if (errorboxyesno("Corrupted data.txt file.", "Highscore in line " + std::to_string(i) + ":\n" + loadeddata[i] + "\n" + loadeddata[i + 1] + "\nIs corrupted. Do you want to delete it?") == 1)
+				{
+					loadeddata.erase(loadeddata.begin() + i);
+					loadeddata.erase(loadeddata.begin() + i);
+					loadeddata[1] = std::to_string(stoi(loadeddata[1])-1);
+					i = 2;
+				}
+				else {
+					return -1;
+				}
+			}
+		}
+		if (countacharinastring(loadeddata[i + 1], ';') != 1)
+		{
+			if (countacharinastring(loadeddata[i + 1], ';') == 0)
+			{
+				loadeddata[i + 1] = loadeddata[i + 1] + ";" + loadeddata[i + 1] + "_FXD_" + versiontag;
+			}
+			if (countacharinastring(loadeddata[i + 1], ';') != 1)
+			{
+				if (errorboxyesno("Corrupted data.txt file.", "Highscore in line " + std::to_string(i) + ":\n" + loadeddata[i] + "\n" + loadeddata[i + 1] + "\nIs corrupted. Do you want to delete it?") == 1)
+				{
+					loadeddata.erase(loadeddata.begin() + i);
+					loadeddata.erase(loadeddata.begin() + i);
+					loadeddata[1] = std::to_string(stoi(loadeddata[1]) - 1);
+					i = 2;
+				}
+				else {
+					return -1;
+				}
+			}
+			else {
+
+			}
+		}
+	}
+
+	for (int i = 2; i < stoi(loadeddata[1]) * 2 + 2; i = i + 2) //loades highscores
+	{
+		highscores.push_back({ stoi(loadeddata[i]), loadeddata[i + 1] });
+	}
+
 	for (int i = 0; i < highscores.size(); i++)
 	{
 		size_t pos = highscores[i].second.find(';');
@@ -159,9 +282,21 @@ int errorboxyesno(std::string title, std::string message)
 	return retmes;
 }
 
-bool is_number(const std::string& s)
+bool is_int(const std::string& s)
 {
 	std::string::const_iterator it = s.begin();
 	while (it != s.end() && std::isdigit(*it)) ++it;
 	return !s.empty() && it == s.end();
+}
+
+int countacharinastring(std::string string, char lookchar)
+{
+	int count = 0;
+
+	for (int i = 0; i < string.size(); i++)
+	{
+		if (string[i] == lookchar) count++;
+	}
+
+	return count;
 }

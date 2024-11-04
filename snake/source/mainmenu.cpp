@@ -35,7 +35,11 @@ int mainmenu(sf::RenderWindow& gamewindow)
 	std::vector <std::string> highscorenames;
 	{
 		std::vector<std::string> defaultsettings = { "800","600","0","0","placeholder","1" };
-		loadhighscores(highscores, highscorenames);
+		if (loadhighscores(highscores, highscorenames) == -1)
+		{
+			return -1;
+		}
+		savehighscoredata(highscores);
 
 		{ //set.txt
 			std::vector<std::string> loadeddata = loadfromtxt("set.txt");
@@ -54,7 +58,7 @@ int mainmenu(sf::RenderWindow& gamewindow)
 
 				for (int i = 0; i < checkfields.size(); i++)
 				{
-					if (!is_number(loadeddata[checkfields[i]]))
+					if (!is_int(loadeddata[checkfields[i]]))
 					{
 						if (errorboxyesno("Corrupted set.txt file.", "Data in set.txt is corrupted, and contains letters in places it should not. You can attempt to fix it manually. Do you want to reset to defaults?") == 1)
 						{
