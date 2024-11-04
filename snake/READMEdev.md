@@ -15,6 +15,7 @@
 
 -> Delete debugging file.
 
+
 # Vdev - ddev
 By Hubert Gonera
 
@@ -42,10 +43,6 @@ After a round if the "Ask for a name after a round" setting is set to "No", the 
 If that setting is set to "Yes", pressing space will use the default name, while pressing enter will prompt the user to type a name.
 
 ## Update notes:
-
-**Patches:**
-* More error-catching in set.txt.
-* Error checking in data.txt.
 
 ## Versioning:
 

@@ -1,5 +1,12 @@
 # Previous update notes:
 
+## V1.3.0.0-alpha-8
+*05.11.2024*
+
+**Patches:**
+* More error-catching in set.txt.
+* Error checking in data.txt.
+
 ## V1.3.0.0-alpha-7
 *04.11.2024*
 
