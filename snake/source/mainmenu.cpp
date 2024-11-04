@@ -44,7 +44,14 @@ int mainmenu(sf::RenderWindow& gamewindow)
 				savetotxt(defaultsettings, "set.txt"); //default settings ig
 			}
 			else {
+
 				std::vector<int> checkfields = { 0,1,2,3,5 };
+
+				std::vector<std::pair<int, int>> ranges;
+				ranges.resize(loadeddata.size());
+
+				ranges = { {400,7680},{300,4320},{0,1},{0,1},{-69,69},{0,1} };
+
 				for (int i = 0; i < checkfields.size(); i++)
 				{
 					if (!is_number(loadeddata[checkfields[i]]))
@@ -56,6 +63,27 @@ int mainmenu(sf::RenderWindow& gamewindow)
 						}
 						else {
 							return -1;
+						}
+					}
+				}
+
+				for (int i = 0; i < ranges.size(); i++)
+				{
+					if (ranges[i].first == -69 && ranges[i].second == 69)
+					{
+						continue;
+					}
+					else {
+						if (std::stoi(loadeddata[i]) < ranges[i].first || std::stoi(loadeddata[i]) > ranges[i].second)
+						{
+							if (errorboxyesno("Corrupted set.txt file.", "Data in set.txt is corrupted, certain values are outside the range they are supposed to be. You can attempt to fix it manually. Do you want to reset to defaults?") == 1)
+							{
+								loadeddata = defaultsettings;
+								savetotxt(loadeddata, "set.txt");
+							}
+							else {
+								return -1;
+							}
 						}
 					}
 				}

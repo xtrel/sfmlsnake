@@ -43,6 +43,9 @@ If that setting is set to "Yes", pressing space will use the default name, while
 
 ## Update notes:
 
+**Patches:**
+* More error-catching in set.txt.
+
 ## Versioning:
 
 Version format: VCOMPATIBILITY.MAJOR.MINOR.PATCH(-suffix)
