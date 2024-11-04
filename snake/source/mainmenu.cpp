@@ -140,7 +140,7 @@ int mainmenu(sf::RenderWindow& gamewindow)
 			}
 			if (windowevent.type == sf::Event::KeyReleased)
 			{
-				if (windowevent.key.code == sf::Keyboard::Enter || windowevent.key.code == sf::Keyboard::Space)
+				if (windowevent.key.code == sf::Keyboard::Enter)
 				{
 					startgame = true;
 				}

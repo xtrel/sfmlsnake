@@ -1,5 +1,15 @@
 # Previous update notes:
 
+## V1.3.0.0-alpha-7
+*04.11.2024*
+
+**Minor:**
+* Changed ways to enter name a name after a round.
+
+**Patches:**
+* Lengthened the wait time after a round to 7 seconds.
+* Removed the ability to start a game using space. This is so that enter is for default skipping, and space is for other uses.
+
 ## V1.3.0.0-alpha-6
 *03.11.2024*
 

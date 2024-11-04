@@ -8,8 +8,8 @@
 #include <iostream>
 #include <vector>
 
-const std::string versiontag = "V1.3.0.0-alpha-6";
-const std::string builddate = "03.11.2024";
+const std::string versiontag = "V1.3.0.0-alpha-7";
+const std::string builddate = "04.11.2024";
 
 extern int screenreswidth;
 extern int screenresheight;

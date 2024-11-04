@@ -1,4 +1,4 @@
-# V1.3.0.0-alpha-6 - 03.11.2024
+# V1.3.0.0-alpha-7 - 04.11.2024
 By Hubert Gonera
 
 ## Welcome
@@ -16,17 +16,22 @@ I am sure You know what snake is about, but if You do not, here are the basics:
 
 Use arrows or WASD to change snake direction.
 
-You can use enter or space to start the game.
+You can use enter to start the game.
 You can (almost anywhere) use Q instead of the X button to close the game.
 
 The GUI elements work as well, but using only the keyboard is way faster.
 
+After a round if the "Ask for a name after a round" setting is set to "No", the game will set the name to "NOT-SET" and go straight to the menu, no matter what.
+If that setting is set to "Yes", pressing space will use the default name, while pressing enter will prompt the user to type a name.
+
 ## Update notes:
 
+**Minor:**
+* Changed ways to enter name a name after a round.
+
 **Patches:**
-* Fixed logo box misaligment in main menu.
-* Added basic error catching, more to come.
-* Rewritten README.
+* Lengthened the wait time after a round to 7 seconds.
+* Removed the ability to start a game using space. This is so that enter is for default skipping, and space is for other uses.
 
 ## Versioning:
 

@@ -405,8 +405,9 @@ int screenloopandinit(sf::RenderWindow& gamewindow, int& score,std::string& name
 	elapsed = endclock.getElapsedTime();
 
 	bool go = false;
+	bool skipask = false;
 
-	while (elapsed.asSeconds() <= 5 && !go)
+	while (elapsed.asSeconds() <= 7 && !go)
 	{
 		sf::Event windowevent;
 		while (gamewindow.pollEvent(windowevent))
@@ -418,9 +419,14 @@ int screenloopandinit(sf::RenderWindow& gamewindow, int& score,std::string& name
 			}
 			if (windowevent.type == sf::Event::KeyReleased)
 			{
-				if (windowevent.key.code == sf::Keyboard::Enter || windowevent.key.code == sf::Keyboard::Space)
+				if (windowevent.key.code == sf::Keyboard::Enter)
 				{
 					go = true;
+				}
+				if (windowevent.key.code == sf::Keyboard::Space)
+				{
+					go = true;
+					skipask = true;
 				}
 				if (windowevent.key.code == sf::Keyboard::Q)
 				{
@@ -438,7 +444,7 @@ int screenloopandinit(sf::RenderWindow& gamewindow, int& score,std::string& name
 	}
 
 	bool quitgame = false;
-	if (askforcustomnameafteraround)
+	if (askforcustomnameafteraround && !skipask)
 	{
 		std::string playername = getstringfromplayermenu(font, gamewindow, quitgame);
 		name = playername;
@@ -447,8 +453,13 @@ int screenloopandinit(sf::RenderWindow& gamewindow, int& score,std::string& name
 			return 0;
 		}
 	}
-	else {
+	else if (askforcustomnameafteraround && skipask)
+	{
 		name = defaultplayername;
+	}
+	else if(!askforcustomnameafteraround)
+	{
+		name = "NOT-SET";
 	}
 
 	return retcode;
