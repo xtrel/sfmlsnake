@@ -1,4 +1,4 @@
-# V1.3.0.0-alpha-7 - 04.11.2024
+# V1.3.0.0-alpha-8 - 05.11.2024
 By Hubert Gonera
 
 ## Welcome
@@ -26,12 +26,9 @@ If that setting is set to "Yes", pressing space will use the default name, while
 
 ## Update notes:
 
-**Minor:**
-* Changed ways to enter name a name after a round.
-
 **Patches:**
-* Lengthened the wait time after a round to 7 seconds.
-* Removed the ability to start a game using space. This is so that enter is for default skipping, and space is for other uses.
+* More error-catching in set.txt.
+* Error checking in data.txt.
 
 ## Versioning:
 
