@@ -44,6 +44,9 @@ If that setting is set to "Yes", pressing space will use the default name, while
 
 ## Update notes:
 
+**Patches:**
+* You now cannot set the in-game resolution higher than your screen resolution.
+
 ## Versioning:
 
 Version format: VCOMPATIBILITY.MAJOR.MINOR.PATCH(-suffix)

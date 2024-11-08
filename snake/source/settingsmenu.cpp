@@ -46,7 +46,7 @@ int settingsmenu(sf::RenderWindow& gamewindow, sf::Font font, bool& visitedsetti
 	sf::Text currentdefaultname(defaultplayername, font);
 
 	std::vector<Button> resolutionbuttons;
-	std::vector<std::pair<int, int>> resolutions = { {800,600},{1600,1200},{1920,1080},{3840,2160} };
+	std::vector<std::pair<int, int>> resolutions = { {800,600},{1600,1200},{1920,1080},{3840,2160},{3840 * 2,2160 * 2} };
 	for (int i = 0; i < resolutions.size(); i++)
 	{
 		resolutionbuttons.push_back(Button(font, "W" + std::to_string(resolutions[i].first) + "x" + std::to_string(resolutions[i].second) + "H"));
@@ -105,11 +105,14 @@ int settingsmenu(sf::RenderWindow& gamewindow, sf::Font font, bool& visitedsetti
 						{
 							if (resolutionbuttons[i].arethosethisbuttoncords({ sf::Mouse::getPosition(gamewindow).x,sf::Mouse::getPosition(gamewindow).y }))
 							{
-								screenreswidth = resolutions[i].first;
-								screenresheight = resolutions[i].second;
-								resetwindow = true;
-								currentresolution.setString("W" + std::to_string(screenreswidth) + "x" + std::to_string(screenresheight) + "H");
-								drawresolutionchoices = !drawresolutionchoices;
+								if (resolutions[i].first <= sf::VideoMode::getDesktopMode().width && resolutions[i].second <= sf::VideoMode::getDesktopMode().height)
+								{
+									screenreswidth = resolutions[i].first;
+									screenresheight = resolutions[i].second;
+									resetwindow = true;
+									currentresolution.setString("W" + std::to_string(screenreswidth) + "x" + std::to_string(screenresheight) + "H");
+									drawresolutionchoices = !drawresolutionchoices;
+								}
 							}
 						}
 					}
@@ -194,7 +197,10 @@ int settingsmenu(sf::RenderWindow& gamewindow, sf::Font font, bool& visitedsetti
 				for (int i = 0; i < resolutionbuttons.size(); i++)
 				{
 					Button tempbutton = resolutionbuttons[i];
-					gamewindow.draw(tempbutton); //sfml for some reason does not like drawing straight from a vector
+					if (resolutions[i].first <= sf::VideoMode::getDesktopMode().width && resolutions[i].second <= sf::VideoMode::getDesktopMode().height)
+					{
+						gamewindow.draw(tempbutton); //sfml for some reason does not like drawing straight from a vector
+					}
 				}
 			}
 		}
