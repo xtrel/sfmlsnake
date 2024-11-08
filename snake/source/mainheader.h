@@ -8,8 +8,8 @@
 #include <iostream>
 #include <vector>
 
-const std::string versiontag = "V1.3.0.0-alpha-8";
-const std::string builddate = "05.11.2024";
+const std::string versiontag = "Vdev";
+const std::string builddate = "Ddev";
 
 extern int screenreswidth;
 extern int screenresheight;
@@ -36,7 +36,7 @@ int errorboxyesno(std::string title = "Default error box", std::string message =
 
 int countacharinastring(std::string string, char lookchar);
 
-bool is_int(const std::string& s); //user31264 and Charles Salvia
+bool is_int(const std::string& s); //user31264 and Charles Salvia on stackoverflow
 
 class Mapstate : public sf::Drawable
 {

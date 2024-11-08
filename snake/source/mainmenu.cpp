@@ -7,7 +7,8 @@ bool fullscreen = false;
 std::string defaultplayername = "placeholder";
 bool askforcustomnameafteraround = true;
 
-int mainmenurecalcbuttons(sf::Font& font, sf::Text& titletext, sf::Text& highscoretext, Button& playbutton, Button& quitbutton, Button& setbutton, sf::Sprite& mainmenugameicon, Button& logobox)
+int mainmenurecalcbuttons(sf::Font& font, sf::Text& titletext, sf::Text& highscoretext, Button& playbutton, Button& quitbutton, Button& setbutton, sf::Sprite& mainmenugameicon, Button& logobox,
+	Button& leaderboardbutton)
 {
 	titletext.setCharacterSize(TORELXPOS(40));
 	titletext.setPosition(TORELXPOS(10), TORELYPOS(10));
@@ -15,9 +16,10 @@ int mainmenurecalcbuttons(sf::Font& font, sf::Text& titletext, sf::Text& highsco
 	highscoretext.setCharacterSize(TORELXPOS(30));
 	highscoretext.setPosition(TORELXPOS(10), TORELYPOS(550));
 
-	playbutton.recalculatepos({ TORELXPOS(60),TORELYPOS(220) }, { TORELXPOS(100),TORELYPOS(50) }, TORELXPOS(5), TORELXPOS(25));
-	quitbutton.recalculatepos({ TORELXPOS(60),TORELYPOS(340) }, { TORELXPOS(100),TORELYPOS(50) }, TORELXPOS(5), TORELXPOS(25));
-	setbutton.recalculatepos({ TORELXPOS(60),TORELYPOS(280) }, { TORELXPOS(100),TORELYPOS(50) }, TORELXPOS(5), TORELXPOS(25));
+	playbutton.recalculatepos({ TORELXPOS(90),TORELYPOS(220) }, { TORELXPOS(160),TORELYPOS(50) }, TORELXPOS(5), TORELXPOS(25));
+	leaderboardbutton.recalculatepos({ TORELXPOS(90),TORELYPOS(280) }, { TORELXPOS(160),TORELYPOS(50) }, TORELXPOS(5), TORELXPOS(25));
+	setbutton.recalculatepos({ TORELXPOS(90),TORELYPOS(340) }, { TORELXPOS(160),TORELYPOS(50) }, TORELXPOS(5), TORELXPOS(25));
+	quitbutton.recalculatepos({ TORELXPOS(90),TORELYPOS(400) }, { TORELXPOS(160),TORELYPOS(50) }, TORELXPOS(5), TORELXPOS(25));
 
 	mainmenugameicon.setScale(sf::Vector2f(screenreswidth / 800.f, screenresheight / 600.f));
 	mainmenugameicon.setPosition(sf::Vector2f(TORELXPOS(800-128), TORELYPOS(0)));
@@ -132,9 +134,10 @@ int mainmenu(sf::RenderWindow& gamewindow)
 	Button playbutton(font, "Play");
 	Button quitbutton(font, "Quit");
 	Button setbutton(font, "Settings");
+	Button leaderboardbutton(font, "Leaderboard");
 	Button logobox(font, " ");
 
-	mainmenurecalcbuttons(font, titletext, highscoretext, playbutton, quitbutton, setbutton, mainmenugameicon, logobox);
+	mainmenurecalcbuttons(font, titletext, highscoretext, playbutton, quitbutton, setbutton, mainmenugameicon, logobox, leaderboardbutton);
 
 	if (createwindow(gamewindow) == -1)
 	{
@@ -151,6 +154,7 @@ int mainmenu(sf::RenderWindow& gamewindow)
 			bool startgame = false;
 			bool quit = false;
 			bool settings = false;
+			bool recalculate = false;
 			if (windowevent.type == sf::Event::Closed)
 			{
 				quit = true;
@@ -208,7 +212,7 @@ int mainmenu(sf::RenderWindow& gamewindow)
 				{
 					quit = true;
 				}
-				mainmenurecalcbuttons(font, titletext, highscoretext, playbutton, quitbutton, setbutton,mainmenugameicon, logobox);
+				recalculate = true;
 			}
 
 			if (quit)
@@ -216,6 +220,11 @@ int mainmenu(sf::RenderWindow& gamewindow)
 				gamewindow.close();
 				returncode = 1;
 				quitfull = true;
+			}
+
+			if (recalculate)
+			{
+				mainmenurecalcbuttons(font, titletext, highscoretext, playbutton, quitbutton, setbutton, mainmenugameicon, logobox, leaderboardbutton);
 			}
 		}
 
@@ -227,6 +236,7 @@ int mainmenu(sf::RenderWindow& gamewindow)
 		gamewindow.draw(setbutton);
 		gamewindow.draw(mainmenugameicon);
 		gamewindow.draw(logobox);
+		gamewindow.draw(leaderboardbutton);
 		gamewindow.display();
 	}
 
