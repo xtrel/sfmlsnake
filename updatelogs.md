@@ -1,5 +1,17 @@
 # Previous update notes:
 
+## V1.3.0.0
+*10.11.2024*
+
+**Major:**
+* Added simple leaderboard menu that shows all saved highscores and the highscores version. Navigate using up and down arrows.
+
+**Minor:**
+* Highscore text in the main menu now only shows highscores that have a correct and version tag, and that version tag matches current version.
+
+**Patches:**
+* You now cannot set the in-game resolution higher than your screen resolution.
+
 ## V1.3.0.0-alpha-8
 *05.11.2024*
 

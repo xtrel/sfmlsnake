@@ -1,4 +1,4 @@
-# V1.3.0.0-alpha-8 - 05.11.2024
+# V1.3.0.0 - 10.11.2024
 By Hubert Gonera
 
 ## Welcome
@@ -26,9 +26,29 @@ If that setting is set to "Yes", pressing space will use the default name, while
 
 ## Update notes:
 
+**Major:**
+* Added simple leaderboard menu that shows all saved highscores and the highscores version. Navigate using up and down arrows.
+* Added settings menu.
+* Highscores fully support names now.
+* Added error-catching in game files.
+
+**Minor:**
+* Highscore text in the main menu now only shows highscores that have a correct and version tag, and that version tag matches current version.
+* Use S in the main menu to go to settings quicker.
+* Game logo has been added to the main menu.
+* Changed TPS to 128Hz, because of very small (but annoying) input lag on older machines with higher TPS.
+* You can now close the game during a round using Q.
+* Background of the game is now a very dark gray, so that during fullscreen play in an aspect ratio different from the monitor, you can see the
+worlds edges.
+* Uncapped the amount of saved highscores.
+
 **Patches:**
-* More error-catching in set.txt.
-* Error checking in data.txt.
+* Lengthened the wait time after a round to 7 seconds.
+* Removed the ability to start a game using space. This is so that enter is for default skipping, and space is for other uses.
+* Various back-end changes to make developing easier.
+* Changes to "Building yourself" section.
+* Changes to versioning.
+* Backend optimizations and code restructuring.
 
 ## Versioning:
 

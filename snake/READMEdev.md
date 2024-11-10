@@ -44,15 +44,6 @@ If that setting is set to "Yes", pressing space will use the default name, while
 
 ## Update notes:
 
-**Major:**
-* Added simple leaderboard menu that shows all saved highscores and the highscores version. Navigate using up and down arrows.
-
-**Minor:**
-* Highscore text in the main menu now only shows highscores that have a correct and version tag, and that version tag matches current version.
-
-**Patches:**
-* You now cannot set the in-game resolution higher than your screen resolution.
-
 ## Versioning:
 
 Version format: VCOMPATIBILITY.MAJOR.MINOR.PATCH(-suffix)
