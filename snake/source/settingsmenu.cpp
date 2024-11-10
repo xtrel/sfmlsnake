@@ -46,7 +46,7 @@ int settingsmenu(sf::RenderWindow& gamewindow, sf::Font font, bool& visitedsetti
 	sf::Text currentdefaultname(defaultplayername, font);
 
 	std::vector<Button> resolutionbuttons;
-	std::vector<std::pair<int, int>> resolutions = { {800,600},{1600,1200},{1920,1080},{3840,2160},{3840 * 2,2160 * 2} };
+	std::vector<std::pair<int, int>> resolutions = { {800,600},{ 1600,1200 },{1920,1080},{3840,2160},{3840 * 2,2160 * 2} };
 	for (int i = 0; i < resolutions.size(); i++)
 	{
 		resolutionbuttons.push_back(Button(font, "W" + std::to_string(resolutions[i].first) + "x" + std::to_string(resolutions[i].second) + "H"));
@@ -179,7 +179,7 @@ int settingsmenu(sf::RenderWindow& gamewindow, sf::Font font, bool& visitedsetti
 		}
 		askfornamebutton.buttontextupdate();
 
-		gamewindow.clear(sf::Color(10, 10, 10, 255));
+		gamewindow.clear(backgroundcolor);
 		if (!visitedsettingsyet)
 		{
 			gamewindow.draw(warningbutton);

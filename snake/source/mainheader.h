@@ -16,6 +16,7 @@ extern int screenresheight;
 extern bool fullscreen;
 extern std::string defaultplayername;
 extern bool askforcustomnameafteraround;
+const sf::Color backgroundcolor(10, 10, 10, 255);
 
 int mainmenu(sf::RenderWindow& gamewindow);
 
@@ -351,8 +352,8 @@ private:
 
 	virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const
 	{
-		target.draw(vertices);
-		target.draw(buttontext);
+		target.draw(vertices, states.transform);
+		target.draw(buttontext, states.transform);
 		//target.draw();
 	}
 };

@@ -27,7 +27,7 @@ int handleinput(sf::RenderWindow& gamewindow)
 int render(sf::RenderWindow &gamewindow, Mapstate &mapstate, std::pair<int, int>& apple, std::vector<std::pair<int, int>>& snakeparts,std::pair<int, int>& snakeheading,
 	sf::Text text, sf::Font font, double& tillmove, const double movementcap)
 {
-	mapstate.fillmapstatewithrgb(10, 10, 10, 255);
+	mapstate.fillmapstatewithrgb(backgroundcolor.r, backgroundcolor.g, backgroundcolor.b, backgroundcolor.a);
 
 	if (!(apple.first < 0 || apple.first > mapstate.mapxsize - 1 || apple.second < 0 || apple.second > mapstate.mapysize - 1))
 	{

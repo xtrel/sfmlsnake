@@ -155,6 +155,7 @@ int mainmenu(sf::RenderWindow& gamewindow)
 			bool quit = false;
 			bool settings = false;
 			bool recalculate = false;
+			bool leaderboard = false;
 			if (windowevent.type == sf::Event::Closed)
 			{
 				quit = true;
@@ -173,6 +174,10 @@ int mainmenu(sf::RenderWindow& gamewindow)
 				{
 					settings = true;
 				}
+				else if (leaderboardbutton.arethosethisbuttoncords({ sf::Mouse::getPosition(gamewindow).x,sf::Mouse::getPosition(gamewindow).y }))
+				{
+					leaderboard = true;
+				}
 			}
 			if (windowevent.type == sf::Event::KeyReleased)
 			{
@@ -188,6 +193,10 @@ int mainmenu(sf::RenderWindow& gamewindow)
 				{
 					settings = true;
 				}
+				else if (windowevent.key.code == sf::Keyboard::L)
+				{
+					leaderboard = true;
+				}
 			}
 			if (startgame)
 			{
@@ -202,6 +211,16 @@ int mainmenu(sf::RenderWindow& gamewindow)
 				{
 					quit = true;
 				}
+			}
+
+			if (leaderboard)
+			{
+				int leaderboardretcode = leaderboardmenu(gamewindow, font, highscores, highscorenames);
+				if (leaderboardretcode == 0)
+				{
+					quit = true;
+				}
+				
 			}
 
 			if (settings)
@@ -228,7 +247,7 @@ int mainmenu(sf::RenderWindow& gamewindow)
 			}
 		}
 
-		gamewindow.clear(sf::Color(10, 10, 10, 255));
+		gamewindow.clear(backgroundcolor);
 		gamewindow.draw(titletext);
 		gamewindow.draw(highscoretext);
 		gamewindow.draw(playbutton);
