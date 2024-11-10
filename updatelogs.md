@@ -1,5 +1,112 @@
 # Previous update notes:
 
+## V1.3.0.0
+*10.11.2024*
+
+**Major:**
+* Added simple leaderboard menu that shows all saved highscores and the highscores version. Navigate using up and down arrows.
+
+**Minor:**
+* Highscore text in the main menu now only shows highscores that have a correct and version tag, and that version tag matches current version.
+
+**Patches:**
+* You now cannot set the in-game resolution higher than your screen resolution.
+
+## V1.3.0.0-alpha-8
+*05.11.2024*
+
+**Patches:**
+* More error-catching in set.txt.
+* Error checking in data.txt.
+
+## V1.3.0.0-alpha-7
+*04.11.2024*
+
+**Minor:**
+* Changed ways to enter name a name after a round.
+
+**Patches:**
+* Lengthened the wait time after a round to 7 seconds.
+* Removed the ability to start a game using space. This is so that enter is for default skipping, and space is for other uses.
+
+## V1.3.0.0-alpha-6
+*03.11.2024*
+
+**Patches:**
+* Fixed logo box misaligment in main menu.
+* Added basic error catching, more to come.
+* Rewritten README.
+
+## V1.3.0.0-alpha-5
+*03.11.2024*
+
+**Major:**
+* Highscores now use names as well. After each round, you will be prompted to give your name (unless turned off). If you don't give any names, the default
+one will be used.
+* Added new settings:
+* * Resolution changing.
+* * Default name changing.
+* * Wheter to ask for a custom name after a round or use the default one.
+* Settings show their current status next to the button or on it.
+
+**Minor:**
+* Use S in the main menu to go to settings quicker.
+* Game logo has been added to the main menu.
+* Warning about the settings the first time you open them.
+
+**Patches:**
+* Various back-end changes to make developing easier.
+* Versioning changes.
+
+## V1.3.0.0-alpha-4
+*30.10.2024*
+
+**Major:**
+* Added basic settings menu along with changing and saving of fullscreen option.
+
+**Minor:**
+* Changed TPS to 128Hz, because of very small (but annoying) input lag on older machines with higher TPS.
+
+**Patches:**
+* Changes to versioning.
+* Added tinydialogfiles, not used yet.
+* Changes to "Building yourself" section.
+
+## V1.3.0.0-alpha-3
+*30.10.2024*
+
+**Patches:**
+* Changes to versioning.
+* Fixed snake reloading.
+
+## V1.3.0.0-alpha-2
+*29.10.2024*
+
+**Patches:**
+* Fixed "Game not opening for certain data.txt files" bug.
+* Fixed saving and reloading of highscores.
+
+## V1.3.0.0-alpha-1
+*29.10.2024*
+
+**Major:**
+* Added the set.txt file to gamedata folder (or it will be generated on first run). It contains three lines, first is resolution width,
+second is height, and the third contains either 0 for window mode or 1 for fullscreen.
+In the future a proper settings GUI will be implemented. This is the main reason as for the alpha suffix.
+
+**Minor:**
+* You can now close the game during a round using Q.
+* Background of the game is now a very dark gray, so that during fullscreen play in an aspect ratio different from the monitor, you can see the
+worlds edges.
+* Highscore saving and loading system now reloades and resaves the highscores after each run. Normally this wouldn't be needed, but in the case that
+many people will be playing on the same .exe file, this should prevent overwriting highscore data. (And yes, I am surprised that such people exist,
+but oh well, the cost to add this redundancy is bascially zero, so I might as well.)
+* Uncapped the amount of saved highscores.
+
+**Patches:**
+* Changes to versioning.
+* Backend optimizations and code restructuring.
+
 ## V1.2.4.1
 *29.10.2024*
 

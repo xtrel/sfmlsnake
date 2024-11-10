@@ -8,24 +8,36 @@
 #include <iostream>
 #include <vector>
 
-const std::string versiontag = "Vdev";
-const std::string builddate = "Ddev";
+const std::string versiontag = "V1.3.0.0";
+const std::string builddate = "10.11.2024";
 
 extern int screenreswidth;
 extern int screenresheight;
 extern bool fullscreen;
+extern std::string defaultplayername;
+extern bool askforcustomnameafteraround;
+const sf::Color backgroundcolor(10, 10, 10, 255);
 
 int mainmenu(sf::RenderWindow& gamewindow);
 
-int screenloopandinit(sf::RenderWindow& gamewindow, int& score);
+int screenloopandinit(sf::RenderWindow& gamewindow, int& score,std::string& name, sf::Font font);
+
+std::string getstringfromplayermenu(sf::Font font, sf::RenderWindow& gamewindow, bool& quitgame, std::string msgstring = "Enter your name or nickname below.\nLeave blank for default name.\nPress enter to confirm.");
 
 std::vector<std::string> loadfromtxt(std::string filename = "data.txt");
 bool writetolog(std::string text, std::string path = "log.txt");
 int savetotxt(std::vector<std::string> datavector, std::string filename = "data.txt");
 
-int TORELXPOS(double pos);
-int TORELYPOS(double pos);
-int TORELSIZE(double pos);
+int TORELXPOS(double pos, int srw = screenreswidth);
+int TORELYPOS(double pos, int srh = screenresheight);
+int centertext(sf::Text& text, bool centerhor = true, bool centerver = true);
+
+void errorbox(std::string title = "Default error box", std::string message="Default error box message");
+int errorboxyesno(std::string title = "Default error box", std::string message = "Default error box message"); //1 - yes, 0 - no
+
+int countacharinastring(std::string string, char lookchar);
+
+bool is_int(const std::string& s); //user31264 and Charles Salvia on stackoverflow
 
 class Mapstate : public sf::Drawable
 {
@@ -96,6 +108,18 @@ public:
 		return 1;
 	}
 
+	int fillmapstatewithrgb(int r, int g, int b, int a)
+	{
+		for (int x = 0; x < mapxsize; x++)
+		{
+			for (int y = 0; y < mapysize; y++)
+			{
+				mapstate[x][y] = { r,g,b,a };
+			}
+		}
+		return 1;
+	}
+
 	void outputmapstatetoconsole()
 	{
 		for (int x = 0; x < mapxsize; x++)
@@ -147,6 +171,10 @@ public:
 
 	int settilecolor(int x, int y, int color)
 	{
+		if (x > mapxsize-1 || x < 0 || y < 0 || y > mapysize-1)
+		{
+			return -1;
+		}
 		if (color == 0)
 		{
 			mapstate[x][y] = { 0,0,0,255 };
@@ -191,7 +219,7 @@ class Button : public sf::Drawable
 {
 public:
 	
-	Button(sf::Font font, std::string string = "Default", std::pair<int, int> screenpos = { 10,10 }, std::pair<int, int> screensize = { 5,5 }, int borderw = 5, int fontsize = 10)
+	Button(sf::Font font, std::string string = "Default", std::pair<int, int> screenpos = { 10,10 }, std::pair<int, int> screensize = { 5,5 }, int borderw = 5, int fontsize = 10, bool startupdate = true)
 	{
 		buttonstring = string;
 		buttonfont = font;
@@ -217,6 +245,29 @@ public:
 		vertices[8].color = sf::Color::White;
 		vertices[9].color = sf::Color::White;
 
+		if (startupdate)
+		{
+			buttonedgeupdate();
+			buttontextupdate();
+		}
+	}
+
+	int recalculatepos(std::pair<int, int> screenpos = { 10,10 }, std::pair<int, int> screensize = { 5,5 }, int borderw = 5, int fontsize = 10, bool startupdate = true)
+	{
+		buttonscreenpos = screenpos;
+		buttonscreensize = screensize;
+
+		buttonfontsize = fontsize;
+
+		borderwidth = borderw;
+
+		if (startupdate)
+		{
+			buttonedgeupdate();
+			buttontextupdate();
+		}
+
+		return 1;
 	}
 
 	int buttonedgeupdate()
@@ -295,12 +346,14 @@ private:
 	sf::Text buttontext;
 	sf::Font buttonfont;
 
+	std::vector<int> initvalues;
+
 	sf::VertexArray vertices;
 
 	virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const
 	{
-		target.draw(vertices);
-		target.draw(buttontext);
+		target.draw(vertices, states.transform);
+		target.draw(buttontext, states.transform);
 		//target.draw();
 	}
 };

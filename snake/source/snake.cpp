@@ -5,8 +5,10 @@ int main(int argc, char* args[])
     sf::RenderWindow gamewindow;
 
     srand(time(0));
+   
+    int mainmenuretint = -1;
 
-    mainmenu(gamewindow);
+    mainmenuretint = mainmenu(gamewindow);
 
-    return 0;
+    return mainmenuretint;
 }
