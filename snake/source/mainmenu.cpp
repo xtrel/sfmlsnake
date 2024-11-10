@@ -126,9 +126,31 @@ int mainmenu(sf::RenderWindow& gamewindow)
 
 	sf::Text titletext("Snake " + versiontag + "\nBy Hubert Gonera\n" + builddate, font);
 	sf::Text highscoretext("Current highscore: None", font);
+	
+	int currenthighscore = 0;
+
 	if (highscores.size() > 0)
 	{
-		highscoretext.setString("Current highscore by " + highscorenames[0] + ": " + std::to_string(highscores[0].first));
+		std::string goodhighscorename = "NOGOODHIGHSCORENAMES";
+		int goodhighscorenumber = 0;
+		for (int i = 0; i < highscores.size(); i++)
+		{
+			std::string vtag = getvtagfromstring(highscores[i].second);
+			if (vtag == versiontag)
+			{
+				goodhighscorename = highscorenames[i];
+				goodhighscorenumber = i;
+				break;
+			}
+		}
+		if (goodhighscorename == "NOGOODHIGHSCORENAMES")
+		{
+			highscoretext.setString("Current highscore: None");
+		}
+		else {
+			highscoretext.setString("Current highscore by " + goodhighscorename + ": " + std::to_string(highscores[goodhighscorenumber].first));
+			currenthighscore = highscores[goodhighscorenumber].first;
+		}
 	}
 
 	Button playbutton(font, "Play");
@@ -205,7 +227,10 @@ int mainmenu(sf::RenderWindow& gamewindow)
 				gameloopreturncode = screenloopandinit(gamewindow, scorefromround, namefromround, font);
 				loadhighscores(highscores, highscorenames);
 				updatehighscores(highscores,highscorenames, scorefromround, namefromround);
-				highscoretext.setString("Current highscore by " + highscorenames[0] + ": " + std::to_string(highscores[0].first));
+				if (scorefromround > currenthighscore)
+				{
+					highscoretext.setString("Current highscore by " + namefromround + ": " + std::to_string(scorefromround));
+				}
 				savehighscoredata(highscores);
 				if (gameloopreturncode == 0)
 				{

@@ -300,3 +300,19 @@ int countacharinastring(std::string string, char lookchar)
 
 	return count;
 }
+
+std::string getvtagfromstring(std::string instring)
+{
+	std::string temptagstring = instring;
+	std::reverse(temptagstring.begin(), temptagstring.end());
+	size_t pos = temptagstring.find(';');
+	if (pos == std::string::npos)
+	{
+		return "ERROR";
+	}
+	else {
+		temptagstring = temptagstring.substr(0, pos);
+		std::reverse(temptagstring.begin(), temptagstring.end());
+	}
+	return temptagstring;
+}
