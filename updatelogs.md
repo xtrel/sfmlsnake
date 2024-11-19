@@ -1,5 +1,16 @@
 # Previous update notes:
 
+## V1.3.1.0
+*19.11.2024*
+
+## Update notes:
+
+**Minor:**
+* You can use B to go back to the main menu from the settings and leaderboard menu.
+* * You can also use Right Control + B to go back to main menu during a game. This will lose progress, and the highscore wont be saved.
+* Added buttons to leaderboard menu.
+* Now the leaderboard menu shows the current listed highscores.
+
 ## V1.3.0.0
 *10.11.2024*
 
