@@ -127,6 +127,10 @@ int settingsmenu(sf::RenderWindow& gamewindow, sf::Font font, bool& visitedsetti
 				{
 					quitgame = true;
 				}
+				else if (windowevent.key.code == sf::Keyboard::B)
+				{
+					backtomenu = true;
+				}
 			}
 			
 			if (resetwindow)

@@ -18,6 +18,13 @@ int handleinput(sf::RenderWindow& gamewindow)
 			{
 				return 2;
 			}
+			else if (windowevent.key.code == sf::Keyboard::B)
+			{
+				if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::RControl))
+				{
+					return 3;
+				}
+			}
 		}
 	}
 
@@ -330,8 +337,9 @@ int screenloopandinit(sf::RenderWindow& gamewindow, int& score,std::string& name
 	bool lost = false;
 	bool won = false;
 	bool quit = false;
+	bool backtomenu = false;
 
-	while (!lost && !won && !quit)
+	while (!lost && !won && !quit && !backtomenu)
 	{
 		int temp = 0;;
 		sf::Time frameTime = clock.restart();
@@ -344,6 +352,10 @@ int screenloopandinit(sf::RenderWindow& gamewindow, int& score,std::string& name
 		if (temp == 2)
 		{
 			quit = true;
+		}
+		if (temp == 3)
+		{
+			backtomenu = true;
 		}
 
 		while (accumulator >= dt)
@@ -372,6 +384,11 @@ int screenloopandinit(sf::RenderWindow& gamewindow, int& score,std::string& name
 	if (quit)
 	{
 		return 0;
+	}
+
+	if (backtomenu)
+	{
+		return 3;
 	}
 
 	int retcode = -1;

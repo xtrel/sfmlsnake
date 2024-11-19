@@ -1,10 +1,15 @@
 #include "mainheader.h"
 #include "mainmenuheader.h"
 
-int recalcleaderboardmenu(Button& backtomenubutton, Button& highscoreframe)
+int recalcleaderboardmenu(Button& backtomenubutton, Button& highscoreframe, Button& downbutton, Button& upbutton, Button& shownhighscores)
 {
 	backtomenubutton.recalculatepos({ TORELXPOS(100),TORELYPOS(35) }, { TORELXPOS(180),TORELYPOS(50) }, TORELXPOS(5), TORELXPOS(25));
-	highscoreframe.recalculatepos({ TORELXPOS(400),TORELYPOS(300+(35+20)/2)}, { TORELXPOS(800 - 20),TORELYPOS(600-35-10-10-20) }, TORELXPOS(5));
+	highscoreframe.recalculatepos({ TORELXPOS(400),TORELYPOS(300 + (35 + 20) / 2) }, { TORELXPOS(800 - 20),TORELYPOS(600 - 35 - 10 - 10 - 20) }, TORELXPOS(5));
+
+	downbutton.recalculatepos({ TORELXPOS(757.5),TORELYPOS(100+38*12) }, { TORELXPOS(35),TORELYPOS(35) }, TORELXPOS(5), TORELXPOS(15));
+	upbutton.recalculatepos({ TORELXPOS(757.5),TORELYPOS(100 + 38 * 0) }, { TORELXPOS(35),TORELYPOS(35) }, TORELXPOS(5), TORELXPOS(15));
+	shownhighscores.recalculatepos({ TORELXPOS(757.5),TORELYPOS((100 + 38 * 0 + 100 + 38*12)/2) }, { TORELXPOS(35),TORELYPOS(35) }, TORELXPOS(0), TORELXPOS(15));
+
 	return 1;
 }
 
@@ -19,6 +24,10 @@ int leaderboardmenu(sf::RenderWindow& gamewindow, sf::Font font, std::vector < s
 
 	Button backtomenubutton(font, "Back to menu");
 	Button highscoreframe(font, " ");
+
+	Button downbutton(font, "\\/");
+	Button upbutton(font, "/\\");
+	Button shownhighscores(font, "NULL");
 
 	std::vector<Button> highscorebuttonsname;
 	std::vector<Button> highscorebuttonshighscore;
@@ -43,7 +52,7 @@ int leaderboardmenu(sf::RenderWindow& gamewindow, sf::Font font, std::vector < s
 		}
 		highscorebuttonstag.push_back(Button(font, temptagstring, { TORELXPOS(370 + 25 + 90 - 10 + 250 / 2),TORELYPOS(100 + (35 + 3) * i) }, { TORELXPOS(250),TORELYPOS(35) }, TORELXPOS(5), TORELXPOS(25)));
 	}
-	recalcleaderboardmenu(backtomenubutton, highscoreframe);
+	recalcleaderboardmenu(backtomenubutton, highscoreframe,downbutton,upbutton,shownhighscores);
 
 	while (!quitfull)
 	{
@@ -53,6 +62,8 @@ int leaderboardmenu(sf::RenderWindow& gamewindow, sf::Font font, std::vector < s
 			bool backtomenu = false;
 			bool quitgame = false;
 			bool resetwindow = false;
+			bool goup = false;
+			bool godown = false;
 			if (windowevent.type == sf::Event::Closed)
 			{
 				quitgame = true;
@@ -63,6 +74,14 @@ int leaderboardmenu(sf::RenderWindow& gamewindow, sf::Font font, std::vector < s
 				{
 					backtomenu = true;
 				}
+				if (downbutton.arethosethisbuttoncords({ sf::Mouse::getPosition(gamewindow).x,sf::Mouse::getPosition(gamewindow).y }))
+				{
+					godown = true;
+				}
+				if (upbutton.arethosethisbuttoncords({ sf::Mouse::getPosition(gamewindow).x,sf::Mouse::getPosition(gamewindow).y }))
+				{
+					goup = true;
+				}
 			}
 			if (windowevent.type == sf::Event::KeyReleased)
 			{
@@ -70,26 +89,40 @@ int leaderboardmenu(sf::RenderWindow& gamewindow, sf::Font font, std::vector < s
 				{
 					quitgame = true;
 				}
+				else if (windowevent.key.code == sf::Keyboard::B)
+				{
+					backtomenu = true;
+				}
 				else if (windowevent.key.code == sf::Keyboard::Up)
 				{
-					if (highscorebuttonsname.size() > 13)
-					{
-						if (drawfrom > 0)
-						{
-							drawfrom--;
-							drawto--;
-						}
-					}
+					goup = true;
 				}
 				else if (windowevent.key.code == sf::Keyboard::Down)
 				{
-					if (highscorebuttonsname.size() > 13)
+					godown = true;
+				}
+			}
+
+			if (godown)
+			{
+				if (highscorebuttonsname.size() > 13)
+				{
+					if (drawto < highscorebuttonsname.size())
 					{
-						if (drawto < highscorebuttonsname.size())
-						{
-							drawfrom++;
-							drawto++;
-						}
+						drawfrom++;
+						drawto++;
+					}
+				}
+			}
+
+			if (goup)
+			{
+				if (highscorebuttonsname.size() > 13)
+				{
+					if (drawfrom > 0)
+					{
+						drawfrom--;
+						drawto--;
 					}
 				}
 			}
@@ -127,6 +160,29 @@ int leaderboardmenu(sf::RenderWindow& gamewindow, sf::Font font, std::vector < s
 				gamewindow.draw(tempbutton, buttonoffset);
 			}
 		}
+		gamewindow.draw(upbutton);
+		gamewindow.draw(downbutton);
+
+		{
+			std::string range;
+
+			if (highscorebuttonsname.size() == 0)
+			{
+				range = "0-0";
+			}
+			else if (highscorebuttonsname.size() < 14)
+			{
+				range = "1-" + std::to_string(highscorebuttonsname.size());
+			}
+			else {
+				range = std::to_string(drawfrom + 1) + "-" + std::to_string(drawto);
+			}
+
+			shownhighscores.buttonstring = range;
+		}
+		shownhighscores.buttontextupdate();
+
+		gamewindow.draw(shownhighscores);
 		gamewindow.display();
 	}
 	return -1;

@@ -226,12 +226,15 @@ int mainmenu(sf::RenderWindow& gamewindow)
 				std::string namefromround = "placeholder";
 				gameloopreturncode = screenloopandinit(gamewindow, scorefromround, namefromround, font);
 				loadhighscores(highscores, highscorenames);
-				updatehighscores(highscores,highscorenames, scorefromround, namefromround);
-				if (scorefromround > currenthighscore)
+				if (gameloopreturncode != 3)
 				{
-					highscoretext.setString("Current highscore by " + namefromround + ": " + std::to_string(scorefromround));
+					updatehighscores(highscores, highscorenames, scorefromround, namefromround);
+					if (scorefromround > currenthighscore)
+					{
+						highscoretext.setString("Current highscore by " + namefromround + ": " + std::to_string(scorefromround));
+					}
+					savehighscoredata(highscores);
 				}
-				savehighscoredata(highscores);
 				if (gameloopreturncode == 0)
 				{
 					quit = true;
