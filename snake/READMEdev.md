@@ -44,12 +44,6 @@ If that setting is set to "Yes", pressing space will use the default name, while
 
 ## Update notes:
 
-**Minor:**
-* You can use B to go back to the main menu from the settings and leaderboard menu.
-* * You can also use Right Control + B to go back to main menu during a game. This will lose progress, and the highscore wont be saved.
-* Added buttons to leaderboard menu.
-* Now the leaderboard menu shows the current listed highscores.
-
 ## Versioning:
 
 Version format: VCOMPATIBILITY.MAJOR.MINOR.PATCH(-suffix)
