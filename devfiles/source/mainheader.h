@@ -7,6 +7,7 @@
 
 #include <iostream>
 #include <vector>
+#include <math.h>
 
 const std::string versiontag = "V1.3.1.0";
 const std::string builddate = "19.11.2024";
