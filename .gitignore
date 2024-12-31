@@ -6,6 +6,7 @@
 # My additions
 devfiles/build/
 devfiles/libraries and dlls
+devfiles/libs
 
 # User-specific files
 *.rsuser
