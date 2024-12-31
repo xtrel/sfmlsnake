@@ -1,3 +1,0 @@
-/home/hubert/Desktop/sfmlsnake cmake/devfiles/build/CMakeFiles/Snake.dir
-/home/hubert/Desktop/sfmlsnake cmake/devfiles/build/CMakeFiles/edit_cache.dir
-/home/hubert/Desktop/sfmlsnake cmake/devfiles/build/CMakeFiles/rebuild_cache.dir

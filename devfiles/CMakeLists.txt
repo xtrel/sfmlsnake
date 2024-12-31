@@ -16,5 +16,5 @@ add_executable(${CMAKE_PROJECT_NAME}
 set(CMAKE_CXX_STANDARD 14)
 set(CMAKE_CXX_STANDARD_REQUIRED True)
 
-find_library(SFML_LIB libsfml-dev)
+find_package(SFML)
 target_link_libraries(${CMAKE_PROJECT_NAME} PRIVATE "${SFML_LIB}")

@@ -4,8 +4,8 @@
 ## Get latest from https://github.com/github/gitignore/blob/master/VisualStudio.gitignore
 
 # My additions
-snake/gamedata/
-snake/snake.vcxproj.user
+devfiles/build/
+devfiles/libraries and dlls
 
 # User-specific files
 *.rsuser
